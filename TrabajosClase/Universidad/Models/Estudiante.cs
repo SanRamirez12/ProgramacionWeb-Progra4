@@ -25,7 +25,7 @@ namespace Universidad.Models
             this.CantidadCursos = 0;
         }
 
-        [Required]
+        [Key]
         public int Id { get => id; set => id = value; }
 
 

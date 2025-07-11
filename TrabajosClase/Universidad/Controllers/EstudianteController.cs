@@ -44,11 +44,9 @@ namespace Universidad.Controllers
                     services.agregarEstudiante(estudiante);
                     return RedirectToAction("Index");
                 }
-                
             }
             catch
-            {
-                
+            {   
             }
             return View();
         }
@@ -56,22 +54,28 @@ namespace Universidad.Controllers
         // GET: EstudianteController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var estudianteAnterior = services.buscarEstudiante(id);
+            return View(estudianteAnterior);
         }
 
         // POST: EstudianteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Estudiante estudiante)
         {
             try
-            {
-                return RedirectToAction(nameof(Index));
+            {   if (ModelState.IsValid)
+                {
+                    services.actualizarEstudiante(estudiante);
+                    return RedirectToAction("Index");
+                }
+                
             }
             catch
             {
-                return View();
+                
             }
+            return View();
         }
 
         // GET: EstudianteController/Delete/5

@@ -54,28 +54,44 @@ namespace Universidad.Controllers
         // GET: CarreraController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var carreraAnterior = services.buscarCarrera(id);
+            return View(carreraAnterior);
         }
 
         // POST: CarreraController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Carrera carrera)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    services.actualizarCarrera(carrera);
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
+                
             }
+            return View();
         }
 
         // GET: CarreraController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var carreraEliminada = services.buscarCarrera(id);
+                return View(carreraEliminada);
+
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
         }
 
         // POST: CarreraController/Delete/5
@@ -85,7 +101,9 @@ namespace Universidad.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var carrera = services.buscarCarrera(id);
+                services.eliminarCarrera(carrera);
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -93,4 +111,6 @@ namespace Universidad.Controllers
             }
         }
     }
+
 }
+

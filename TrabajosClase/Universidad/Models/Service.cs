@@ -23,7 +23,7 @@ namespace Universidad.Models
 
         public Estudiante buscarEstudiante(int id) { 
             var estudianteBuscado = this.estudiantes.FirstOrDefault(x  => x.Id == id);
-            if (estudianteBuscado == null)
+            if (estudianteBuscado != null)
                 return estudianteBuscado;
             else throw new Exception("Ese estudiante no esta registrado");
         }
@@ -34,11 +34,21 @@ namespace Universidad.Models
             SaveChanges();
         }
 
+        public void actualizarEstudiante(Estudiante estudiante)
+        {
+            var estudianteAnterior = this.estudiantes.FirstOrDefault(x => x.Id == estudiante.Id);
+            if (estudianteAnterior != null)
+            {
+                estudianteAnterior.Nombre = estudiante.Nombre;
+                estudianteAnterior.Carrera = estudiante.Carrera;
+                estudianteAnterior.CantidadCursos = estudiante.CantidadCursos;
+                SaveChanges();
+            }
+            else throw new Exception("Ese estudiante no esta registrado");
+        }
 
 
-
-
-        //Metodos 
+        //Metodos de carrreras
         public void agregarCarrera(Carrera carrera) {
             carreras.Add(carrera);
             SaveChanges();
@@ -49,8 +59,33 @@ namespace Universidad.Models
             return carreras.ToArray();
         }
 
+        public Carrera buscarCarrera(int id)
+        {
+            var carreraBuscada = this.carreras.FirstOrDefault(x => x.Id == id);
+            if (carreraBuscada != null)
+                return carreraBuscada;
+            else throw new Exception("Esa carrera no esta registrada");
+        }
 
+        public void eliminarCarrera(Carrera carrera)
+        {
+            this.carreras.Remove(carrera);
+            SaveChanges();
+        }
 
+        public void actualizarCarrera(Carrera carrera)
+        {
+            var carreraAnterior = this.carreras.FirstOrDefault(x => x.Id == carrera.Id);
+            if (carreraAnterior != null)
+            {
+                carreraAnterior.Facultad = carrera.Facultad;
+                carreraAnterior.NombreCarrera = carrera.NombreCarrera;
+                carreraAnterior.Certificacion = carrera.Certificacion;
+                carreraAnterior.Sede = carrera.Sede;
+                SaveChanges();
+            }
+            else throw new Exception("Esa carrera no esta registrada");
+        }
 
 
 

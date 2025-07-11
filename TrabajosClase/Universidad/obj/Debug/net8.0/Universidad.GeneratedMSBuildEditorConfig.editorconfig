@@ -32,12 +32,24 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmVyYVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Popi1/OneDrive/Documentos/GitHub/CursoProgra4/TrabajosClase/Universidad/Views/Carrera/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmVyYVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Popi1/OneDrive/Documentos/GitHub/CursoProgra4/TrabajosClase/Universidad/Views/Carrera/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmVyYVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Popi1/OneDrive/Documentos/GitHub/CursoProgra4/TrabajosClase/Universidad/Views/Carrera/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FycmVyYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Popi1/OneDrive/Documentos/GitHub/CursoProgra4/TrabajosClase/Universidad/Views/Estudiante/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Popi1/OneDrive/Documentos/GitHub/CursoProgra4/TrabajosClase/Universidad/Views/Estudiante/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Popi1/OneDrive/Documentos/GitHub/CursoProgra4/TrabajosClase/Universidad/Views/Estudiante/Index.cshtml]
