@@ -1,0 +1,194 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\chofer\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\chofer\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\models\\chofer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:models\\chofer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\chofer\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\chofer\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\chofer\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\chofer\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\chofer\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\chofer\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\views\\chofer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:views\\chofer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\controllers\\chofercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:controllers\\chofercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\trabajosclase\\examenprogra4\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D63C18CC-05DC-48E2-B5F0-CAF5C1136A28}|ExamenProgra4.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T04:08:05.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T03:49:00.839Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Chofer\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Details.cshtml*",
+              "RelativeToolTip": "Views\\Chofer\\Details.cshtml*",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADUAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T03:34:58.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Chofer\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Chofer\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T02:51:41.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Chofer\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Chofer\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T02:48:53.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Chofer\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Create.cshtml",
+              "RelativeToolTip": "Views\\Chofer\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T02:36:35.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Chofer\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Views\\Chofer\\Index.cshtml",
+              "RelativeToolTip": "Views\\Chofer\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-18T02:35:13.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ChoferController.cs",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Controllers\\ChoferController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ChoferController.cs",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Controllers\\ChoferController.cs",
+              "RelativeToolTip": "Controllers\\ChoferController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAiwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T01:16:28.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Service.cs",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Models\\Service.cs",
+              "RelativeDocumentMoniker": "Models\\Service.cs",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Models\\Service.cs",
+              "RelativeToolTip": "Models\\Service.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T00:54:44.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Chofer.cs",
+              "DocumentMoniker": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Models\\Chofer.cs",
+              "RelativeDocumentMoniker": "Models\\Chofer.cs",
+              "ToolTip": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\TrabajosClase\\ExamenProgra4\\Models\\Chofer.cs",
+              "RelativeToolTip": "Models\\Chofer.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAwwFcAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T00:20:38.032Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

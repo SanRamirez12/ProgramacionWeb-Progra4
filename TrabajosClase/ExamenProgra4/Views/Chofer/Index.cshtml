@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ExamenProgra4.Models.Chofer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Chofer de Uber Costa Rica</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo chofer:</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CedulaIdentidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComisionGenerada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoMascotas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoNinos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoMaletasGrandes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoViajesNocturnos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CedulaIdentidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComisionGenerada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoMascotas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoNinos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoMaletasGrandes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoViajesNocturnos)
+            </td>
+            <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

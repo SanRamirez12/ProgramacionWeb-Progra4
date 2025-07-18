@@ -1,0 +1,102 @@
+﻿@model PracticaExamen.Models.Dinosaurio
+
+@{
+    ViewData["Title"] = "Crear Dinosaurio";
+}
+
+<h1>Crear</h1>
+
+<h4>Dinosaurio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="NombreDinosaurio" class="control-label"></label>
+                <input asp-for="NombreDinosaurio" type="text" class="form-control" placeholder="Nombre del dinosaurio" required />
+                <span asp-validation-for="NombreDinosaurio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>¿Cuál es su género?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Genero" value="true" id="GeneroMasculino"  />
+                    <label class="form-check-label" for="GeneroMasculino">Macho</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Genero" value="false" id="GeneroFemenino" />
+                    <label class="form-check-label" for="GeneroFemenino">Hembra</label>
+                </div>
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Alimentacion" class="control-label">Tipo de alimentación:</label>
+                <select asp-for="Alimentacion" class="form-control" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="Carnívoro">Carnívoro</option>
+                    <option value="Herbívoro">Herbívoro</option>
+                </select>
+                <span asp-validation-for="Alimentacion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input asp-for="FechaRegistro" type="date" class="form-control" required />
+                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Tipo de dinosaurio</label>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="TipoDinosaurio" value="Ave" id="TipoDinosaurioAve" />
+                    <label class="form-check-label" for="TipoDinosaurioAve">Ave</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="TipoDinosaurio" value="Pez" id="TipoDinosaurioPez" />
+                    <label class="form-check-label" for="TipoDinosaurioPez">Pez</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="TipoDinosaurio" value="Terrestre" id="TipoDinosaurioTerrestre" />
+                    <label class="form-check-label" for="TipoDinosaurioTerrestre">Terrestre</label>
+                </div>
+
+                <span asp-validation-for="TipoDinosaurio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Edad" class="control-label"></label>
+                <input asp-for="Edad" type="number" class="form-control" required placeholder="Edad del dinosaurio" />
+                <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConsideracionesImportantes" class="control-label"></label>
+                <textarea asp-for="ConsideracionesImportantes" class="form-control" required placeholder="Factos del dinosaurio"></textarea>
+                <span asp-validation-for="ConsideracionesImportantes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+            <div class="form-group">
+                <input type="reset" value="Restablecer" class="btn btn-secondary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
