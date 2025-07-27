@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExamenProgra4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b759cbdf591932fdbd0a7658f47aa5ba3688e77b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e63a4d9a9d5aa1ff97a197e6c4a34e3cdaeb0f32")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExamenProgra4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExamenProgra4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
