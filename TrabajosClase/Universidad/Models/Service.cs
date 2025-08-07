@@ -7,10 +7,12 @@ namespace Universidad.Models
         //Enlace de la aplicacion a la base de datos 
         public DbSet<Estudiante> estudiantes { get; set; } 
         public DbSet<Carrera> carreras { get; set; }
+        public DbSet<Usuario>  usuarios { get; set; }
 
         //Nombre de la base de datos tiene que ser igual que el archivo de configuracion 
         public Service(): base("Universidad") { }
 
+        //Metodos Estudiantes
         public void agregarEstudiante(Estudiante estudiante) {
             
             estudiantes.Add(estudiante); //Agrega direcctamente a la DB
@@ -87,6 +89,49 @@ namespace Universidad.Models
             else throw new Exception("Esa carrera no esta registrada");
         }
 
+        //Metodos Usuarios
+        public void agregarUsuario(Usuario usuario)
+        {
+            usuarios.Add(usuario);
+            SaveChanges();
+        }
+
+        public Array mostrarUsuarios()
+        {
+            return usuarios.ToArray();
+        }
+
+        public Usuario buscarUsuario(int id)
+        {
+            var usuarioBuscado = this.usuarios.FirstOrDefault(x => x.Id == id);
+            if (usuarioBuscado != null)
+                return usuarioBuscado;
+            else throw new Exception("Ese usuario no esta registrada");
+        }
+
+        public void eliminarUsuario(Usuario usuario)
+        {
+            this.usuarios.Remove(usuario);
+            SaveChanges();
+        }
+
+        public void actualizarUsuario(Usuario usuario)
+        {
+            var usuarioAnterior = this.usuarios.FirstOrDefault(x => x.Id == usuario.Id);
+            if (usuarioAnterior != null)
+            {
+                usuarioAnterior.Nombre = usuario.Nombre;
+                usuarioAnterior.Perfil = usuario.Perfil;
+                usuarioAnterior.Fecha_vencimiento = usuario.Fecha_vencimiento;
+                usuarioAnterior.Telefono = usuario.Telefono;
+                usuarioAnterior.Email = usuario.Email;
+                usuarioAnterior.Username = usuario.Username;
+                usuarioAnterior.Password = usuario.Password;
+                
+                SaveChanges();
+            }
+            else throw new Exception("Ese usuario no esta registrado");
+        }
 
 
     }
