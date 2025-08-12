@@ -12,6 +12,9 @@ namespace Universidad.Models
         //Nombre de la base de datos tiene que ser igual que el archivo de configuracion 
         public Service(): base("Universidad") { }
 
+
+        #region Metodos de Estudiante
+
         //Metodos Estudiantes
         public void agregarEstudiante(Estudiante estudiante) {
             
@@ -49,7 +52,9 @@ namespace Universidad.Models
             else throw new Exception("Ese estudiante no esta registrado");
         }
 
+        #endregion
 
+        #region Metodos de carreras
         //Metodos de carrreras
         public void agregarCarrera(Carrera carrera) {
             carreras.Add(carrera);
@@ -89,6 +94,9 @@ namespace Universidad.Models
             else throw new Exception("Esa carrera no esta registrada");
         }
 
+        #endregion
+
+        #region Metodos de Usuarios
         //Metodos Usuarios
         public void agregarUsuario(Usuario usuario)
         {
@@ -132,6 +140,21 @@ namespace Universidad.Models
             }
             else throw new Exception("Ese usuario no esta registrado");
         }
+
+        public Usuario login(string username, string password) { 
+        
+            var usuarioLogueado = usuarios.FirstOrDefault(u=> u.Username == username && u.Password == password);
+            if (usuarioLogueado != null)
+                return usuarioLogueado;
+            else throw new Exception("Datos de inicio de sesión incorrectos o el usuario no existe. Por favor digite de nuevo");
+
+
+        }
+        
+
+
+
+        #endregion
 
 
     }

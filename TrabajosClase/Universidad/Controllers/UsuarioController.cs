@@ -1,14 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Universidad.Models;
 
 namespace Universidad.Controllers
 {
     public class UsuarioController : Controller
     {
-        // GET: UsuarioController
+        private Service services;
+        public UsuarioController()
+        {
+            this.services = new Service();
+        }// GET: UsuarioController
         public ActionResult Index()
         {
-            return View();
+            var usuarios = services.mostrarUsuarios();
+            return View(usuarios);
         }
 
         // GET: UsuarioController/Details/5
@@ -26,43 +32,64 @@ namespace Universidad.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Usuario usuario)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    services.agregarUsuario(usuario);
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
+
             }
+            return View();
         }
 
         // GET: UsuarioController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var usuarioAnterior = services.buscarUsuario(id);
+            return View(usuarioAnterior);
         }
 
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Usuario usuario)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    services.actualizarUsuario(usuario);
+                    return RedirectToAction("Index");
+                }
+
             }
             catch
             {
-                return View();
+
             }
+            return View();
         }
 
         // GET: UsuarioController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var usuarioEliminado = services.buscarUsuario(id);
+                return View(usuarioEliminado);
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+
         }
 
         // POST: UsuarioController/Delete/5
@@ -72,12 +99,41 @@ namespace Universidad.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var usuario = services.buscarUsuario(id);
+                services.eliminarUsuario(usuario);
+                return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
         }
+
+        //Metodos de login
+        // GET: UsuarioController/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: UsuarioController/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string username, string password)
+        {
+            try
+            {
+                var usuarioLogueado = services.login(username, password);
+                return RedirectToAction("Index", "Home");
+            }
+            catch(Exception ex) 
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
+            
+        }
+
+
     }
 }
