@@ -4,10 +4,14 @@
 
 }
 <!--El arroba indica codigo de c#-->
-<div class="text-center">
-    <h1 class="display-4">Welcome @nombre</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if(!string.IsNullOrEmpty(ViewBag.NombreUsuario))
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome @ViewBag.NombreUsuario </h1>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+}
+}
 
 <h3 >Tabla de multiplicar del 8:</h3>
 

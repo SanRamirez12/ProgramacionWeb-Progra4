@@ -26,8 +26,9 @@ namespace Universidad.Controllers
         }
 
         // GET: EstudianteController/Create
-        public ActionResult Create()
-        {//Cargar el formulario la primera vez en blanco, tipo generar la vista
+        public ActionResult Create()//Cargar el formulario la primera vez en blanco, tipo generar la vista
+        {
+            ViewBag.Usuarios = services.mostrarUsuarios();
             return View();
         }
 

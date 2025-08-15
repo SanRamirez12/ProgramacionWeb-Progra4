@@ -113,6 +113,7 @@ namespace Universidad.Controllers
         // GET: UsuarioController/Login
         public ActionResult Login()
         {
+            HttpContext.Session.Clear(); //Limpiar las variables de session
             return View();
         }
 
@@ -124,6 +125,7 @@ namespace Universidad.Controllers
             try
             {
                 var usuarioLogueado = services.login(username, password);
+                HttpContext.Session.SetString("VarSesion_NombreUsuario", usuarioLogueado.Nombre);//creamos la variable de sesion
                 return RedirectToAction("Index", "Home");
             }
             catch(Exception ex) 

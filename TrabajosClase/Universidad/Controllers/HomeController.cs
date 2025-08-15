@@ -15,6 +15,12 @@ namespace Universidad.Controllers
 
         public IActionResult Index()
         {
+            //Validacion par que no se acceda a index mediante url interna(debe hacerse en todas las vistas)
+            var NombreUsuario = HttpContext.Session.GetString("VarSesion_NombreUsuario");//variable del usarioController del metodo POST del login
+            if (NombreUsuario != null) 
+                ViewBag.NombreUsuario = NombreUsuario;
+            else
+                return RedirectToAction("Login","Usuario");
             return View();
         }
 
