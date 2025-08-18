@@ -58,14 +58,14 @@ namespace Aeropost.Models
         #endregion
 
         #region Metodos de Paquete
-        public void agregarPaquetes(Paquete paquete)
+        public void agregarPaquete(Paquete paquete)
         {
 
             paquetes.Add(paquete); //Agrega direcctamente a la DB
             SaveChanges(); // Y guarda los cambios de la DB osea el commit
         }
 
-        public Array mostrarPaquetes()
+        public Array mostrarPaquete()
         {
             return paquetes.ToArray(); //Devuelve la lista de los paquetes
         }
