@@ -1,20 +1,37 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Aeropost.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aeropost.Controllers
 {
     public class FacturaController : Controller
     {
+        // Instanciamos service
+        private Service services;
+        public FacturaController()
+        {
+            this.services = new Service();
+        }
+
         // GET: FacturaController
         public ActionResult Index()
         {
-            return View();
+            var facturas = services.mostrarFacturas();
+            return View(facturas);
         }
 
         // GET: FacturaController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                var factura = services.buscarFactura(id);
+                return View(factura);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // GET: FacturaController/Create
@@ -26,43 +43,69 @@ namespace Aeropost.Controllers
         // POST: FacturaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Factura factura)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    services.agregarFactura(factura);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+                // Log / manejar error si es necesario
             }
+            return View(factura);
         }
 
         // GET: FacturaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                var facturaAnterior = services.buscarFactura(id);
+                return View(facturaAnterior);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: FacturaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Factura factura)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    services.actualizarFactura(factura);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+                // Log / manejar error si es necesario
             }
+            return View(factura);
         }
 
         // GET: FacturaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var facturaEliminada = services.buscarFactura(id);
+                return View(facturaEliminada);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: FacturaController/Delete/5
@@ -72,11 +115,13 @@ namespace Aeropost.Controllers
         {
             try
             {
+                var factura = services.buscarFactura(id);
+                services.eliminarFactura(factura);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
     }
