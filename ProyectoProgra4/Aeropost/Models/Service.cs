@@ -8,7 +8,6 @@ namespace Aeropost.Models
         public DbSet<Cliente> clientes { get; set; }
         public DbSet<Paquete> paquetes { get; set; }
         public DbSet<Factura> facturas { get; set; }
-
         public DbSet<Usuario> usuarios { get; set; }
         // Hola
         //Creacion del context con la base Aeropost:
@@ -61,14 +60,14 @@ namespace Aeropost.Models
         #endregion
 
         #region Metodos de Paquete
-        public void agregarPaquetes(Paquete paquete)
+        public void agregarPaquete(Paquete paquete)
         {
 
             paquetes.Add(paquete); //Agrega direcctamente a la DB
             SaveChanges(); // Y guarda los cambios de la DB osea el commit
         }
 
-        public Array mostrarPaquetes()
+        public Array mostrarPaquete()
         {
             return paquetes.ToArray(); //Devuelve la lista de los paquetes
         }
