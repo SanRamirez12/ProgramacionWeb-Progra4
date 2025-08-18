@@ -8,7 +8,6 @@ namespace Aeropost.Models
         public DbSet<Cliente> clientes { get; set; }
         public DbSet<Paquete> paquetes { get; set; }
         public DbSet<Factura> facturas { get; set; }
-
         public DbSet<Usuario> usuarios { get; set; }
         // Hola
         //Creacion del context con la base Aeropost:
