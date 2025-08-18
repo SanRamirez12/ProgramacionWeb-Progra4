@@ -7,7 +7,10 @@ namespace Aeropost.Models
         //Creacion de mapeos de tablas a base de datos:
         public DbSet<Cliente> clientes { get; set; }
         public DbSet<Paquete> paquetes { get; set; }
+        public DbSet<Factura> facturas { get; set; }
 
+        public DbSet<Usuario> usuarios { get; set; }
+        // Hola
         //Creacion del context con la base Aeropost:
         public Service(): base("Aeropost") { }
 
@@ -101,16 +104,96 @@ namespace Aeropost.Models
             else throw new Exception("Ese paquete no esta registrado");
         }
         #endregion
+   
 
         #region Metodos de Factura
+        public void agregarFactura(Factura factura)
+        {
+            facturas.Add(factura); // Agrega directamente a la DB
+            SaveChanges(); // Guarda los cambios en la DB (commit)
+        }
 
-        #endregion
+        public Array mostrarFacturas()
+        {
+            return facturas.ToArray(); // Devuelve la lista de facturas
+        }
 
-        #region Metodos de Factura
+        public Factura buscarFactura(int id)
+        {
+            var facturaBuscada = this.facturas.FirstOrDefault(x => x.Id == id);
+            if (facturaBuscada != null)
+                return facturaBuscada;
+            else throw new Exception("Esa factura no está registrada");
+        }
+
+        public void eliminarFactura(Factura factura)
+        {
+            this.facturas.Remove(factura);
+            SaveChanges();
+        }
+
+        public void actualizarFactura(Factura factura)
+        {
+            var facturaAnterior = this.facturas.FirstOrDefault(x => x.Id == factura.Id);
+            if (facturaAnterior != null)
+            {
+                facturaAnterior.NumeroTracking = factura.NumeroTracking;
+                facturaAnterior.CedulaCliente = factura.CedulaCliente;
+                facturaAnterior.Peso = factura.Peso;
+                facturaAnterior.ValorTotalPaquete = factura.ValorTotalPaquete;
+                facturaAnterior.EsProductoEspecial = factura.EsProductoEspecial;
+                facturaAnterior.FechaEntrega = factura.FechaEntrega;
+                facturaAnterior.MontoTotal = factura.MontoTotal;
+
+                SaveChanges();
+            }
+            else throw new Exception("Esa factura no está registrada");
+        }
 
         #endregion
 
         #region Metodos de Usuarios
+        public void agregarUsuario(Usuario usuario)
+        {
+            usuarios.Add(usuario); // Agrega directamente a la DB
+            SaveChanges(); // Guarda los cambios en la DB (commit)
+        }
+
+        public Array mostrarUsuarios()
+        {
+            return usuarios.ToArray(); // Devuelve la lista de los usuarios
+        }
+
+        public Usuario buscarUsuario(int id)
+        {
+            var usuarioBuscado = this.usuarios.FirstOrDefault(x => x.Id == id);
+            if (usuarioBuscado != null)
+                return usuarioBuscado;
+            else
+                throw new Exception("Ese usuario no está registrado");
+        }
+
+        public void eliminarUsuario(Usuario usuario)
+        {
+            this.usuarios.Remove(usuario);
+            SaveChanges();
+        }
+
+        public void actualizarUsuario(Usuario usuario)
+        {
+            var usuarioAnterior = this.usuarios.FirstOrDefault(x => x.Id == usuario.Id);
+            if (usuarioAnterior != null)
+            {
+                usuarioAnterior.NombreUsuario = usuario.NombreUsuario;
+                usuarioAnterior.Contrasena = usuario.Contrasena;
+                usuarioAnterior.Correo = usuario.Correo;
+                usuarioAnterior.Rol = usuario.Rol;
+
+                SaveChanges();
+            }
+            else
+                throw new Exception("Ese usuario no está registrado");
+        }
 
         #endregion
 
