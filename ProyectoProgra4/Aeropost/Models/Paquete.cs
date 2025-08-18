@@ -11,6 +11,7 @@ namespace Aeropost.Models
         private bool condicionEspecial;
         private DateTime fechaRegistro;
         private string clienteAsociado;
+        private string numeroTracking;
 
         public Paquete(int id, decimal peso, decimal valorTotalBruto, string tiendaOrigen, bool condicionEspecial, DateTime fechaRegistro, string clienteAsociado)
         {

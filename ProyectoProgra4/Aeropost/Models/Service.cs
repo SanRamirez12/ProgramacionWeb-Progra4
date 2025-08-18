@@ -193,6 +193,13 @@ namespace Aeropost.Models
             else
                 throw new Exception("Ese usuario no está registrado");
         }
+        public Usuario login(string username, string password)
+        {
+            var usuarioLogueado = usuarios.FirstOrDefault(u => u.NombreUsuario == username && u.Contrasena == password);
+            if (usuarioLogueado != null)
+                return usuarioLogueado;
+            else throw new Exception("Usuario o contraseña es incorrecto");
+        }
 
         #endregion
 

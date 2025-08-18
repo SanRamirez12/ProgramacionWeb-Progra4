@@ -124,5 +124,30 @@ namespace Aeropost.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
+        //Metodos de login
+        // GET: UsuarioController/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: UsuarioController/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string username, string password)
+        {
+            try
+            {
+                var usuarioLogueado = services.login(username, password);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
+
+        }
     }
 }
