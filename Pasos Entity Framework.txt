@@ -1,0 +1,25 @@
+1. Crear Clase lógica
+	-variables, constructores y propiedades, required en la primary key.
+
+2. Instalar el Entity
+	-Click derecho sobre explorador de soluciones y abrir Administrador de paquetes NuGet y ahi darle examinar y instalar EntityFramework.
+3. Configurar el appsettings.json
+
+	-Agregar: "ConnectionStrings": {
+  		"BloggingDatabase": "Data Source=(localdb)\ProjectModels;Initial Catalog=master;Integrated Security=True;"
+		}, encima del logging del json y cambiar master por el nombre de la base que queremos darle.
+	-Llevamos el control de la conexión con sql server desde el explorador de objetos de SQL Server.
+
+4. Configurar Clase service
+	-Creo que no viene por default, entonces ahi la creamos y hacemos conexión con base.
+	-Crear el Dbset relacionado a la clase lógica y el constructor de Service relacionado conla base de datos
+
+5. Habilitar el Entity, comando: enable-migrations
+	-Nos vamos a herramientas, luego NuGet Package Manager y luego Package Manager Console, digitamos el comando.
+	-Cambiar el archivo Configuration a true
+6. Actualizar la DB, comando: update-database 
+8. Chequear la BD
+9. Hacemos los métodos de carpintería (CRUD en Service)
+10. Crear y configurar el Controller de la clase lógica
+11. Creamos la vista
+12. Configurar el menu: Layout

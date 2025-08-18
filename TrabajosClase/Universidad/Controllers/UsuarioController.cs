@@ -10,7 +10,8 @@ namespace Universidad.Controllers
         public UsuarioController()
         {
             this.services = new Service();
-        }// GET: UsuarioController
+        }
+        // GET: UsuarioController
         public ActionResult Index()
         {
             var usuarios = services.mostrarUsuarios();
