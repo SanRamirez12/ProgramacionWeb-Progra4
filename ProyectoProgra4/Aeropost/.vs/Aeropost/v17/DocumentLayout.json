@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\felipe\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\felipe\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,11 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Service.cs",
               "DocumentMoniker": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Service.cs",
               "RelativeDocumentMoniker": "Models\\Service.cs",
@@ -28,6 +32,19 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-18T03:28:27.358Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-18T20:55:40.665Z",
               "EditorCaption": ""
             }
           ]
