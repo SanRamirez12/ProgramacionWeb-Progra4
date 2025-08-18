@@ -9,6 +9,38 @@
     {
       "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\controllers\\facturacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:controllers\\facturacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\paquete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\paquete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\bitacora.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\bitacora.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,10 +60,114 @@
               "RelativeDocumentMoniker": "Models\\Service.cs",
               "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Service.cs",
               "RelativeToolTip": "Models\\Service.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-18T03:28:27.358Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:28:04.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FacturaController.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\FacturaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FacturaController.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\FacturaController.cs",
+              "RelativeToolTip": "Controllers\\FacturaController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:27:43.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Cliente.cs",
+              "RelativeToolTip": "Models\\Cliente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:01:29.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Bitacora.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Bitacora.cs",
+              "RelativeDocumentMoniker": "Models\\Bitacora.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Bitacora.cs",
+              "RelativeToolTip": "Models\\Bitacora.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:01:27.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Usuario.cs",
+              "RelativeToolTip": "Models\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:01:25.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Paquete.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Paquete.cs",
+              "RelativeDocumentMoniker": "Models\\Paquete.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Paquete.cs",
+              "RelativeToolTip": "Models\\Paquete.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:01:17.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Factura.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Factura.cs",
+              "RelativeDocumentMoniker": "Models\\Factura.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Factura.cs",
+              "RelativeToolTip": "Models\\Factura.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:01:15.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:01:14.339Z",
               "EditorCaption": ""
             },
             {
@@ -46,9 +182,10 @@
               "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
               "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\ClienteController.cs",
               "RelativeToolTip": "Controllers\\ClienteController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAkwAMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T04:22:55.434Z"
+              "WhenOpened": "2025-08-18T04:22:55.434Z",
+              "EditorCaption": ""
             }
           ]
         }
