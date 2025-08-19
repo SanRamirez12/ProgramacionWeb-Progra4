@@ -34,14 +34,34 @@ namespace Aeropost.Models
             this.ClienteAsociado = "";
         }
 
-        [Key][Required]
-        public int Id { get => id; set => id = value; }
-        public decimal Peso { get => peso; set => peso = value; }
-        public decimal ValorTotalBruto { get => valorTotalBruto; set => valorTotalBruto = value; }
-        public string TiendaOrigen { get => tiendaOrigen; set => tiendaOrigen = value; }
-        public bool CondicionEspecial { get => condicionEspecial; set => condicionEspecial = value; }
-        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
-        public string ClienteAsociado { get => clienteAsociado; set => clienteAsociado = value; }
+        [Key]
+        [Required]
+        public int Id { get; set; }   
+
+        [Required]
+        [Range(0, 999999.99)]
+        [DataType(DataType.Currency)]
+        public decimal Peso { get; set; }   
+
+        [Required]
+        [Range(0, 999999999.99)]
+        [DataType(DataType.Currency)]
+        public decimal ValorTotalBruto { get; set; }   
+
+        [Required]
+        [StringLength(100)]
+        public string TiendaOrigen { get; set; }   
+
+        [Required]
+        public bool CondicionEspecial { get; set; }   
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime FechaRegistro { get; set; }   
+
+        [Required]
+        [StringLength(100)]
+        public string ClienteAsociado { get; set; }  
 
     }
 }

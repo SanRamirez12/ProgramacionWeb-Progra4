@@ -73,5 +73,14 @@ namespace Aeropost.Models
         [Required]
         [Range(0, double.MaxValue)]
         public decimal MontoTotal { get => montoTotal; set => montoTotal = value; }
+
+
+
+
+
+
+
+
+
     }
 }

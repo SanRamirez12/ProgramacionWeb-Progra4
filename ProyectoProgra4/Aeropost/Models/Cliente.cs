@@ -35,14 +35,33 @@ namespace Aeropost.Models
             this.Telefono = "";
         }
 
-        [Key][Required]
-        public int Id { get => id; set => id = value; }
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Cedula { get => cedula; set => cedula = value; }
-        public string Tipo { get => tipo; set => tipo = value; }
-        public string Correo { get => correo; set => correo = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
-        public string Telefono { get => telefono; set => telefono = value; }
+        [Key]
+        [Required]
+        public int Id { get; set; }   
+
+        [Required]
+        [StringLength(100)]
+        public string Nombre { get; set; }   
+
+        [Required]
+        [StringLength(20)]
+        public string Cedula { get; set; }   
+
+        [Required]
+        [StringLength(50)]
+        public string Tipo { get; set; }    
+
+        [Required]
+        [EmailAddress]
+        [StringLength(150)]
+        public string Correo { get; set; }  
+
+        [StringLength(250)]
+        public string Direccion { get; set; }   
+
+        [StringLength(20)]
+        [Phone]
+        public string Telefono { get; set; }    
 
 
 
