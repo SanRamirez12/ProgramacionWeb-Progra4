@@ -57,6 +57,43 @@ namespace Aeropost.Models
             }
             else throw new Exception("Ese cliente no esta registrado");
         }
+
+
+        //  Listar (con filtro opcional por cédula para el Index)
+        public List<Cliente> listarClientes(string filtroCedula = null)
+        {
+            if (string.IsNullOrWhiteSpace(filtroCedula))
+                return this.clientes.OrderBy(c => c.Nombre).ToList();
+
+            return this.clientes
+                .Where(c => c.Cedula.Contains(filtroCedula))
+                .OrderBy(c => c.Nombre)
+                .ToList();
+        }
+
+        //  Reporte por tipo (Regular / Frecuente / Suspendido)
+        public List<Cliente> listarClientesPorTipo(string tipo)
+        {
+            if (string.IsNullOrWhiteSpace(tipo))
+                return this.clientes.OrderBy(c => c.Nombre).ToList();
+
+            return this.clientes
+                .Where(c => c.Tipo == tipo)
+                .OrderBy(c => c.Nombre)
+                .ToList();
+        }
+
+        //  Unicidad sencilla (para Create/Edit)
+        //    Nota: usa 'idIgnorar' cuando estás editando (para no chocarte contigo mismo).
+        public bool existeCedula(string cedula, int idIgnorar = 0)
+        {
+            return this.clientes.Any(c => c.Cedula == cedula && c.Id != idIgnorar);
+        }
+
+        public bool existeCorreo(string correo, int idIgnorar = 0)
+        {
+            return this.clientes.Any(c => c.Correo == correo && c.Id != idIgnorar);
+        }
         #endregion
 
         #region Metodos de Paquete
