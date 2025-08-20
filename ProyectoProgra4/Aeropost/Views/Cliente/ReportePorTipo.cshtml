@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Aeropost.Models.Cliente>
+@{
+    ViewData["Title"] = "Reporte de clientes por tipo";
+}
+
+<h2>Reporte de clientes por tipo</h2>
+
+<form method="post" asp-action="ReportePorTipo" class="mb-3">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <select name="tipo" class="form-control">
+                <option value="">Todos</option>
+                <option value="Regular">Regular</option>
+                <option value="Frecuente">Frecuente</option>
+                <option value="Suspendido">Suspendido</option>
+            </select>
+        </div>
+        <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary">Generar</button>
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+</form>
+
+<p>Tipo seleccionado: <strong>@ViewBag.TipoSeleccionado</strong> — Total: <strong>@ViewBag.Total</strong></p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Cedula</td>
+                <td>@c.Nombre</td>
+                <td>@c.Tipo</td>
+                <td>@c.Correo</td>
+                <td>@c.Telefono</td>
+            </tr>
+        }
+    </tbody>
+</table>
