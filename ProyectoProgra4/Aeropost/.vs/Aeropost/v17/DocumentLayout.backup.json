@@ -1,13 +1,18 @@
 {
   "Version": 1,
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   "WorkspaceRootPath": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\",
+=======
+  "WorkspaceRootPath": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\",
+>>>>>>> Stashed changes
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\controllers\\facturacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:controllers\\facturacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\beto\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\alons\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -64,6 +69,10 @@
       "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\popi1\\onedrive\\documentos\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
 >>>>>>> 7efb5a9d9df3436f5c25d3a01f87485e83454a61
+=======
+      "AbsoluteMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|c:\\users\\beto\\documents\\github\\cursoprogra4\\proyectoprogra4\\aeropost\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> Stashed changes
     }
   ],
   "DocumentGroupContainers": [
@@ -73,78 +82,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< Updated upstream
 <<<<<<< HEAD
           "SelectedChildIndex": 1,
 =======
           "SelectedChildIndex": 7,
 >>>>>>> 7efb5a9d9df3436f5c25d3a01f87485e83454a61
+=======
+          "SelectedChildIndex": 0,
+>>>>>>> Stashed changes
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
 <<<<<<< HEAD
               "DocumentIndex": 0,
-              "Title": "FacturaController.cs",
-              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\FacturaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FacturaController.cs",
-              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\FacturaController.cs",
-              "RelativeToolTip": "Controllers\\FacturaController.cs",
+              "Title": "Factura.cs",
+              "DocumentMoniker": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Factura.cs",
+              "RelativeDocumentMoniker": "Models\\Factura.cs",
+              "ToolTip": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Factura.cs",
+              "RelativeToolTip": "Models\\Factura.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T03:01:00.257Z",
+              "WhenOpened": "2025-08-20T05:08:21.764Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Views\\Paquete\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Paquete\\Index.cshtml",
-              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Views\\Paquete\\Index.cshtml",
-              "RelativeToolTip": "Views\\Paquete\\Index.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACoAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-20T02:23:27.387Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ReportePorCliente.cshtml",
-              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Views\\Paquete\\ReportePorCliente.cshtml",
-              "RelativeDocumentMoniker": "Views\\Paquete\\ReportePorCliente.cshtml",
-              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Views\\Paquete\\ReportePorCliente.cshtml",
-              "RelativeToolTip": "Views\\Paquete\\ReportePorCliente.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-20T02:22:46.496Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PaqueteController.cs",
-              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\PaqueteController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PaqueteController.cs",
-              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Controllers\\PaqueteController.cs",
-              "RelativeToolTip": "Controllers\\PaqueteController.cs",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAgwKsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T00:35:39.727Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Service.cs",
-              "DocumentMoniker": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Service.cs",
-              "RelativeDocumentMoniker": "Models\\Service.cs",
-              "ToolTip": "C:\\Users\\alons\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\Service.cs",
-              "RelativeToolTip": "Models\\Service.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAAwBsAAAAMAAAAAAAAAA==",
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T23:54:19.461Z",
+              "WhenOpened": "2025-08-20T05:08:20.576Z",
               "EditorCaption": ""
+<<<<<<< Updated upstream
             },
             {
               "$type": "Document",
@@ -269,6 +243,8 @@
               "WhenOpened": "2025-08-20T06:01:40.386Z",
               "EditorCaption": ""
 >>>>>>> 7efb5a9d9df3436f5c25d3a01f87485e83454a61
+=======
+>>>>>>> Stashed changes
             }
           ]
         }

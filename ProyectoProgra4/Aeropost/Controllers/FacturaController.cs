@@ -124,32 +124,9 @@ namespace Aeropost.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-    }
 
-   // GET: /Factura/BuscarPorCedula?cedula=1-2345-0678
-[HttpGet]
-        [Produces("application/json")]
-        public IActionResult BuscarPorCedula(string cedula)
-        {
-            if (string.IsNullOrWhiteSpace(cedula))
-                return BadRequest(new { mensaje = "Debe indicar una cédula." });
 
-            // LLAMA A LA ÚNICA FIRMA (sin ambigüedades)
-            var datos = services.ObtenerDatosFacturaPorCedula(cedula);
 
-            if (datos == null)
-                return NotFound(new { mensaje = "No se encontraron datos para esa cédula." });
-
-            return Ok(new
-            {
-                numeroTracking = datos.NumeroTracking,
-                cedulaCliente = datos.CedulaCliente,
-                peso = datos.Peso,
-                valorTotalPaquete = datos.ValorTotalPaquete,
-                esProductoEspecial = datos.EsProductoEspecial,
-                fechaEntrega = datos.FechaEntrega.ToString("yyyy-MM-dd"),
-                montoTotal = datos.MontoTotal
-            });
-        }
 
     }
+}
