@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Aeropost.Models.Paquete>
+
+@{
+    ViewData["Title"] = "Reporte de paquetes por cliente";
+}
+
+<h1>Reporte de paquetes por cliente</h1>
+
+@if (ViewBag.Cedula != null)
+{
+    <p><strong>Cédula del cliente:</strong> @ViewBag.Cedula</p>
+    <p><strong>Total de paquetes:</strong> @ViewBag.Total</p>
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Número de Tracking</th>
+                <th>Peso</th>
+                <th>Valor Bruto</th>
+                <th>Tienda</th>
+                <th>Especial</th>
+                <th>Fecha Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.NumeroTracking</td>
+                    <td>@p.Peso</td>
+                    <td>@p.ValorTotalBruto</td>
+                    <td>@p.TiendaOrigen</td>
+                    <td>@(p.CondicionEspecial ? "Sí" : "No")</td>
+                    <td>@p.FechaRegistro</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted">No hay paquetes registrados para esta cédula.</p>
+}
