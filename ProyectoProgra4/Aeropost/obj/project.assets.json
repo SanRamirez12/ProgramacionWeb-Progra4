@@ -6223,23 +6223,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Felipe\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\beto\\.nuget\\packages\\": {},
+>>>>>>> 2fcb32c4c2ac9b522672cb262d66ed504dcad2d4
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
       "projectName": "Aeropost",
       "projectPath": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
       "packagesPath": "C:\\Users\\Felipe\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
+      "projectName": "Aeropost",
+      "projectPath": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
+      "packagesPath": "C:\\Users\\beto\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\obj\\",
+>>>>>>> 2fcb32c4c2ac9b522672cb262d66ed504dcad2d4
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Felipe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\beto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 2fcb32c4c2ac9b522672cb262d66ed504dcad2d4
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6301,7 +6317,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+>>>>>>> 2fcb32c4c2ac9b522672cb262d66ed504dcad2d4
       }
     }
   }

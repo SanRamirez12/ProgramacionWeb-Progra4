@@ -99,14 +99,13 @@ namespace Aeropost.Models
         #region Metodos de Paquete
         public void agregarPaquete(Paquete paquete)
         {
-
-            paquetes.Add(paquete); //Agrega direcctamente a la DB
-            SaveChanges(); // Y guarda los cambios de la DB osea el commit
+            paquetes.Add(paquete);
+            SaveChanges();
         }
 
         public Array mostrarPaquete()
         {
-            return paquetes.ToArray(); //Devuelve la lista de los paquetes
+            return paquetes.ToArray();
         }
 
         public Paquete buscarPaquete(int id)
@@ -128,19 +127,35 @@ namespace Aeropost.Models
             var paqueteAnterior = this.paquetes.FirstOrDefault(x => x.Id == paquete.Id);
             if (paqueteAnterior != null)
             {
-
                 paqueteAnterior.Peso = paquete.Peso;
                 paqueteAnterior.TiendaOrigen = paquete.TiendaOrigen;
                 paqueteAnterior.CondicionEspecial = paquete.CondicionEspecial;
                 paqueteAnterior.ValorTotalBruto = paquete.ValorTotalBruto;
-                paqueteAnterior.FechaRegistro = paquete.FechaRegistro;  
+                paqueteAnterior.FechaRegistro = paquete.FechaRegistro;
                 paqueteAnterior.ClienteAsociado = paquete.ClienteAsociado;
                 SaveChanges();
             }
             else throw new Exception("Ese paquete no esta registrado");
         }
+
+        //Metodo para validar si ya existe el numero de tracking
+        public bool ExisteTracking(string numeroTracking)
+        {
+            return paquetes.Any(p => p.NumeroTracking == numeroTracking);
+        }
+
+        //Devuelve TODOS los paquetes de un cliente (por cédula), ordenados del más reciente al más antiguo.
+        public Array ReportePaquetesPorCliente(string cedulaCliente)
+        {
+            return paquetes
+                .Where(p => p.ClienteAsociado == cedulaCliente)
+                .OrderByDescending(p => p.FechaRegistro)
+                .ToArray();
+        }
+
         #endregion
-   
+
+
         #region Metodos de Factura
         public void agregarFactura(Factura factura)
         {
