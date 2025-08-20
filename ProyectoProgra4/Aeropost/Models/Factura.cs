@@ -42,7 +42,7 @@ namespace Aeropost.Models
             this.MontoTotal = 0m;
         }
 
-        // Propiedades
+        // Propiedades hollaaa
         [Key]
         [Required]
         public int Id { get => id; set => id = value; }
