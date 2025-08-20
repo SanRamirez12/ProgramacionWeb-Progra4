@@ -4,53 +4,78 @@ namespace Aeropost.Models
 {
     public class Usuario
     {
-        // Campos privados
         private int id;
-        private string nombreUsuario;
-        private string contrasena;
+        private string nombre;
+        private string cedula;
+        private string genero;
+        private DateTime fechaRegistro;
+        private string estado;
         private string correo;
-        private string rol;
+        private string username;
+        private string password;
 
-        // Constructores
-        public Usuario(int id, string nombreUsuario, string contrasena, string correo, string rol)
+
+        public Usuario(int id, string nombre, string cedula, string genero, DateTime fechaRegistro, string estado, string correo, string username, string password)
         {
             this.Id = id;
-            this.NombreUsuario = nombreUsuario;
-            this.Contrasena = contrasena;
+            this.Nombre = nombre;
+            this.Cedula = cedula;
+            this.Genero = genero;
+            this.FechaRegistro = fechaRegistro;
+            this.Estado = estado;
             this.Correo = correo;
-            this.Rol = rol;
+            this.Username = username;
+            this.Password = password;
         }
 
         public Usuario()
         {
             this.Id = 0;
-            this.NombreUsuario = "";
-            this.Contrasena = "";
+            this.Nombre = "";
+            this.Cedula = "";
+            this.Genero = "";
+            this.FechaRegistro = DateTime.Now;
+            this.Estado = "";
             this.Correo = "";
-            this.Rol = "";
+            this.Username = "";
+            this.Password = "";
         }
 
-        // Propiedades
         [Key]
-        [Required]
         public int Id { get => id; set => id = value; }
 
         [Required]
-        [StringLength(30)]
-        public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
-
-        [Required]
         [StringLength(100)]
-        [DataType(DataType.Password)]
-        public string Contrasena { get => contrasena; set => contrasena = value; }
-
-        [Required]
-        [StringLength(100)]
-        [EmailAddress]
-        public string Correo { get => correo; set => correo = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
 
         [Required]
         [StringLength(20)]
-        public string Rol { get => rol; set => rol = value; }
+        public string Cedula { get => cedula; set => cedula = value; }
+
+        [Required]
+        [StringLength(10)]
+        public string Genero { get => genero; set => genero = value; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
+
+        [Required]
+        [StringLength(20)]
+        public string Estado { get => estado; set => estado = value; }
+
+        [Required]
+        [EmailAddress]
+        [StringLength(100)]
+        public string Correo { get => correo; set => correo = value; }
+
+        [Required]
+        [StringLength(50)]
+        public string Username { get => username; set => username = value; }
+
+        [Required]
+        [StringLength(100, MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        public string Password { get => password; set => password = value; }
     }
 }

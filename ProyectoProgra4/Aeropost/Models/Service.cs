@@ -155,7 +155,6 @@ namespace Aeropost.Models
 
         #endregion
 
-
         #region Metodos de Factura
         public void agregarFactura(Factura factura)
         {
@@ -254,29 +253,63 @@ namespace Aeropost.Models
             var usuarioAnterior = this.usuarios.FirstOrDefault(x => x.Id == usuario.Id);
             if (usuarioAnterior != null)
             {
-                usuarioAnterior.NombreUsuario = usuario.NombreUsuario;
-                usuarioAnterior.Contrasena = usuario.Contrasena;
+                usuarioAnterior.Nombre = usuario.Nombre;
+                usuarioAnterior.Genero = usuario.Genero;
+                usuarioAnterior.FechaRegistro = usuario.FechaRegistro;
+                usuarioAnterior.Estado = usuario.Estado;
                 usuarioAnterior.Correo = usuario.Correo;
-                usuarioAnterior.Rol = usuario.Rol;
+                usuarioAnterior.Username = usuario.Username;
+                usuarioAnterior.Password = usuario.Password;
 
                 SaveChanges();
             }
             else
                 throw new Exception("Ese usuario no está registrado");
         }
+
+        //Metodo que setea un usario admin generico para hacer el login inicial
         public Usuario login(string username, string password)
         {
-            var usuarioLogueado = usuarios.FirstOrDefault(u => u.NombreUsuario == username && u.Contrasena == password);
-            if (usuarioLogueado != null)
-                return usuarioLogueado;
-            else throw new Exception("Usuario o contraseña es incorrecto");
+            // Caso especial: usuario de emergencia
+            if (username == "adminKing" && password == "1234567")
+            {
+                return new Usuario
+                {
+                    Id = -1,
+                    Nombre = "Administrador Genérico",
+                    Cedula = "000000000",
+                    Genero = "N/A",
+                    FechaRegistro = DateTime.Now,
+                    Estado = "Activo",
+                    Correo = "admin@aeropost.com",
+                    Username = "adminKing",
+                    Password = "1234567"
+                };
+            }
+
+            // Buscar usuario en la lista normal
+            var usuario = usuarios.FirstOrDefault(u =>
+                u.Username == username && u.Password == password);
+
+            if (usuario == null)
+                throw new Exception("Usuario o contraseña incorrectos.");
+
+            return usuario;
         }
 
+<<<<<<< HEAD
         internal object ObtenerDatosFacturaPorCedula(string cedula)
         {
             throw new NotImplementedException();
         }
 
+=======
+        //Valida que dos contraseñas coincidan (comparación ordinal).
+        public bool PasswordsCoinciden(string password, string confirmPassword)
+        {
+            return string.Equals(password, confirmPassword, StringComparison.Ordinal);
+        }
+>>>>>>> 7efb5a9d9df3436f5c25d3a01f87485e83454a61
         #endregion
 
         #region Metodos de Bitacora
