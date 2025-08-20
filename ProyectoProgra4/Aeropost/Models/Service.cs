@@ -162,6 +162,26 @@ namespace Aeropost.Models
             }
             else throw new Exception("Esa factura no está registrada");
         }
+        public Factura ObtenerDatosFacturaPorCedula(string cedula)
+        {
+            // 1) Buscar cliente/paquete por cédula
+            // 2) Armar un objeto Factura precargado con esa info
+            // 3) Calcular MontoTotal si aplica (impuestos/tarifas/etc.)
+            // Esto es sólo un ejemplo “mock”:
+            var paquete = this.buscarPaquetePorCedula(cedula); // implementa
+            if (paquete == null) return null;
+
+            return new Factura
+            {
+                NumeroTracking = paquete.NumeroTracking,
+                CedulaCliente = cedula,
+                Peso = paquete.Peso,
+                ValorTotalPaquete = paquete.ValorTotalBruto,
+                EsProductoEspecial = paquete.CondicionEspecial,
+                FechaEntrega = DateTime.Today,
+                MontoTotal = CalcularMonto(paquete) // implementa según tus reglas
+            };
+        }
 
         #endregion
 
@@ -213,6 +233,11 @@ namespace Aeropost.Models
             if (usuarioLogueado != null)
                 return usuarioLogueado;
             else throw new Exception("Usuario o contraseña es incorrecto");
+        }
+
+        internal object ObtenerDatosFacturaPorCedula(string cedula)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
