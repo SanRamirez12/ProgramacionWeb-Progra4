@@ -18,11 +18,6 @@ namespace Aeropost.Controllers
             return View(paquetes);
         }
 
-        // GET: PaqueteController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: PaqueteController/Create
         public ActionResult Create()
@@ -38,6 +33,21 @@ namespace Aeropost.Controllers
             try
             {
                 if (!ModelState.IsValid) return View(paquete);
+                // Validación: la cédula debe existir como cliente
+                var ced = (paquete.ClienteAsociado ?? string.Empty).Trim();
+                if (string.IsNullOrWhiteSpace(ced))
+                {
+                    ModelState.AddModelError(nameof(Paquete.ClienteAsociado), "La cédula es obligatoria.");
+                    return View(paquete);
+                }
+                var cliente = services.buscarClientePorCedula(ced);
+                if (cliente == null)
+                {
+                    ModelState.AddModelError(nameof(Paquete.ClienteAsociado), "La cédula no pertenece a ningún cliente registrado.");
+                    return View(paquete);
+                }
+                // normaliza el valor
+                paquete.ClienteAsociado = ced;
 
                 //En caso de que la fecha de registro venga vacía desde el form le asigna de golpe la fecha
                 if (paquete.FechaRegistro == default) paquete.FechaRegistro = DateTime.Now;
@@ -84,6 +94,21 @@ namespace Aeropost.Controllers
             try
             {
                 if (!ModelState.IsValid) return View(paquete); //verifica que el modelo de vista sea valido
+                                                               // 🔒 Validación: la cédula debe existir como cliente
+                var ced = (paquete.ClienteAsociado ?? string.Empty).Trim();
+                if (string.IsNullOrWhiteSpace(ced))
+                {
+                    ModelState.AddModelError(nameof(Paquete.ClienteAsociado), "La cédula es obligatoria.");
+                    return View(paquete);
+                }
+                var cliente = services.buscarClientePorCedula(ced);
+                if (cliente == null)
+                {
+                    ModelState.AddModelError(nameof(Paquete.ClienteAsociado), "La cédula no pertenece a ningún cliente registrado.");
+                    return View(paquete);
+                }
+                // normaliza el valor
+                paquete.ClienteAsociado = ced;
 
                 var original = services.buscarPaquete(paquete.Id); //buscamos el paquete por el id 
                 if (original == null) return NotFound(); //tira error si esta vacio
@@ -186,6 +211,40 @@ namespace Aeropost.Controllers
             ViewBag.Total = lista.Count;
 
             return View(lista); // Vista fuertemente tipada a IEnumerable<Paquete>
+        }
+
+        [HttpGet]
+        public IActionResult PaquetePorTracking(string tracking)
+        {
+            if (string.IsNullOrWhiteSpace(tracking))
+                return Json(null);
+
+            var p = services.buscarPaquetePorTracking(tracking);
+            if (p == null) return Json(null);
+
+            var c = services.buscarClientePorCedula(p.ClienteAsociado);
+
+            return Json(new
+            {
+                paquete = new
+                {
+                    tracking = p.NumeroTracking,
+                    peso = p.Peso,
+                    valor = p.ValorTotalBruto,
+                    especial = p.CondicionEspecial,
+                    cedulaCliente = p.ClienteAsociado
+                },
+                cliente = (c == null ? null : new
+                {
+                    id = c.Id,
+                    nombre = c.Nombre,
+                    cedula = c.Cedula,
+                    tipo = c.Tipo,
+                    correo = c.Correo,
+                    direccion = c.Direccion,
+                    telefono = c.Telefono
+                })
+            });
         }
 
 

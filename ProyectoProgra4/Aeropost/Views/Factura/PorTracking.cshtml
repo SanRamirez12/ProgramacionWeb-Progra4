@@ -1,0 +1,58 @@
+﻿@model Aeropost.Models.Factura
+@{
+    ViewData["Title"] = "Buscar por Tracking";
+    string tracking = Context.Request.Query["tracking"];
+}
+
+<h1>Buscar Factura por Tracking</h1>
+<hr />
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <label for="tracking" class="form-label">Tracking</label>
+        <input id="tracking" name="tracking" class="form-control" value="@tracking" placeholder="Ingrese tracking" />
+    </div>
+    <div class="col-auto align-self-end">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FechaEntrega</th>
+                <th>Cédula</th>
+                <th>Tracking</th>
+                <th>Peso</th>
+                <th>Valor</th>
+                <th>Especial</th>
+                <th>Monto</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.FechaEntrega.ToString("yyyy-MM-dd")</td>
+                <td>@Model.CedulaCliente</td>
+                <td>@Model.NumeroTracking</td>
+                <td>@Model.Peso</td>
+                <td>@Model.ValorTotalPaquete.ToString("C")</td>
+                <td>@Model.EsProductoEspecial</td>
+                <td>@Model.MontoTotal.ToString("C")</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrWhiteSpace(tracking))
+{
+    <div class="alert alert-warning">No se encontró una factura con ese tracking.</div>
+}

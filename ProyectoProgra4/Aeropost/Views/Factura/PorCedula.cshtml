@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Aeropost.Models.Factura>
+@{
+    ViewData["Title"] = "Facturas por Cédula";
+    string ced = ViewBag.Cedula as string ?? "";
+    decimal total = ViewBag.Total ?? 0m;
+    int cantidad = ViewBag.Cantidad ?? 0;
+}
+
+<h1>Facturas por Cédula</h1>
+<hr />
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <label for="cedula" class="form-label">Cédula</label>
+        <input id="cedula" name="cedula" class="form-control" value="@ced" placeholder="Ingrese cédula" />
+    </div>
+    <div class="col-auto align-self-end">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="alert alert-info">
+        <strong>@ced:</strong> @cantidad factura(s) — Total: @total.ToString("C")
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FechaEntrega</th>
+                <th>Tracking</th>
+                <th>MontoTotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in Model)
+            {
+                <tr>
+                    <td>@f.Id</td>
+                    <td>@f.FechaEntrega.ToString("yyyy-MM-dd")</td>
+                    <td>@f.NumeroTracking</td>
+                    <td>@f.MontoTotal.ToString("C")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = f.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = f.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrWhiteSpace(ced))
+{
+    <div class="alert alert-warning">No se encontraron facturas para la cédula ingresada.</div>
+}

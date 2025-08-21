@@ -85,11 +85,6 @@ namespace Aeropost.Models
 
             NumeroTracking = $"{pref}{mes}{yy}MIA{rand}";
         }
-
-
-
-
-
         
     }
 }

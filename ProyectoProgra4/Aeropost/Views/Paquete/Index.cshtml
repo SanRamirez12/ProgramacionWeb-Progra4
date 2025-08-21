@@ -1,25 +1,24 @@
 ﻿@model IEnumerable<Aeropost.Models.Paquete>
 
 @{
-    ViewData["Title"] = "Paquetes";
+    ViewData["Title"] = "Lista de Paquetes";
 }
 
-<h1>Listado de Paquetes</h1>
+<h2 class="mb-4">Lista de Paquetes</h2>
 
-<p>
+<div class="mb-3">
     <a asp-action="Create" class="btn btn-primary">Registrar nuevo paquete</a>
-</p>
+</div>
 
-<table class="table table-striped">
-    <thead>
+<table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-primary">
         <tr>
-            <th>Id</th>
             <th>Peso (lb)</th>
             <th>Valor Total Bruto</th>
             <th>Tienda de Origen</th>
             <th>Condición Especial</th>
             <th>Fecha de Registro</th>
-            <th>Cliente Asociado (Cédula)</th>
+            <th>Cliente Asociado</th>
             <th>Número de Tracking</th>
             <th>Acciones</th>
         </tr>
@@ -28,18 +27,26 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
                 <td>@item.Peso</td>
                 <td>@item.ValorTotalBruto</td>
                 <td>@item.TiendaOrigen</td>
-                <td>@(item.CondicionEspecial ? "Sí" : "No")</td>
-                <td>@item.FechaRegistro</td>
+                <td>
+                    @if (item.CondicionEspecial)
+                    {
+                        <span class="text-success fw-bold">✔</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger fw-bold">✘</span>
+                    }
+                </td>
+                <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
                 <td>@item.ClienteAsociado</td>
                 <td>@item.NumeroTracking</td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Ver reporte", "ReportePorCliente", new { cedula = item.ClienteAsociado })
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) 
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Ver reporte</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
         }

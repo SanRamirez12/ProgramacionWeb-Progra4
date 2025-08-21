@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Aeropost.Models.Factura>
+@{
+    ViewData["Title"] = "Reporte Mensual";
+    int anio = ViewBag.Anio ?? DateTime.Now.Year;
+    int mes = ViewBag.Mes ?? DateTime.Now.Month;
+    decimal total = ViewBag.Total ?? 0m;
+    int cantidad = ViewBag.Cantidad ?? 0;
+}
+
+<h1>Reporte Mensual</h1>
+<hr />
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <label for="anio" class="form-label">Año</label>
+        <input id="anio" name="anio" type="number" class="form-control" value="@anio" min="2000" max="2100" />
+    </div>
+    <div class="col-auto">
+        <label for="mes" class="form-label">Mes</label>
+        <input id="mes" name="mes" type="number" class="form-control" value="@mes" min="1" max="12" />
+    </div>
+    <div class="col-auto align-self-end">
+        <button class="btn btn-primary" type="submit">Generar</button>
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="alert alert-info">
+        <strong>Resumen:</strong>
+        @cantidad factura(s) — Total: @total.ToString("C")
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FechaEntrega</th>
+                <th>Tracking</th>
+                <th>Cédula</th>
+                <th>MontoTotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in Model)
+            {
+                <tr>
+                    <td>@f.Id</td>
+                    <td>@f.FechaEntrega.ToString("yyyy-MM-dd")</td>
+                    <td>@f.NumeroTracking</td>
+                    <td>@f.CedulaCliente</td>
+                    <td>@f.MontoTotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">No hay facturas para mostrar.</div>
+}

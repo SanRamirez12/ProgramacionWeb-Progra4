@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aeropost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d754de3ab001423a4795c083c9b3fb24e079d5a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c158463da48833e3d63d8f95e4b038bde5e999ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aeropost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aeropost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
