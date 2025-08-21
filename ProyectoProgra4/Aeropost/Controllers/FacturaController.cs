@@ -149,8 +149,8 @@ namespace Aeropost.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-<<<<<<< HEAD
-        [HttpGet]
+
+        // GET: Factura/PaquetesPorCedula?cedula=123456789
         public IActionResult PaquetesPorCedula(string cedula)
         {
             if (string.IsNullOrWhiteSpace(cedula))
@@ -221,11 +221,6 @@ namespace Aeropost.Controllers
     }
 
 }
-=======
 
+    
 
-
-
-    }
-}
->>>>>>> d61dd396061f040496288bca30ce24619523e80a

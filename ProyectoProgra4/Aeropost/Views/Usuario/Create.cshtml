@@ -75,7 +75,7 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <!-- Confirm Password (no está en el modelo) 
+            <!-- Confirm Password (no está en el modelo) -->
             <div class="form-group">
                 <label for="ConfirmPassword" class="control-label">Confirmar Contraseña</label>
                 <input id="ConfirmPassword" name="ConfirmPassword" class="form-control"
@@ -83,7 +83,7 @@
                 <span class="text-danger">
                     @ViewData.ModelState["ConfirmPassword"]?.Errors.FirstOrDefault()?.ErrorMessage
                 </span>
-            </div>-->
+            </div>
 
 
             <!-- Botones -->

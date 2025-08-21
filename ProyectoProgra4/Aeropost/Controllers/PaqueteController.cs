@@ -213,7 +213,7 @@ namespace Aeropost.Controllers
             return View(lista); // Vista fuertemente tipada a IEnumerable<Paquete>
         }
 
-        [HttpGet]
+        // GET: PaqueteController/PaquetePorTracking?tracking=ABC123
         public IActionResult PaquetePorTracking(string tracking)
         {
             if (string.IsNullOrWhiteSpace(tracking))

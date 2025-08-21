@@ -28,6 +28,8 @@
                     <option value="Amazon">Amazon</option>
                     <option value="eBay">eBay</option>
                     <option value="AliExpress">AliExpress</option>
+                    <option value="Temu">Temu</option>
+                    <option value="Shein">Shein</option>
                 </select>
                 <span asp-validation-for="TiendaOrigen" class="text-danger"></span>
             </div>
@@ -41,9 +43,9 @@
                 <span asp-validation-for="CondicionEspecial" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="FechaRegistro" class="form-label fw-bold"></label>
-                <input asp-for="FechaRegistro" type="datetime-local" class="form-control" />
+            <div class="form-group mb-3">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input asp-for="FechaRegistro" class="form-control" type="date" />
                 <span asp-validation-for="FechaRegistro" class="text-danger"></span>
             </div>
 

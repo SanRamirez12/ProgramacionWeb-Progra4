@@ -152,7 +152,7 @@ namespace Aeropost.Controllers
             return View(lista);
         }
 
-        [HttpGet]
+        // GET: ClienteController/ClientePorCedula
         public IActionResult ClientePorCedula(string cedula)
         {
             if (string.IsNullOrWhiteSpace(cedula))

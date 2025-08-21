@@ -370,19 +370,13 @@ namespace Aeropost.Models
             return usuario;
         }
 
-<<<<<<< HEAD
-        internal object ObtenerDatosFacturaPorCedula(string cedula)
-        {
-            throw new NotImplementedException();
-        }
 
-=======
         //Valida que dos contraseñas coincidan (comparación ordinal).
         public bool PasswordsCoinciden(string password, string confirmPassword)
         {
             return string.Equals(password, confirmPassword, StringComparison.Ordinal);
         }
->>>>>>> 7efb5a9d9df3436f5c25d3a01f87485e83454a61
+
         #endregion
 
         #region Metodos de Bitacora
