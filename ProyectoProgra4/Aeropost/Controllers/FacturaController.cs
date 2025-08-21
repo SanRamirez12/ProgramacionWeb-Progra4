@@ -149,6 +149,7 @@ namespace Aeropost.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+<<<<<<< HEAD
         [HttpGet]
         public IActionResult PaquetesPorCedula(string cedula)
         {
@@ -220,3 +221,11 @@ namespace Aeropost.Controllers
     }
 
 }
+=======
+
+
+
+
+    }
+}
+>>>>>>> d61dd396061f040496288bca30ce24619523e80a
