@@ -153,12 +153,12 @@ namespace Aeropost.Models
         }
 
         //Devuelve TODOS los paquetes de un cliente (por cédula), ordenados del más reciente al más antiguo.
-        public Array ReportePaquetesPorCliente(string cedulaCliente)
+        public List<Paquete> ReportePaquetesPorCliente(string cedulaCliente)
         {
-            return paquetes
+            return this.paquetes
                 .Where(p => p.ClienteAsociado == cedulaCliente)
                 .OrderByDescending(p => p.FechaRegistro)
-                .ToArray();
+                .ToList();
         }
 
         #endregion

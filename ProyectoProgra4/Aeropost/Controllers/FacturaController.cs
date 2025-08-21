@@ -23,16 +23,16 @@ namespace Aeropost.Controllers
         // GET: FacturaController/Details/5
         public ActionResult Details(int id)
         {
-            try
-            {
-                var factura = services.buscarFactura(id);
-                return View(factura);
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            var f = services.buscarFactura(id);
+            if (f == null) return RedirectToAction(nameof(Index));
+
+            var cli = services.buscarClientePorCedula(f.CedulaCliente);
+            ViewBag.Cliente = cli;
+
+            return View(f);
         }
+
+
 
         // GET: FacturaController/Create
         public ActionResult Create()
@@ -124,8 +124,13 @@ namespace Aeropost.Controllers
         {
             try
             {
-                var facturaEliminada = services.buscarFactura(id);
-                return View(facturaEliminada);
+                var f = services.buscarFactura(id);
+                if (f == null) return RedirectToAction(nameof(Index));
+
+                // Para mostrar la tarjeta de Cliente
+                ViewBag.Cliente = services.buscarClientePorCedula(f.CedulaCliente);
+
+                return View(f);
             }
             catch
             {
@@ -194,16 +199,38 @@ namespace Aeropost.Controllers
             return View(lista);
         }
 
-        // GET: Factura/PorCedula?cedula=123456789
-        public ActionResult PorCedula(string cedula)
+        // GET: Factura/PorCedula   (sin cédula => muestra form)
+        // GET: Factura/PorCedula?cedula=123456789   (con cédula => lista resumen + tabla)
+        public ActionResult PorCedula(string? cedula)
         {
             if (string.IsNullOrWhiteSpace(cedula))
-                return View(new List<Factura>());
+            {
+                ViewBag.Cedula = null;
+                ViewBag.ClienteNombre = null;
+                ViewBag.Cantidad = 0;
+                ViewBag.TotalMonto = 0m;
+                return View(Enumerable.Empty<Factura>());
+            }
 
-            var lista = services.listarFacturasPorCedula(cedula);
+            cedula = cedula.Trim();
+
+            var cliente = services.buscarClientePorCedula(cedula);
+            if (cliente == null)
+            {
+                ModelState.AddModelError(string.Empty, "La cédula no pertenece a ningún cliente registrado.");
+                ViewBag.Cedula = cedula;
+                ViewBag.ClienteNombre = null;
+                ViewBag.Cantidad = 0;
+                ViewBag.TotalMonto = 0m;
+                return View(Enumerable.Empty<Factura>());
+            }
+
+            var lista = services.listarFacturasPorCedula(cedula); // ya lo tienes en Service
+
             ViewBag.Cedula = cedula;
-            ViewBag.Total = lista.Sum(f => f.MontoTotal);
+            ViewBag.ClienteNombre = cliente.Nombre;
             ViewBag.Cantidad = lista.Count;
+            ViewBag.TotalMonto = lista.Sum(f => f.MontoTotal);
 
             return View(lista);
         }
@@ -215,6 +242,15 @@ namespace Aeropost.Controllers
                 return View(model: null);
 
             var f = services.buscarFacturaPorTracking(tracking);
+
+            // Para que el resumen muestre el nombre (si existe)
+            if (f != null)
+            {
+                var c = services.buscarClientePorCedula(f.CedulaCliente);
+                ViewBag.ClienteNombre = c?.Nombre;
+            }
+
+            ViewBag.Tracking = tracking;
             return View(f);
         }
 

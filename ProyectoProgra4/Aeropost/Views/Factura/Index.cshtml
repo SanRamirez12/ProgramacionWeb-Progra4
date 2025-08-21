@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Facturas";
+    var us = System.Globalization.CultureInfo.CreateSpecificCulture("en-US"); // formato $ y punto decimal
 }
 
 <h1 class="mb-4 text-center">Lista de Facturas</h1>
@@ -27,7 +28,7 @@
             <th>Número de tracking</th>
             <th>Cédula del cliente</th>
             <th>Peso (lb)</th>
-            <th>Valor total del paquete</th>
+            <th>Valor total del paquete ($)</th>
             <th>Producto especial</th>
             <th>Fecha de entrega</th>
             <th>Monto total ($)</th>
@@ -40,21 +41,25 @@
             <tr>
                 <td>@item.NumeroTracking</td>
                 <td>@item.CedulaCliente</td>
-                <td>@item.Peso</td>
-                <td>@item.ValorTotalPaquete</td>
+                <td>@item.Peso.ToString("N2", us)</td>
+                <td>@item.ValorTotalPaquete.ToString("C2", us)</td>
                 <td class="text-center">
-                    @(item.EsProductoEspecial ? "✔️" : "❌")
+                    @(item.EsProductoEspecial ? "Sí" : "No")
                 </td>
                 <td>@item.FechaEntrega.ToString("dd/MM/yyyy")</td>
-                <td class="fw-bold text-success">@item.MontoTotal</td>
+                <td class="fw-bold text-success">@item.MontoTotal.ToString("C2", us)</td>
                 <td class="text-center">
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1">
+                        <i class="bi bi-eye"></i> Detalles
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning me-1">
                         <i class="bi bi-pencil-square"></i> Editar
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
                         <i class="bi bi-trash"></i> Eliminar
                     </a>
                 </td>
+
             </tr>
         }
     </tbody>

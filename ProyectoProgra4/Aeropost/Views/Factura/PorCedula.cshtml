@@ -1,59 +1,116 @@
-﻿@model IEnumerable<Aeropost.Models.Factura>
+﻿@using System.Globalization
+@model IEnumerable<Aeropost.Models.Factura>
+
 @{
     ViewData["Title"] = "Facturas por Cédula";
-    string ced = ViewBag.Cedula as string ?? "";
-    decimal total = ViewBag.Total ?? 0m;
-    int cantidad = ViewBag.Cantidad ?? 0;
+    var us = CultureInfo.CreateSpecificCulture("en-US"); // $ y punto decimal
+    var tieneCedula = ViewBag.Cedula != null && !string.IsNullOrWhiteSpace((string)ViewBag.Cedula);
 }
 
-<h1>Facturas por Cédula</h1>
-<hr />
+<h1 class="mb-3">Facturas por cédula</h1>
 
-<form method="get" class="row g-2 mb-3">
-    <div class="col-auto">
-        <label for="cedula" class="form-label">Cédula</label>
-        <input id="cedula" name="cedula" class="form-control" value="@ced" placeholder="Ingrese cédula" />
+<!-- Formulario de búsqueda -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <form asp-action="PorCedula" method="get" class="row g-3">
+            <div class="col-md-6">
+                <label for="cedula" class="form-label">Cédula</label>
+                <input type="text"
+                       id="cedula"
+                       name="cedula"
+                       value="@(tieneCedula ? (string)ViewBag.Cedula : string.Empty)"
+                       class="form-control"
+                       placeholder="103450789"
+                       required />
+                <div class="form-text">Digite la cédula y presione “Buscar”.</div>
+            </div>
+            <div class="col-md-6 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a asp-controller="Factura" asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
     </div>
-    <div class="col-auto align-self-end">
-        <button class="btn btn-primary" type="submit">Buscar</button>
-        <a asp-action="Index" class="btn btn-secondary">Volver</a>
-    </div>
-</form>
+</div>
 
-@if (Model != null && Model.Any())
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
 {
-    <div class="alert alert-info">
-        <strong>@ced:</strong> @cantidad factura(s) — Total: @total.ToString("C")
+    <div class="alert alert-warning">
+        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            @err.ErrorMessage
+            <br />
+        }
     </div>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FechaEntrega</th>
-                <th>Tracking</th>
-                <th>MontoTotal</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var f in Model)
-            {
-                <tr>
-                    <td>@f.Id</td>
-                    <td>@f.FechaEntrega.ToString("yyyy-MM-dd")</td>
-                    <td>@f.NumeroTracking</td>
-                    <td>@f.MontoTotal.ToString("C")</td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = f.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = f.Id })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 }
-else if (!string.IsNullOrWhiteSpace(ced))
+
+<!-- Resumen -->
+@if (tieneCedula)
 {
-    <div class="alert alert-warning">No se encontraron facturas para la cédula ingresada.</div>
+    var nombre = ViewBag.ClienteNombre as string ?? "—";
+    var ced = ViewBag.Cedula as string ?? "";
+    var cant = (int)(ViewBag.Cantidad ?? 0);
+    var total = ((decimal)(ViewBag.TotalMonto ?? 0m)).ToString("C2", us);
+
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <h5 class="mb-1">Cliente</h5>
+                    <div><strong>Nombre:</strong> @nombre</div>
+                    <div><strong>Cédula:</strong> @ced</div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-1">Resumen</h5>
+                    <div><strong>Total de facturas:</strong> @cant</div>
+                    <div><strong>Monto total ($):</strong> @total</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Resultados -->
+@if (tieneCedula && Model != null && Model.Any())
+{
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Fecha de Entrega</th>
+                            <th>Tracking</th>
+                            <th class="text-end">Monto Total ($)</th>
+                            <th class="text-end" style="width: 300px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var f in Model)
+                        {
+                            <tr>
+                                <td>@f.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                                <td>@f.NumeroTracking</td>
+                                <td class="text-end">@f.MontoTotal.ToString("C2", us)</td>
+                                <td class="text-end">
+                                    <a asp-action="Details" asp-route-id="@f.Id" class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="bi bi-eye"></i> Detalles
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@f.Id" class="btn btn-sm btn-outline-warning me-1">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@f.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else if (tieneCedula)
+{
+    <p class="text-muted mt-2">No hay facturas registradas para esta cédula.</p>
 }

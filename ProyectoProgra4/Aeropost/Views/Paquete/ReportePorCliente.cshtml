@@ -1,48 +1,116 @@
-﻿@model IEnumerable<Aeropost.Models.Paquete>
+﻿@using System.Globalization
+@model IEnumerable<Aeropost.Models.Paquete>
 
 @{
     ViewData["Title"] = "Reporte de paquetes por cliente";
+    var us = CultureInfo.CreateSpecificCulture("en-US"); // $ y punto decimal
+    var tieneCedula = ViewBag.Cedula != null && !string.IsNullOrWhiteSpace((string)ViewBag.Cedula);
 }
 
-<h1>Reporte de paquetes por cliente</h1>
+<h1 class="mb-3">Reporte de paquetes por cliente</h1>
 
-@if (ViewBag.Cedula != null)
+<!-- Formulario de búsqueda (GET a la misma acción) -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <form asp-action="ReportePorCliente" method="get" class="row g-3">
+            <div class="col-md-6">
+                <label for="cedula" class="form-label">Número de cédula</label>
+                <input type="text"
+                       id="cedula"
+                       name="cedula"
+                       value="@(tieneCedula ? (string)ViewBag.Cedula : string.Empty)"
+                       class="form-control"
+                       placeholder="103450789"
+                       required />
+                <div class="form-text">Digite la cédula y presione “Buscar”.</div>
+            </div>
+            <div class="col-md-6 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a asp-action="Index" class="btn btn-secondary">Volver a Paquetes</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
 {
-    <p><strong>Cédula del cliente:</strong> @ViewBag.Cedula</p>
-    <p><strong>Total de paquetes:</strong> @ViewBag.Total</p>
+    <div class="alert alert-warning">
+        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            @err.ErrorMessage
+            <br />
+        }
+    </div>
 }
 
-@if (Model != null && Model.Any())
+<!-- Resumen (solo si hay cédula ingresada) -->
+@if (tieneCedula)
 {
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Número de Tracking</th>
-                <th>Peso</th>
-                <th>Valor Bruto</th>
-                <th>Tienda</th>
-                <th>Especial</th>
-                <th>Fecha Registro</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var p in Model)
-            {
-                <tr>
-                    <td>@p.Id</td>
-                    <td>@p.NumeroTracking</td>
-                    <td>@p.Peso</td>
-                    <td>@p.ValorTotalBruto</td>
-                    <td>@p.TiendaOrigen</td>
-                    <td>@(p.CondicionEspecial ? "Sí" : "No")</td>
-                    <td>@p.FechaRegistro</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <h5 class="mb-1">Cliente</h5>
+                    <div><strong>Nombre:</strong> @(ViewBag.ClienteNombre ?? "—")</div>
+                    <div><strong>Cédula:</strong> @ViewBag.Cedula</div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-1">Resumen</h5>
+                    <div><strong>Total de paquetes:</strong> @(ViewBag.TotalPaquetes ?? 0)</div>
+                    <div><strong>Peso total (lb):</strong> @(((decimal)(ViewBag.PesoTotal ?? 0m)).ToString("N2", us))</div>
+                    <div><strong>Valor bruto total ($):</strong> @(((decimal)(ViewBag.ValorBrutoTotal ?? 0m)).ToString("C2", us))</div>
+                    <div><strong>Con condición especial:</strong> @(ViewBag.ConEspecial ?? 0)</div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-else
+
+<!-- Resultados -->
+@if (tieneCedula && Model != null && Model.Any())
 {
-    <p class="text-muted">No hay paquetes registrados para esta cédula.</p>
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Número de Tracking</th>
+                            <th class="text-end">Peso (lb)</th>
+                            <th class="text-end">Valor Bruto ($)</th>
+                            <th>Tienda</th>
+                            <th>Especial</th>
+                            <th>Fecha Registro</th>
+                            <th class="text-end" style="width: 200px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model)
+                        {
+                            <tr>
+                                <td>@p.NumeroTracking</td>
+                                <td class="text-end">@p.Peso.ToString("N2", us)</td>
+                                <td class="text-end">@p.ValorTotalBruto.ToString("C2", us)</td>
+                                <td>@p.TiendaOrigen</td>
+                                <td>@(p.CondicionEspecial ? "Sí" : "No")</td>
+                                <td>@p.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-warning me-1">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else if (tieneCedula)
+{
+    <p class="text-muted mt-2">No hay paquetes registrados para esta cédula.</p>
 }

@@ -1,58 +1,104 @@
-﻿@model Aeropost.Models.Factura
+﻿@using System.Globalization
+@model Aeropost.Models.Factura
+
 @{
-    ViewData["Title"] = "Buscar por Tracking";
-    string tracking = Context.Request.Query["tracking"];
+    ViewData["Title"] = "Factura por tracking";
+    var us = CultureInfo.CreateSpecificCulture("en-US");  // $ y punto decimal
+    var tracking = (string)(ViewBag.Tracking ?? Context.Request.Query["tracking"].ToString());
+    var tieneTracking = !string.IsNullOrWhiteSpace(tracking);
 }
 
-<h1>Buscar Factura por Tracking</h1>
-<hr />
+<h1 class="mb-3">Facturas por tracking</h1>
 
-<form method="get" class="row g-2 mb-3">
-    <div class="col-auto">
-        <label for="tracking" class="form-label">Tracking</label>
-        <input id="tracking" name="tracking" class="form-control" value="@tracking" placeholder="Ingrese tracking" />
+<!-- Buscador -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <form asp-action="PorTracking" method="get" class="row g-3">
+            <div class="col-md-6">
+                <label for="tracking" class="form-label">Tracking</label>
+                <input type="text"
+                       id="tracking"
+                       name="tracking"
+                       value="@(tieneTracking? tracking : string.Empty)"
+                       class="form-control"
+                       placeholder="AL0825MIA17647"
+                       required />
+                <div class="form-text">Digite el tracking y presione “Buscar”.</div>
+            </div>
+            <div class="col-md-6 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a asp-controller="Factura" asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
     </div>
-    <div class="col-auto align-self-end">
-        <button class="btn btn-primary" type="submit">Buscar</button>
-        <a asp-action="Index" class="btn btn-secondary">Volver</a>
-    </div>
-</form>
+</div>
 
-@if (Model != null)
+@if (tieneTracking && Model != null)
 {
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FechaEntrega</th>
-                <th>Cédula</th>
-                <th>Tracking</th>
-                <th>Peso</th>
-                <th>Valor</th>
-                <th>Especial</th>
-                <th>Monto</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@Model.Id</td>
-                <td>@Model.FechaEntrega.ToString("yyyy-MM-dd")</td>
-                <td>@Model.CedulaCliente</td>
-                <td>@Model.NumeroTracking</td>
-                <td>@Model.Peso</td>
-                <td>@Model.ValorTotalPaquete.ToString("C")</td>
-                <td>@Model.EsProductoEspecial</td>
-                <td>@Model.MontoTotal.ToString("C")</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Resumen -->
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <h5 class="mb-1">Cliente</h5>
+                    <div><strong>Nombre:</strong> @(ViewBag.ClienteNombre ?? "—")</div>
+                    <div><strong>Cédula:</strong> @Model.CedulaCliente</div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-1">Factura</h5>
+                    <div><strong>Tracking:</strong> @Model.NumeroTracking</div>
+                    <div><strong>Fecha de entrega:</strong> @Model.FechaEntrega.ToString("dd/MM/yyyy")</div>
+                    <div><strong>Monto total ($):</strong> @Model.MontoTotal.ToString("C2", us)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resultado -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Fecha de Entrega</th>
+                            <th>Cédula</th>
+                            <th>Tracking</th>
+                            <th class="text-end">Peso (lb)</th>
+                            <th class="text-end">Valor Bruto ($)</th>
+                            <th>Especial</th>
+                            <th class="text-end">Monto Total ($)</th>
+                            <th class="text-end" style="width: 300px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                            <td>@Model.CedulaCliente</td>
+                            <td>@Model.NumeroTracking</td>
+                            <td class="text-end">@Model.Peso.ToString("N2", us)</td>
+                            <td class="text-end">@Model.ValorTotalPaquete.ToString("C2", us)</td>
+                            <td>@(Model.EsProductoEspecial ? "Sí" : "No")</td>
+                            <td class="text-end">@Model.MontoTotal.ToString("C2", us)</td>
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-primary me-1">
+                                    <i class="bi bi-eye"></i> Detalles
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning me-1">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 }
-else if (!string.IsNullOrWhiteSpace(tracking))
+else if (tieneTracking)
 {
-    <div class="alert alert-warning">No se encontró una factura con ese tracking.</div>
+    <p class="text-muted mt-2">No se encontró una factura con ese tracking.</p>
 }

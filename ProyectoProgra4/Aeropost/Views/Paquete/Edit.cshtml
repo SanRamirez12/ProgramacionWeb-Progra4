@@ -1,14 +1,21 @@
 ﻿@model Aeropost.Models.Paquete
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Paquete";
 }
 
 <h2 class="mb-4">Editar Paquete</h2>
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <form asp-action="Create">
+        <!--Debe postear a Edit y por POST -->
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- Necesarios para que el POST reciba el Id y conserve el tracking anterior -->
+            <input asp-for="Id" type="hidden" />
+            <input asp-for="NumeroTracking" type="hidden" />
+
             <div class="mb-3">
                 <label asp-for="Peso" class="form-label fw-bold"></label>
                 <input asp-for="Peso" class="form-control" placeholder="Ingrese el peso en lb" />
@@ -37,8 +44,8 @@
             <div class="mb-3">
                 <label asp-for="CondicionEspecial" class="form-label fw-bold"></label>
                 <div>
-                    <input type="radio" asp-for="CondicionEspecial" value="true" /> Sí
-                    <input type="radio" asp-for="CondicionEspecial" value="false" /> No
+                    <input type="radio" asp-for="CondicionEspecial" value="true" id="espSi" /> <label for="espSi">Sí</label>
+                    <input type="radio" asp-for="CondicionEspecial" value="false" id="espNo" class="ms-3" /> <label for="espNo">No</label>
                 </div>
                 <span asp-validation-for="CondicionEspecial" class="text-danger"></span>
             </div>
@@ -57,7 +64,7 @@
 
             <div class="d-flex justify-content-between">
                 <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
-                <button type="submit" class="btn btn-success">Crear</button>
+                <button type="submit" class="btn btn-success">Guardar cambios</button>
             </div>
         </form>
     </div>

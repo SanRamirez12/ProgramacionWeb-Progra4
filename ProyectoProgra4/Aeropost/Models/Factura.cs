@@ -42,36 +42,43 @@ namespace Aeropost.Models
             this.MontoTotal = 0m;
         }
 
-        // Propiedades hollaaa
+        // Propiedades
         [Key]
         [Required]
         public int Id { get => id; set => id = value; }
 
         [Required]
         [StringLength(30)]
+        [Display(Name = "Número de Tracking")]
         public string NumeroTracking { get => numeroTracking; set => numeroTracking = value; }
 
         [Required]
         [StringLength(25)]
+        [Display(Name = "Cédula del Cliente")]
         public string CedulaCliente { get => cedulaCliente; set => cedulaCliente = value; }
 
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "El peso debe ser mayor a 0.")]
+        [Display(Name = "Peso (lb)")]
         public decimal Peso { get => peso; set => peso = value; }
 
         [Required]
         [Range(0, double.MaxValue, ErrorMessage = "El valor del paquete no puede ser negativo.")]
+        [Display(Name = "Valor del Paquete ($)")]
         public decimal ValorTotalPaquete { get => valorTotalPaquete; set => valorTotalPaquete = value; }
 
         [Required]
+        [Display(Name = "Producto Especial")]
         public bool EsProductoEspecial { get => esProductoEspecial; set => esProductoEspecial = value; }
 
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "Fecha de Entrega")]
         public DateTime FechaEntrega { get => fechaEntrega; set => fechaEntrega = value; }
 
         [Required]
         [Range(0, double.MaxValue)]
+        [Display(Name = "Monto Total ($)")]
         public decimal MontoTotal { get => montoTotal; set => montoTotal = value; }
 
     }

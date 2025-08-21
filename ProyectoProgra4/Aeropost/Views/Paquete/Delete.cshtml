@@ -1,47 +1,79 @@
-﻿@model Aeropost.Models.Paquete
+﻿@using System.Globalization
+@model Aeropost.Models.Paquete
 
 @{
-    ViewData["Title"] = "Cancelar paquete";
+    ViewData["Title"] = "Eliminar paquete";
+    var us = CultureInfo.CreateSpecificCulture("en-US"); // $ y punto decimal
+    var nombreCliente = ViewBag.ClienteNombre as string ?? "—";
 }
 
-<h1>Cancelar paquete</h1>
+<h1 class="mb-3">Eliminar paquete</h1>
 
-<h3>¿Está seguro que desea cancelar este paquete?</h3>
-<div>
-    <h4>Paquete</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">Id</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.Id)</dd>
-
-        <dt class="col-sm-3">Peso (lb)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.Peso)</dd>
-
-        <dt class="col-sm-3">Valor Total Bruto</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.ValorTotalBruto)</dd>
-
-        <dt class="col-sm-3">Tienda de Origen</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.TiendaOrigen)</dd>
-
-        <dt class="col-sm-3">Condición Especial</dt>
-        <dd class="col-sm-9">@(Model.CondicionEspecial ? "Sí" : "No")</dd>
-
-        <dt class="col-sm-3">Fecha de Registro</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.FechaRegistro)</dd>
-
-        <dt class="col-sm-3">Cliente Asociado (Cédula)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.ClienteAsociado)</dd>
-
-        <dt class="col-sm-3">Número de Tracking</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.NumeroTracking)</dd>
-    </dl>
-
-    <form asp-action="Delete" method="post">
-        <input type="hidden" asp-for="Id" />
-
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-danger">Sí, cancelar paquete</button>
-            <a asp-action="Index" class="btn btn-secondary">No, volver al listado</a>
-        </div>
-    </form>
+<div class="alert alert-warning">
+    <strong>¿Está seguro que desea eliminar este paquete?</strong>
 </div>
+
+<!-- Resumen estilo "reporte por cliente" -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <h5 class="mb-1">Cliente</h5>
+                <div><strong>Nombre:</strong> @nombreCliente</div>
+                <div><strong>Cédula:</strong> @Model.ClienteAsociado</div>
+            </div>
+            <div class="col-md-6">
+                <h5 class="mb-1">Resumen</h5>
+                <div><strong>Peso (lb):</strong> @Model.Peso.ToString("N2", us)</div>
+                <div><strong>Valor bruto ($):</strong> @Model.ValorTotalBruto.ToString("C2", us)</div>
+                <div><strong>Condición especial:</strong> @(Model.CondicionEspecial ? "Sí" : "No")</div>
+                <div><strong>Fecha de registro:</strong> @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabla con el paquete (1 fila) -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Número de Tracking</th>
+                        <th class="text-end">Peso (lb)</th>
+                        <th class="text-end">Valor Bruto ($)</th>
+                        <th>Tienda</th>
+                        <th>Especial</th>
+                        <th>Fecha Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.NumeroTracking</td>
+                        <td class="text-end">@Model.Peso.ToString("N2", us)</td>
+                        <td class="text-end">@Model.ValorTotalBruto.ToString("C2", us)</td>
+                        <td>@Model.TiendaOrigen</td>
+                        <td>@(Model.CondicionEspecial ? "Sí" : "No")</td>
+                        <td>@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario de confirmación -->
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-flex gap-2">
+    @Html.AntiForgeryToken()
+
+    <!--  Id oculto  -->
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">
+        Volver
+    </a>
+</form>

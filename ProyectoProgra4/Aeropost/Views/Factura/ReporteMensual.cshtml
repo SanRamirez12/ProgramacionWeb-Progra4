@@ -1,63 +1,90 @@
-﻿@model IEnumerable<Aeropost.Models.Factura>
+﻿@using System.Globalization
+@model IEnumerable<Aeropost.Models.Factura>
+
 @{
     ViewData["Title"] = "Reporte Mensual";
+
+    var us = CultureInfo.CreateSpecificCulture("en-US"); // $ y punto decimal
+
     int anio = ViewBag.Anio ?? DateTime.Now.Year;
     int mes = ViewBag.Mes ?? DateTime.Now.Month;
-    decimal total = ViewBag.Total ?? 0m;
-    int cantidad = ViewBag.Cantidad ?? 0;
+
+    int cantidad = ViewBag.Cantidad ?? (Model?.Count() ?? 0);
+    decimal total = ViewBag.Total ?? (Model?.Sum(f => f.MontoTotal) ?? 0m);
 }
 
-<h1>Reporte Mensual</h1>
-<hr />
+<h1 class="mb-3">Reporte Mensual</h1>
 
-<form method="get" class="row g-2 mb-3">
-    <div class="col-auto">
-        <label for="anio" class="form-label">Año</label>
-        <input id="anio" name="anio" type="number" class="form-control" value="@anio" min="2000" max="2100" />
+<!-- Filtro -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <form asp-action="ReporteMensual" method="get" class="row g-3">
+            <div class="col-md-3">
+                <label for="anio" class="form-label">Año</label>
+                <input id="anio" name="anio" type="number" class="form-control" value="@anio" min="2000" max="2100" />
+            </div>
+            <div class="col-md-3">
+                <label for="mes" class="form-label">Mes</label>
+                <input id="mes" name="mes" type="number" class="form-control" value="@mes" min="1" max="12" />
+            </div>
+            <div class="col-md-6 d-flex align-items-end gap-2">
+                <button class="btn btn-primary" type="submit">Generar</button>
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
     </div>
-    <div class="col-auto">
-        <label for="mes" class="form-label">Mes</label>
-        <input id="mes" name="mes" type="number" class="form-control" value="@mes" min="1" max="12" />
-    </div>
-    <div class="col-auto align-self-end">
-        <button class="btn btn-primary" type="submit">Generar</button>
-        <a asp-action="Index" class="btn btn-secondary">Volver</a>
-    </div>
-</form>
+</div>
 
 @if (Model != null && Model.Any())
 {
-    <div class="alert alert-info">
-        <strong>Resumen:</strong>
-        @cantidad factura(s) — Total: @total.ToString("C")
+    <!-- Resumen -->
+    <div class="card shadow-sm mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <h5 class="mb-1">Período</h5>
+                    <div><strong>Mes:</strong> @mes.ToString("00")</div>
+                    <div><strong>Año:</strong> @anio</div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-1">Resumen</h5>
+                    <div><strong>Total de facturas:</strong> @cantidad</div>
+                    <div><strong>Total facturado ($):</strong> @total.ToString("C2", us)</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FechaEntrega</th>
-                <th>Tracking</th>
-                <th>Cédula</th>
-                <th>MontoTotal</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var f in Model)
-            {
-                <tr>
-                    <td>@f.Id</td>
-                    <td>@f.FechaEntrega.ToString("yyyy-MM-dd")</td>
-                    <td>@f.NumeroTracking</td>
-                    <td>@f.CedulaCliente</td>
-                    <td>@f.MontoTotal.ToString("C")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <!-- Tabla -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Fecha de Entrega</th>
+                            <th>Tracking</th>
+                            <th>Cédula</th>
+                            <th class="text-end">Monto Total ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var f in Model)
+                        {
+                            <tr>
+                                <td>@f.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                                <td>@f.NumeroTracking</td>
+                                <td>@f.CedulaCliente</td>
+                                <td class="text-end">@f.MontoTotal.ToString("C2", us)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 }
 else
 {
-    <div class="alert alert-warning">No hay facturas para mostrar.</div>
+    <p class="text-muted">No hay facturas para el período seleccionado.</p>
 }

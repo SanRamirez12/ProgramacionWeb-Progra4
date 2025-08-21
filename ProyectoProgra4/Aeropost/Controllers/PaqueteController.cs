@@ -1,6 +1,7 @@
 ﻿using Aeropost.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace Aeropost.Controllers
 {
@@ -167,15 +168,19 @@ namespace Aeropost.Controllers
         // GET: PaqueteController/Delete/5
         public ActionResult Delete(int id)
         {
-
             try
             {
-                var paqueteEliminado = services.buscarPaquete(id);
-                return View(paqueteEliminado);
+                var paquete = services.buscarPaquete(id);
+
+                // Para mostrar nombre en la vista (si el cliente existe)
+                var cli = services.buscarClientePorCedula(paquete.ClienteAsociado);
+                ViewBag.ClienteNombre = cli?.Nombre;
+
+                return View(paquete);
             }
             catch (Exception)
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
@@ -196,21 +201,55 @@ namespace Aeropost.Controllers
             }
         }
 
-        // GET: PaqueteController/ReportePorCliente?cedula=123456789
-        public ActionResult ReportePorCliente(string cedula)
+        // GET: Paquete/ReportePorCliente  (sin cédula => muestra form)
+        // GET: Paquete/ReportePorCliente?cedula=123456789  (con cédula => lista)
+        public ActionResult ReportePorCliente(string? cedula)
         {
+            // 1) Sin cédula -> solo formulario
             if (string.IsNullOrWhiteSpace(cedula))
             {
-                TempData["Mensaje"] = "Debe ingresar una cédula válida para generar el reporte.";
-                return RedirectToAction(nameof(Index));
+                ViewBag.Cedula = null;
+                ViewBag.ClienteNombre = null;
+                ViewBag.TotalPaquetes = 0;
+                ViewBag.PesoTotal = 0m;
+                ViewBag.ValorBrutoTotal = 0m;
+                ViewBag.ConEspecial = 0;
+
+                return View(Enumerable.Empty<Paquete>());
             }
 
-            var lista = services.ReportePaquetesPorCliente(cedula).Cast<Paquete>().ToList();
+            // 2) Con cédula -> validar cliente y consultar
+            cedula = cedula.Trim();
+            var cliente = services.buscarClientePorCedula(cedula);
+            if (cliente == null)
+            {
+                ModelState.AddModelError(string.Empty, "La cédula no pertenece a ningún cliente registrado.");
+                ViewBag.Cedula = cedula;
+                ViewBag.ClienteNombre = null;
+                ViewBag.TotalPaquetes = 0;
+                ViewBag.PesoTotal = 0m;
+                ViewBag.ValorBrutoTotal = 0m;
+                ViewBag.ConEspecial = 0;
+
+                return View(Enumerable.Empty<Paquete>());
+            }
+
+            var lista = services.ReportePaquetesPorCliente(cedula);
+
+            // 3) Totales en el controller (sin out)
+            var total = lista.Count;
+            var pesoTotal = lista.Sum(p => p.Peso);
+            var valorBrutoTotal = lista.Sum(p => p.ValorTotalBruto);
+            var conEspecial = lista.Count(p => p.CondicionEspecial);
 
             ViewBag.Cedula = cedula;
-            ViewBag.Total = lista.Count;
+            ViewBag.ClienteNombre = cliente.Nombre;
+            ViewBag.TotalPaquetes = total;
+            ViewBag.PesoTotal = pesoTotal;
+            ViewBag.ValorBrutoTotal = valorBrutoTotal;
+            ViewBag.ConEspecial = conEspecial;
 
-            return View(lista); // Vista fuertemente tipada a IEnumerable<Paquete>
+            return View(lista);
         }
 
         // GET: PaqueteController/PaquetePorTracking?tracking=ABC123
