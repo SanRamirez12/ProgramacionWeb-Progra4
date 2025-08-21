@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Aeropost.Models.Bitacora>
+
+@{
+    ViewData["Title"] = "Bitácora de inicios de sesión";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Fecha de ingreso</th>
+            <th>Fecha de salida</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Username</td>
+                <td>@item.FechaIngreso.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@(item.FechaSalida.HasValue? item.FechaSalida.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss") : "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>

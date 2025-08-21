@@ -9,7 +9,7 @@ namespace Aeropost.Models
         public DbSet<Paquete> paquetes { get; set; }
         public DbSet<Factura> facturas { get; set; }
         public DbSet<Usuario> usuarios { get; set; }
-        // Hola
+        public DbSet<Bitacora> bitacoras { get; set; }
         //Creacion del context con la base Aeropost:
         public Service(): base("Aeropost") { }
 
@@ -350,9 +350,9 @@ namespace Aeropost.Models
         //Metodo que setea un usario admin generico para hacer el login inicial
         public Usuario login(string username, string password)
         {
-            // Caso especial: usuario de emergencia
             if (username == "adminKing" && password == "1234567")
             {
+                registrarInicio("adminKing");
                 return new Usuario
                 {
                     Id = -1,
@@ -367,20 +367,69 @@ namespace Aeropost.Models
                 };
             }
 
-            // Buscar usuario en la lista normal
             var usuario = usuarios.FirstOrDefault(u =>
                 u.Username == username && u.Password == password);
 
             if (usuario == null)
                 throw new Exception("Usuario o contraseña incorrectos.");
 
+            registrarInicio(usuario.Username);
             return usuario;
         }
 
 
         #endregion
 
+        #region Metodos de Bitacora
+        public void agregarBitacora(Bitacora bitacora)
+        {
+            bitacoras.Add(bitacora);
+            SaveChanges();
+        }
 
-   
+        public void registrarInicio(string username)
+        {
+            var log = new Bitacora
+            {
+                Username = username,
+                FechaIngreso = DateTime.UtcNow,
+                FechaSalida = null
+            };
+            bitacoras.Add(log);
+            SaveChanges();
+        }
+
+        public void registrarSalida(string username)
+        {
+            var ultimo = bitacoras
+                .Where(b => b.Username == username && b.FechaSalida == null)
+                .OrderByDescending(b => b.FechaIngreso)
+                .FirstOrDefault();
+
+            if (ultimo != null)
+            {
+                ultimo.FechaSalida = DateTime.UtcNow;
+                SaveChanges();
+            }
+        }
+
+        public IQueryable<Bitacora> listarBitacora(string usuario = null, DateTime? desde = null, DateTime? hasta = null)
+        {
+            var q = bitacoras.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(usuario))
+                q = q.Where(b => b.Username.Contains(usuario));
+
+            if (desde.HasValue)
+                q = q.Where(b => b.FechaIngreso >= desde.Value);
+
+            if (hasta.HasValue)
+                q = q.Where(b => b.FechaIngreso <= hasta.Value);
+
+            return q.OrderByDescending(b => b.FechaIngreso);
+        }
+
+        #endregion
+
     }
 }

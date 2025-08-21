@@ -173,7 +173,7 @@ namespace Aeropost.Controllers
         // GET: UsuarioController/Login
         public ActionResult Login()
         {
-            HttpContext.Session.Clear(); //Limpiar las variables de session
+            HttpContext.Session.Clear();
             return View();
         }
 
@@ -184,8 +184,12 @@ namespace Aeropost.Controllers
         {
             try
             {
-                var usuarioLogueado = services.login(username, password);
-                HttpContext.Session.SetString("VarSesion_NombreUsuario", usuarioLogueado.Nombre);//creamos la variable de sesion
+                var usuarioLogueado = services.login(username, password); // registra inicio adentro
+
+                //Variables de sesion
+                HttpContext.Session.SetString("VarSesion_NombreUsuario", usuarioLogueado.Nombre);
+                HttpContext.Session.SetString("VarSesion_Username", usuarioLogueado.Username);
+
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
@@ -193,8 +197,22 @@ namespace Aeropost.Controllers
                 ViewBag.ErrorMessage = ex.Message;
                 return View();
             }
-
         }
+
+        // POST: UsuarioController/Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            var username = HttpContext.Session.GetString("VarSesion_Username");
+
+            if (!string.IsNullOrWhiteSpace(username))
+                services.registrarSalida(username); // Bitácora: marcar fecha de salida
+
+            HttpContext.Session.Clear(); // limpiar variables de sesión
+            return RedirectToAction("Login", "Usuario");
+        }
+
 
 
         // GET
