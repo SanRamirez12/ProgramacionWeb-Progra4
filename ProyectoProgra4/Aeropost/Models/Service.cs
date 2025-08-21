@@ -82,6 +82,10 @@ namespace Aeropost.Models
                 .OrderBy(c => c.Nombre)
                 .ToList();
         }
+        public Cliente buscarClientePorCedula(string cedula)
+        {
+            return this.clientes.FirstOrDefault(c => c.Cedula == cedula);
+        }
 
         //  Unicidad sencilla (para Create/Edit)
         //    Nota: usa 'idIgnorar' cuando estás editando (para no chocarte contigo mismo).
@@ -137,6 +141,10 @@ namespace Aeropost.Models
             }
             else throw new Exception("Ese paquete no esta registrado");
         }
+        public Paquete buscarPaquetePorTracking(string tracking)
+        {
+            return this.paquetes.FirstOrDefault(p => p.NumeroTracking == tracking);
+        }
 
         //Metodo para validar si ya existe el numero de tracking
         public bool ExisteTracking(string numeroTracking)
@@ -145,12 +153,12 @@ namespace Aeropost.Models
         }
 
         //Devuelve TODOS los paquetes de un cliente (por cédula), ordenados del más reciente al más antiguo.
-        public Array ReportePaquetesPorCliente(string cedulaCliente)
+        public List<Paquete> ReportePaquetesPorCliente(string cedulaCliente)
         {
-            return paquetes
+            return this.paquetes
                 .Where(p => p.ClienteAsociado == cedulaCliente)
                 .OrderByDescending(p => p.FechaRegistro)
-                .ToArray();
+                .ToList();
         }
 
         #endregion
@@ -158,8 +166,30 @@ namespace Aeropost.Models
         #region Metodos de Factura
         public void agregarFactura(Factura factura)
         {
-            facturas.Add(factura); // Agrega directamente a la DB
-            SaveChanges(); // Guarda los cambios en la DB (commit)
+            // 1) Unicidad por tracking
+            if (existeFacturaPorTracking(factura.NumeroTracking))
+                throw new Exception("Ya existe una factura para ese número de tracking.");
+
+            // 2) Traer el paquete
+            var paquete = paquetes.FirstOrDefault(p => p.NumeroTracking == factura.NumeroTracking);
+            if (paquete == null)
+                throw new Exception("No existe un paquete con ese número de tracking.");
+
+            // 3) Coherencia de cédula
+            if (paquete.ClienteAsociado != factura.CedulaCliente)
+                throw new Exception("La cédula no coincide con el cliente del paquete.");
+
+            // 4) Rellenar desde Paquete y calcular
+            factura.Peso = paquete.Peso;
+            factura.ValorTotalPaquete = paquete.ValorTotalBruto;
+            factura.EsProductoEspecial = paquete.CondicionEspecial;
+            factura.MontoTotal = calcularMontoFactura(paquete);
+
+            // 5) Fecha por defecto
+            if (factura.FechaEntrega == default) factura.FechaEntrega = DateTime.Now;
+
+            facturas.Add(factura);
+            SaveChanges();
         }
 
         public Array mostrarFacturas()
@@ -183,22 +213,85 @@ namespace Aeropost.Models
 
         public void actualizarFactura(Factura factura)
         {
-            var facturaAnterior = this.facturas.FirstOrDefault(x => x.Id == factura.Id);
-            if (facturaAnterior != null)
-            {
-                facturaAnterior.NumeroTracking = factura.NumeroTracking;
-                facturaAnterior.CedulaCliente = factura.CedulaCliente;
-                facturaAnterior.Peso = factura.Peso;
-                facturaAnterior.ValorTotalPaquete = factura.ValorTotalPaquete;
-                facturaAnterior.EsProductoEspecial = factura.EsProductoEspecial;
-                facturaAnterior.FechaEntrega = factura.FechaEntrega;
-                facturaAnterior.MontoTotal = factura.MontoTotal;
+            var anterior = this.facturas.FirstOrDefault(x => x.Id == factura.Id);
+            if (anterior == null) throw new Exception("Esa factura no está registrada");
 
-                SaveChanges();
-            }
-            else throw new Exception("Esa factura no está registrada");
+            bool cambiaTracking = !string.Equals(anterior.NumeroTracking, factura.NumeroTracking, StringComparison.Ordinal);
+
+            // Si cambia tracking, validar duplicado y existencia del paquete
+            if (cambiaTracking && existeFacturaPorTracking(factura.NumeroTracking))
+                throw new Exception("Ya existe otra factura con ese número de tracking.");
+
+            var paquete = paquetes.FirstOrDefault(p => p.NumeroTracking == factura.NumeroTracking);
+            if (paquete == null)
+                throw new Exception("No existe un paquete con ese número de tracking.");
+
+            // Coherencia de cédula
+            if (paquete.ClienteAsociado != factura.CedulaCliente)
+                throw new Exception("La cédula no coincide con el cliente del paquete.");
+
+            // Actualizar campos editables
+            anterior.NumeroTracking = factura.NumeroTracking;
+            anterior.CedulaCliente = factura.CedulaCliente;
+            anterior.FechaEntrega = factura.FechaEntrega == default ? anterior.FechaEntrega : factura.FechaEntrega;
+
+            // Rellenar/calcular siempre desde el paquete para garantizar consistencia
+            anterior.Peso = paquete.Peso;
+            anterior.ValorTotalPaquete = paquete.ValorTotalBruto;
+            anterior.EsProductoEspecial = paquete.CondicionEspecial;
+            anterior.MontoTotal = calcularMontoFactura(paquete);
+
+            SaveChanges();
         }
 
+        // ¿Existe factura para este tracking? (evitar duplicados)
+        public bool existeFacturaPorTracking(string tracking)
+        {
+            return facturas.Any(f => f.NumeroTracking == tracking);
+        }
+
+        // Buscar factura por tracking exacto
+        public Factura buscarFacturaPorTracking(string tracking)
+        {
+            return facturas.FirstOrDefault(f => f.NumeroTracking == tracking);
+        }
+
+        // Listar facturas por cédula del cliente (más recientes primero)
+        public List<Factura> listarFacturasPorCedula(string cedula)
+        {
+            return facturas
+                .Where(f => f.CedulaCliente == cedula)
+                .OrderByDescending(f => f.FechaEntrega)
+                .ToList();
+        }
+
+        // Listar facturas de un mes específico
+        public List<Factura> listarFacturasPorMes(int anio, int mes)
+        {
+            return facturas
+                .Where(f => f.FechaEntrega.Year == anio && f.FechaEntrega.Month == mes)
+                .OrderByDescending(f => f.FechaEntrega)
+                .ToList();
+        }
+
+        // Total facturado del mes (monto total y cantidad)
+        public (decimal total, int cantidad) totalFacturadoDelMes(int anio, int mes)
+        {
+            var lista = listarFacturasPorMes(anio, mes);
+            decimal total = lista.Sum(f => f.MontoTotal);
+            return (total, lista.Count);
+        }
+
+        // --- Cálculo del monto (privado de apoyo) ---
+        private decimal calcularMontoFactura(Paquete p)
+        {
+            decimal tarifaBase = 12m;                     // 12 USD por kg
+            decimal basePeso = p.Peso * tarifaBase;
+            decimal iva = p.ValorTotalBruto * 0.13m;
+            decimal adicional = p.CondicionEspecial ? (p.ValorTotalBruto * 0.10m) : 0m;
+            return Math.Round(basePeso + iva + adicional, 2);
+        }
+        
         #endregion
 
         #region Metodos de Usuarios
@@ -285,6 +378,21 @@ namespace Aeropost.Models
 
             return usuario;
         }
+<<<<<<< HEAD
+=======
+
+
+        //Valida que dos contraseñas coincidan (comparación ordinal).
+        public bool PasswordsCoinciden(string password, string confirmPassword)
+        {
+            return string.Equals(password, confirmPassword, StringComparison.Ordinal);
+        }
+
+        #endregion
+
+        #region Metodos de Bitacora
+
+>>>>>>> 7dc41665555ab4171dc0ac84cc0f691c46493418
         #endregion
 
    

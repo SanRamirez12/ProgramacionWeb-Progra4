@@ -79,10 +79,21 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
+<<<<<<< HEAD
             <div class="form-group">
                 <label asp-for="ConfirmPassword"></label>
                 <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+=======
+            <!-- Confirm Password (no está en el modelo) -->
+            <div class="form-group">
+                <label for="ConfirmPassword" class="control-label">Confirmar Contraseña</label>
+                <input id="ConfirmPassword" name="ConfirmPassword" class="form-control"
+                       type="password" required placeholder="Repita la contraseña" />
+                <span class="text-danger">
+                    @ViewData.ModelState["ConfirmPassword"]?.Errors.FirstOrDefault()?.ErrorMessage
+                </span>
+>>>>>>> 7dc41665555ab4171dc0ac84cc0f691c46493418
             </div>
 
             <div class="form-group mt-3">

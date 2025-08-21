@@ -1,20 +1,20 @@
 ﻿@using System.Globalization
-@model IEnumerable<Aeropost.Models.Paquete>
+@model IEnumerable<Aeropost.Models.Factura>
 
 @{
-    ViewData["Title"] = "Reporte de paquetes por cliente";
+    ViewData["Title"] = "Facturas por Cédula";
     var us = CultureInfo.CreateSpecificCulture("en-US"); // $ y punto decimal
     var tieneCedula = ViewBag.Cedula != null && !string.IsNullOrWhiteSpace((string)ViewBag.Cedula);
 }
 
-<h1 class="mb-3">Reporte de paquetes por cliente</h1>
+<h1 class="mb-3">Facturas por cédula</h1>
 
-<!-- Formulario de búsqueda (GET a la misma acción) -->
+<!-- Formulario de búsqueda -->
 <div class="card shadow-sm mb-3">
     <div class="card-body">
-        <form asp-action="ReportePorCliente" method="get" class="row g-3">
+        <form asp-action="PorCedula" method="get" class="row g-3">
             <div class="col-md-6">
-                <label for="cedula" class="form-label">Número de cédula</label>
+                <label for="cedula" class="form-label">Cédula</label>
                 <input type="text"
                        id="cedula"
                        name="cedula"
@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-6 d-flex align-items-end gap-2">
                 <button type="submit" class="btn btn-primary">Buscar</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver a Paquetes</a>
+                <a asp-controller="Factura" asp-action="Index" class="btn btn-secondary">Volver</a>
             </div>
         </form>
     </div>
@@ -43,23 +43,26 @@
     </div>
 }
 
-<!-- Resumen (solo si hay cédula ingresada) -->
+<!-- Resumen -->
 @if (tieneCedula)
 {
+    var nombre = ViewBag.ClienteNombre as string ?? "—";
+    var ced = ViewBag.Cedula as string ?? "";
+    var cant = (int)(ViewBag.Cantidad ?? 0);
+    var total = ((decimal)(ViewBag.TotalMonto ?? 0m)).ToString("C2", us);
+
     <div class="card shadow-sm mb-3">
         <div class="card-body">
             <div class="row g-3">
                 <div class="col-md-6">
                     <h5 class="mb-1">Cliente</h5>
-                    <div><strong>Nombre:</strong> @(ViewBag.ClienteNombre ?? "—")</div>
-                    <div><strong>Cédula:</strong> @ViewBag.Cedula</div>
+                    <div><strong>Nombre:</strong> @nombre</div>
+                    <div><strong>Cédula:</strong> @ced</div>
                 </div>
                 <div class="col-md-6">
                     <h5 class="mb-1">Resumen</h5>
-                    <div><strong>Total de paquetes:</strong> @(ViewBag.TotalPaquetes ?? 0)</div>
-                    <div><strong>Peso total (lb):</strong> @(((decimal)(ViewBag.PesoTotal ?? 0m)).ToString("N2", us))</div>
-                    <div><strong>Valor bruto total ($):</strong> @(((decimal)(ViewBag.ValorBrutoTotal ?? 0m)).ToString("C2", us))</div>
-                    <div><strong>Con condición especial:</strong> @(ViewBag.ConEspecial ?? 0)</div>
+                    <div><strong>Total de facturas:</strong> @cant</div>
+                    <div><strong>Monto total ($):</strong> @total</div>
                 </div>
             </div>
         </div>
@@ -75,30 +78,27 @@
                 <table class="table table-striped mb-0 align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Número de Tracking</th>
-                            <th class="text-end">Peso (lb)</th>
-                            <th class="text-end">Valor Bruto ($)</th>
-                            <th>Tienda</th>
-                            <th>Especial</th>
-                            <th>Fecha Registro</th>
-                            <th class="text-end" style="width: 200px;">Acciones</th>
+                            <th>Fecha de Entrega</th>
+                            <th>Tracking</th>
+                            <th class="text-end">Monto Total ($)</th>
+                            <th class="text-end" style="width: 300px;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var p in Model)
+                        @foreach (var f in Model)
                         {
                             <tr>
-                                <td>@p.NumeroTracking</td>
-                                <td class="text-end">@p.Peso.ToString("N2", us)</td>
-                                <td class="text-end">@p.ValorTotalBruto.ToString("C2", us)</td>
-                                <td>@p.TiendaOrigen</td>
-                                <td>@(p.CondicionEspecial ? "Sí" : "No")</td>
-                                <td>@p.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@f.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                                <td>@f.NumeroTracking</td>
+                                <td class="text-end">@f.MontoTotal.ToString("C2", us)</td>
                                 <td class="text-end">
-                                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-warning me-1">
+                                    <a asp-action="Details" asp-route-id="@f.Id" class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="bi bi-eye"></i> Detalles
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@f.Id" class="btn btn-sm btn-outline-warning me-1">
                                         <i class="bi bi-pencil-square"></i> Editar
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-outline-danger">
+                                    <a asp-action="Delete" asp-route-id="@f.Id" class="btn btn-sm btn-outline-danger">
                                         <i class="bi bi-trash"></i> Eliminar
                                     </a>
                                 </td>
@@ -112,5 +112,5 @@
 }
 else if (tieneCedula)
 {
-    <p class="text-muted mt-2">No hay paquetes registrados para esta cédula.</p>
+    <p class="text-muted mt-2">No hay facturas registradas para esta cédula.</p>
 }

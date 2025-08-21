@@ -45,29 +45,36 @@ namespace Aeropost.Models
         [Required]
         [Range(0, 999999.99)]
         [DataType(DataType.Currency)]
+        [Display(Name = "Peso (lb)")]
         public decimal Peso { get; set; }   
 
         [Required]
         [Range(0, 999999999.99)]
         [DataType(DataType.Currency)]
+        [Display(Name = "Valor Total Bruto ($)")]
         public decimal ValorTotalBruto { get; set; }   
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Tienda de Origen")]
         public string TiendaOrigen { get; set; }   
 
         [Required]
+        [Display(Name = "Condición Especial")]
         public bool CondicionEspecial { get; set; }   
 
         [Required]
         [DataType(DataType.DateTime)]
+        [Display(Name = "Fecha de Registro")]
         public DateTime FechaRegistro { get; set; }   
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Cédula del Cliente")]
         public string ClienteAsociado { get; set; }
         
         [StringLength(32)]
+        [Display(Name = "Número de Tracking")]
         public string NumeroTracking { get => numeroTracking; set => numeroTracking = value; }
 
         //Metodos de Logica de Paquetes:
@@ -85,11 +92,6 @@ namespace Aeropost.Models
 
             NumeroTracking = $"{pref}{mes}{yy}MIA{rand}";
         }
-
-
-
-
-
         
     }
 }

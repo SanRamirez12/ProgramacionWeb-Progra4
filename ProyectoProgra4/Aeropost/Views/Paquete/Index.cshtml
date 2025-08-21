@@ -1,46 +1,73 @@
-﻿@model IEnumerable<Aeropost.Models.Paquete>
+﻿@using System.Globalization
+@model IEnumerable<Aeropost.Models.Paquete>
 
 @{
-    ViewData["Title"] = "Paquetes";
+    ViewData["Title"] = "Lista de Paquetes";
+    var us = CultureInfo.CreateSpecificCulture("en-US"); // formato con $ y punto decimal
 }
 
-<h1>Listado de Paquetes</h1>
+<h2 class="mb-4">Lista de Paquetes</h2>
 
-<p>
+<div class="d-flex flex-wrap gap-2 mb-3">
     <a asp-action="Create" class="btn btn-primary">Registrar nuevo paquete</a>
-</p>
 
-<table class="table table-striped">
-    <thead>
+    <!-- Botón único para ir al reporte por cédula -->
+    <a asp-action="ReportePorCliente" class="btn btn-outline-primary">
+        Reporte de paquetes
+    </a>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-warning">@TempData["Mensaje"]</div>
+}
+
+<table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-primary">
         <tr>
-            <th>Id</th>
             <th>Peso (lb)</th>
-            <th>Valor Total Bruto</th>
+            <th>Valor Total Bruto ($)</th>
             <th>Tienda de Origen</th>
             <th>Condición Especial</th>
             <th>Fecha de Registro</th>
-            <th>Cliente Asociado (Cédula)</th>
+            <th>Cliente Asociado</th>
             <th>Número de Tracking</th>
-            <th>Acciones</th>
+            <th style="width: 200px;">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Peso.ToString("N2", us)</td>
+                    <td>@item.ValorTotalBruto.ToString("C2", us)</td>
+                    <td>@item.TiendaOrigen</td>
+                    <td>
+                        @if (item.CondicionEspecial)
+                        {
+                            <span class="text-success fw-bold">Sí</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger fw-bold">No</span>
+                        }
+                    </td>
+                    <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                    <td>@item.ClienteAsociado</td>
+                    <td>@item.NumeroTracking</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@item.Id</td>
-                <td>@item.Peso</td>
-                <td>@item.ValorTotalBruto</td>
-                <td>@item.TiendaOrigen</td>
-                <td>@(item.CondicionEspecial ? "Sí" : "No")</td>
-                <td>@item.FechaRegistro</td>
-                <td>@item.ClienteAsociado</td>
-                <td>@item.NumeroTracking</td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Ver reporte", "ReportePorCliente", new { cedula = item.ClienteAsociado })
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) 
-                </td>
+                <td colspan="8" class="text-muted">No hay paquetes registrados.</td>
             </tr>
         }
     </tbody>
