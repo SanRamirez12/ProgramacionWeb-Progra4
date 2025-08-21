@@ -326,16 +326,14 @@ namespace Aeropost.Models
             var u = this.usuarios.FirstOrDefault(x => x.Id == usuario.Id);
             if (u == null) throw new Exception("Ese usuario no está registrado");
 
-            // Actualiza SOLO datos no sensibles
             u.Nombre = usuario.Nombre;
             u.Genero = usuario.Genero;
             u.FechaRegistro = usuario.FechaRegistro;
             u.Estado = usuario.Estado;
             u.Correo = usuario.Correo;
-            // Cedula: si quieres mantenerla fija, NO la toques:
-            // u.Cedula = usuario.Cedula; // <- déjala comentada si es fija
+            // u.Cedula = usuario.Cedula; // sólo si decides permitirlo
 
-            // Username y Password NO se tocan aquí
+            // JAMÁS tocar Username/Password aquí
             SaveChanges();
         }
 
@@ -344,7 +342,7 @@ namespace Aeropost.Models
             var u = this.usuarios.FirstOrDefault(x => x.Id == id);
             if (u == null) throw new Exception("Ese usuario no está registrado");
 
-            u.Password = newPassword; // aquí luego metes hash
+            u.Password = newPassword; // ideal: hash
             SaveChanges();
         }
 
@@ -378,22 +376,10 @@ namespace Aeropost.Models
 
             return usuario;
         }
-<<<<<<< HEAD
-=======
 
-
-        //Valida que dos contraseñas coincidan (comparación ordinal).
-        public bool PasswordsCoinciden(string password, string confirmPassword)
-        {
-            return string.Equals(password, confirmPassword, StringComparison.Ordinal);
-        }
 
         #endregion
 
-        #region Metodos de Bitacora
-
->>>>>>> 7dc41665555ab4171dc0ac84cc0f691c46493418
-        #endregion
 
    
     }

@@ -77,8 +77,8 @@ namespace Aeropost.Controllers
         {
             try
             {
-                var usuarioAnterior = services.buscarUsuario(id);
-                return View(usuarioAnterior);
+                var usuario = services.buscarUsuario(id);
+                return View(usuario);
             }
             catch
             {
@@ -93,19 +93,37 @@ namespace Aeropost.Controllers
         {
             try
             {
-                // Validación por si faltan scripts en el usuario
-                if (usuario.Password != usuario.ConfirmPassword)
-                    ModelState.AddModelError(nameof(usuario.ConfirmPassword), "Las contraseñas no coinciden.");
+                // Estos campos NO se editan en esta vista:
+                ModelState.Remove(nameof(Usuario.Username));
+                ModelState.Remove(nameof(Usuario.Password));
+                ModelState.Remove(nameof(Usuario.ConfirmPassword));
 
                 if (!ModelState.IsValid)
                     return View(usuario);
 
-                // Recuperar el original y solo actualizar la contraseña
                 var original = services.buscarUsuario(usuario.Id);
-                original.Password = usuario.Password; // aquí idealmente hash
 
-                services.actualizarUsuario(original);
+                // Actualiza SOLO datos permitidos
+                original.Nombre = usuario.Nombre;
+                original.Genero = usuario.Genero;
+                original.FechaRegistro = usuario.FechaRegistro == default
+                                          ? original.FechaRegistro
+                                          : usuario.FechaRegistro;
+                original.Estado = usuario.Estado;
+                original.Correo = usuario.Correo;
+                // Si la cédula no se edita, no la toques (o déjala readonly en la vista)
+                // original.Cedula = original.Cedula;
+
+                services.actualizarUsuario(original); // método que no toca user/pass
                 return RedirectToAction(nameof(Index));
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var detalles = string.Join("; ",
+                    ex.EntityValidationErrors.SelectMany(e => e.ValidationErrors)
+                      .Select(v => $"{v.PropertyName}: {v.ErrorMessage}"));
+                ModelState.AddModelError(string.Empty, "Error al actualizar: " + detalles);
+                return View(usuario);
             }
             catch (Exception ex)
             {
@@ -113,6 +131,9 @@ namespace Aeropost.Controllers
                 return View(usuario);
             }
         }
+
+
+
 
 
 
@@ -174,6 +195,82 @@ namespace Aeropost.Controllers
             }
 
         }
+
+
+        // GET
+        public ActionResult ChangePassword(int id)
+        {
+            try
+            {
+                var u = services.buscarUsuario(id);
+                return View(new Usuario { Id = u.Id }); // Solo Id para el form
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(Usuario usuario)
+        {
+            try
+            {
+                // Validación MANUAL (lado servidor)
+                if (string.IsNullOrWhiteSpace(usuario.Password))
+                    ModelState.AddModelError(nameof(usuario.Password), "La contraseña es obligatoria.");
+
+                if ((usuario.Password ?? "").Length < 8)
+                    ModelState.AddModelError(nameof(usuario.Password), "La contraseña debe tener al menos 8 caracteres.");
+
+                if (usuario.Password != usuario.ConfirmPassword)
+                    ModelState.AddModelError(nameof(usuario.ConfirmPassword), "Las contraseñas no coinciden.");
+
+                // Evitar que otros [Required] del modelo tumben esta pantalla
+                ModelState.Remove(nameof(Usuario.Nombre));
+                ModelState.Remove(nameof(Usuario.Cedula));
+                ModelState.Remove(nameof(Usuario.Genero));
+                ModelState.Remove(nameof(Usuario.FechaRegistro));
+                ModelState.Remove(nameof(Usuario.Estado));
+                ModelState.Remove(nameof(Usuario.Correo));
+                ModelState.Remove(nameof(Usuario.Username));
+
+                if (!ModelState.IsValid)
+                    return View(usuario);
+
+                // Cargar entidad real y cambiar SOLO el password
+                var original = services.buscarUsuario(usuario.Id);
+
+                // (Recomendado) hashear aquí antes de guardar
+                // original.Password = BCrypt.Net.BCrypt.HashPassword(usuario.Password);
+                original.Password = usuario.Password;
+
+                services.actualizarPassword(original.Id, original.Password);
+
+                TempData["Ok"] = "Contraseña actualizada correctamente.";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var detalles = string.Join("; ",
+                    ex.EntityValidationErrors.SelectMany(e => e.ValidationErrors)
+                      .Select(v => $"{v.PropertyName}: {v.ErrorMessage}"));
+                ModelState.AddModelError(string.Empty, "Error de validación EF: " + detalles);
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Error al actualizar la contraseña: {ex.Message}");
+                return View(usuario);
+            }
+        }
+
+
+
+
+
 
 
     }

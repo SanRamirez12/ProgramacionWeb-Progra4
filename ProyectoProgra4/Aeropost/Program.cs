@@ -1,32 +1,58 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+// Activamos localización de vistas y DataAnnotations, y configuramos mensajes del model binding en español.
+builder.Services
+    .AddControllersWithViews(options =>
+    {
+        var m = options.ModelBindingMessageProvider;
+        m.SetValueIsInvalidAccessor(_ => "El valor no es válido.");
+        m.SetValueMustBeANumberAccessor(_ => "El campo debe ser numérico.");
+        m.SetMissingBindRequiredValueAccessor(name => $"Falta el valor para “{name}”.");
+        m.SetUnknownValueIsInvalidAccessor(name => $"El valor de “{name}” no es válido.");
+        m.SetValueMustNotBeNullAccessor(name => $"El campo “{name}” no puede ser nulo.");
+        m.SetAttemptedValueIsInvalidAccessor((value, name) => $"“{value}” no es un valor válido para “{name}”.");
+    })
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
-//Configuracion de las variables de sesion
-builder.Services.AddDistributedMemoryCache(); //se asigna un poco de memoria cache pa las cookies
+// Configuración de sesión
+builder.Services.AddDistributedMemoryCache(); // cache para la sesión
 builder.Services.AddSession(options =>
-{ //Tiempo deexpiracion de la sesion
-    options.IOTimeout = TimeSpan.FromMinutes(20); //20min
-    options.Cookie.HttpOnly = true; //Seguridad del cookie
-    options.Cookie.IsEssential = true; //Hacer que lacookie de sesion sea esencial
+{
+    options.IOTimeout = TimeSpan.FromMinutes(20);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+// --- Cultura por defecto: español (Costa Rica) ---
+var culturas = new[] { new CultureInfo("es-CR"), new CultureInfo("es-ES") };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("es-CR"),
+    SupportedCultures = culturas,
+    SupportedUICultures = culturas
+});
+// -----------------------------------------------
+
 app.UseRouting();
-app.UseSession();//Usar la sesion
+app.UseSession();     // usar sesión
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -34,3 +60,4 @@ app.MapControllerRoute(
     pattern: "{controller=Usuario}/{action=Login}/{id?}");
 
 app.Run();
+

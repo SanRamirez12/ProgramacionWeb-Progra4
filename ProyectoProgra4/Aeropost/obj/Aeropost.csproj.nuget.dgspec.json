@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj": {}
+    "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj": {
+    "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
+        "projectUniqueName": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
         "projectName": "Aeropost",
-        "projectPath": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
-        "packagesPath": "C:\\Users\\Felipe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Felipe\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\obj\\",
+        "projectPath": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Aeropost.csproj",
+        "packagesPath": "C:\\Users\\Popi1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Felipe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Popi1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -71,6 +70,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.16, 8.0.16]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -79,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

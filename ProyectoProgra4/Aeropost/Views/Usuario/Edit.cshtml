@@ -1,10 +1,9 @@
 ﻿@model Aeropost.Models.Usuario
-
 @{
-    ViewData["Title"] = "Cambiar contraseña";
+    ViewData["Title"] = "Editar Usuario";
 }
 
-<h1>Cambiar contraseña</h1>
+<h1>Editar Usuario</h1>
 <hr />
 
 <div class="row">
@@ -12,30 +11,65 @@
         <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- Clave -->
+            <!-- NECESARIO para el POST -->
             <input type="hidden" asp-for="Id" />
 
-            <!-- Campos requeridos en el modelo, enviados como ocultos para que ModelState sea válido -->
-            <input type="hidden" asp-for="Nombre" />
-            <input type="hidden" asp-for="Cedula" />
-            <input type="hidden" asp-for="Genero" />
-            <input type="hidden" asp-for="FechaRegistro" />
-            <input type="hidden" asp-for="Estado" />
-            <input type="hidden" asp-for="Correo" />
-            <input type="hidden" asp-for="Username" />
+            <!-- Opcional: bloque de diagnóstico para ver qué invalida -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-warning">
+                    <strong>Diagnóstico ModelState:</strong>
+                    <ul>
+                        @foreach (var kvp in ViewData.ModelState)
+                        {
+                            foreach (var err in kvp.Value.Errors)
+                            {
+                                <li><code>@kvp.Key</code>: @err.ErrorMessage</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
 
-            <!-- NO mandar el password actual (nunca lo prellenes) -->
             <div class="form-group">
-                <label asp-for="Password" class="control-label">Nueva contraseña</label>
-                <input asp-for="Password" class="form-control" type="password" autocomplete="new-password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label">Confirmar contraseña</label>
-                <input asp-for="ConfirmPassword" class="form-control" type="password" autocomplete="new-password" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <label asp-for="Cedula"></label>
+                <input asp-for="Cedula" class="form-control" readonly />
+                <span asp-validation-for="Cedula" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label>Género</label><br />
+                <input type="radio" asp-for="Genero" value="Masculino" /> Masculino
+                <input type="radio" asp-for="Genero" value="Femenino" /> Femenino
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FechaRegistro"></label>
+                <input asp-for="FechaRegistro" type="date" class="form-control" />
+                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label><br />
+                <input type="radio" asp-for="Estado" value="Activo" /> Activo
+                <input type="radio" asp-for="Estado" value="Inactivo" /> Inactivo
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Correo"></label>
+                <input asp-for="Correo" class="form-control" type="email" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            @* No mostrar Username ni Password en EDIT *@
 
             <div class="form-group mt-3">
                 <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
@@ -49,4 +83,6 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
 }
+

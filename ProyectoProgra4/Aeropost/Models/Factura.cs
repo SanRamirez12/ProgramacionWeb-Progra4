@@ -44,40 +44,40 @@ namespace Aeropost.Models
 
         // Propiedades
         [Key]
-        [Required]
+        [Required(ErrorMessage = "El Id es obligatorio.")]
         public int Id { get => id; set => id = value; }
 
-        [Required]
-        [StringLength(30)]
+        [Required(ErrorMessage = "El Número de Tracking es obligatorio.")]
+        [StringLength(30, ErrorMessage = "El Número de Tracking no puede superar los 30 caracteres.")]
         [Display(Name = "Número de Tracking")]
         public string NumeroTracking { get => numeroTracking; set => numeroTracking = value; }
 
-        [Required]
-        [StringLength(25)]
+        [Required(ErrorMessage = "La Cédula del Cliente es obligatoria.")]
+        [StringLength(25, ErrorMessage = "La Cédula no puede superar los 25 caracteres.")]
         [Display(Name = "Cédula del Cliente")]
         public string CedulaCliente { get => cedulaCliente; set => cedulaCliente = value; }
 
-        [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "El peso debe ser mayor a 0.")]
+        [Required(ErrorMessage = "El Peso es obligatorio.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El Peso debe ser mayor a 0.")]
         [Display(Name = "Peso (lb)")]
         public decimal Peso { get => peso; set => peso = value; }
 
-        [Required]
-        [Range(0, double.MaxValue, ErrorMessage = "El valor del paquete no puede ser negativo.")]
+        [Required(ErrorMessage = "El Valor del Paquete es obligatorio.")]
+        [Range(0, double.MaxValue, ErrorMessage = "El Valor del Paquete no puede ser negativo.")]
         [Display(Name = "Valor del Paquete ($)")]
         public decimal ValorTotalPaquete { get => valorTotalPaquete; set => valorTotalPaquete = value; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe indicar si el producto es especial.")]
         [Display(Name = "Producto Especial")]
         public bool EsProductoEspecial { get => esProductoEspecial; set => esProductoEspecial = value; }
 
-        [Required]
-        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "La Fecha de Entrega es obligatoria.")]
+        [DataType(DataType.Date, ErrorMessage = "El formato de la fecha no es válido.")]
         [Display(Name = "Fecha de Entrega")]
         public DateTime FechaEntrega { get => fechaEntrega; set => fechaEntrega = value; }
 
-        [Required]
-        [Range(0, double.MaxValue)]
+        [Required(ErrorMessage = "El Monto Total es obligatorio.")]
+        [Range(0, double.MaxValue, ErrorMessage = "El Monto Total no puede ser negativo.")]
         [Display(Name = "Monto Total ($)")]
         public decimal MontoTotal { get => montoTotal; set => montoTotal = value; }
 
