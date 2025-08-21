@@ -1,6 +1,5 @@
 {
   "Version": 1,
-<<<<<<< HEAD
   "WorkspaceRootPath": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\",
   "Documents": [
     {
@@ -16,10 +15,6 @@
       "RelativeMoniker": "D:0:0:{5E1EFD41-B514-487B-A786-A44CDFCCCD84}|Aeropost.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
-=======
-  "WorkspaceRootPath": "C:\\Users\\Popi1\\OneDrive\\Documentos\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\",
-  "Documents": [],
->>>>>>> 444761bceae840bb8092ecc9ffba82f74ae5de5f
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -27,7 +22,6 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-<<<<<<< HEAD
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -38,7 +32,7 @@
               "RelativeDocumentMoniker": "Migrations\\Configuration.cs",
               "ToolTip": "C:\\Users\\beto\\Documents\\GitHub\\CursoProgra4\\ProyectoProgra4\\Aeropost\\Migrations\\Configuration.cs",
               "RelativeToolTip": "Migrations\\Configuration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-20T05:09:53.476Z",
               "EditorCaption": ""
@@ -66,13 +60,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-20T05:08:20.576Z"
-=======
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
->>>>>>> 444761bceae840bb8092ecc9ffba82f74ae5de5f
             }
           ]
         }
