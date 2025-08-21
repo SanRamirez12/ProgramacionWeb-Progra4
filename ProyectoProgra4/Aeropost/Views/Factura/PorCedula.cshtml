@@ -7,110 +7,149 @@
     var tieneCedula = ViewBag.Cedula != null && !string.IsNullOrWhiteSpace((string)ViewBag.Cedula);
 }
 
-<h1 class="mb-3">Facturas por cédula</h1>
+<!-- Contenedor principal usando el diseño existente -->
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <!-- Título con estilo moderno -->
+        <h1 class="clientes-title">Facturas por Cédula</h1>
 
-<!-- Formulario de búsqueda -->
-<div class="card shadow-sm mb-3">
-    <div class="card-body">
-        <form asp-action="PorCedula" method="get" class="row g-3">
-            <div class="col-md-6">
-                <label for="cedula" class="form-label">Cédula</label>
-                <input type="text"
-                       id="cedula"
-                       name="cedula"
-                       value="@(tieneCedula ? (string)ViewBag.Cedula : string.Empty)"
-                       class="form-control"
-                       placeholder="103450789"
-                       required />
-                <div class="form-text">Digite la cédula y presione “Buscar”.</div>
+        <!-- Formulario de búsqueda -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="PorCedula" method="get" class="client-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="cedula" class="form-label">
+                                Cédula del Cliente
+                            </label>
+                            <input type="text"
+                                   id="cedula"
+                                   name="cedula"
+                                   value="@(tieneCedula ? (string)ViewBag.Cedula : string.Empty)"
+                                   class="form-input"
+                                   placeholder="103450789"
+                                   required />
+                            <div style="color: #6b7280; font-size: 0.875rem; margin-top: 0.25rem;">
+                                Digite la cédula y presione "Buscar".
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end; gap: 1rem;">
+                            <button type="submit" class="btn-modern-primary" style="flex: 1;">
+                                Buscar
+                            </button>
+                            <a asp-controller="Factura" asp-action="Index" class="btn-modern-secondary" style="flex: 1;">
+                                Volver
+                            </a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6 d-flex align-items-end gap-2">
-                <button type="submit" class="btn btn-primary">Buscar</button>
-                <a asp-controller="Factura" asp-action="Index" class="btn btn-secondary">Volver</a>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-@if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
-{
-    <div class="alert alert-warning">
-        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        <!-- Errores de validación -->
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
         {
-            @err.ErrorMessage
-            <br />
+            <div class="modern-card" style="margin-bottom: 2rem; background: rgba(239, 68, 68, 0.05);">
+                <div class="modern-card-body">
+                    <div style="color: #dc2626;">
+                        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            @err.ErrorMessage
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Resumen del Cliente -->
+        @if (tieneCedula)
+        {
+            var nombre = ViewBag.ClienteNombre as string ?? "—";
+            var ced = ViewBag.Cedula as string ?? "";
+            var cant = (int)(ViewBag.Cantidad ?? 0);
+            var total = ((decimal)(ViewBag.TotalMonto ?? 0m)).ToString("C2", us);
+
+            <div class="modern-card" style="margin-bottom: 2rem; background: rgba(96, 165, 250, 0.05);">
+                <div class="modern-card-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <h5 style="color: #1e3a8a; margin-bottom: 1rem; font-weight: 600;">Información del Cliente</h5>
+                            <div style="margin-bottom: 0.5rem;">
+                                <strong>Nombre:</strong> @nombre
+                            </div>
+                            <div>
+                                <strong>Cédula:</strong> @ced
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h5 style="color: #1e3a8a; margin-bottom: 1rem; font-weight: 600;">Resumen de Facturas</h5>
+                            <div style="margin-bottom: 0.5rem;">
+                                <strong>Total de facturas:</strong> @cant
+                            </div>
+                            <div>
+                                <strong>Monto total:</strong> <span style="color: #059669; font-weight: 600;">@total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Resultados - Tabla de Facturas -->
+        @if (tieneCedula && Model != null && Model.Any())
+        {
+            <div class="modern-card">
+                <div class="modern-card-body" style="padding: 0;">
+                    <div style="overflow-x: auto;">
+                        <table class="modern-table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">Fecha de Entrega</th>
+                                    <th style="text-align: left;">Número de Tracking</th>
+                                    <th style="text-align: right;">Monto Total</th>
+                                    <th style="text-align: center; width: 300px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var f in Model)
+                                {
+                                    <tr>
+                                        <td>@f.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                                        <td>@f.NumeroTracking</td>
+                                        <td style="text-align: right; font-weight: 600; color: #059669;">
+                                            @f.MontoTotal.ToString("C2", us)
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                                                <a asp-action="Details" asp-route-id="@f.Id" class="btn-modern-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                                                    Detalles
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@f.Id" class="btn-action-edit">
+                                                    Editar
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@f.Id" class="btn-action-delete">
+                                                    Eliminar
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (tieneCedula)
+        {
+            <div class="modern-card">
+                <div class="modern-card-body" style="text-align: center; padding: 3rem 2rem;">
+                    <p style="color: #6b7280; font-size: 1.125rem; margin: 0;">
+                        No hay facturas registradas para esta cédula.
+                    </p>
+                </div>
+            </div>
         }
     </div>
-}
-
-<!-- Resumen -->
-@if (tieneCedula)
-{
-    var nombre = ViewBag.ClienteNombre as string ?? "—";
-    var ced = ViewBag.Cedula as string ?? "";
-    var cant = (int)(ViewBag.Cantidad ?? 0);
-    var total = ((decimal)(ViewBag.TotalMonto ?? 0m)).ToString("C2", us);
-
-    <div class="card shadow-sm mb-3">
-        <div class="card-body">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <h5 class="mb-1">Cliente</h5>
-                    <div><strong>Nombre:</strong> @nombre</div>
-                    <div><strong>Cédula:</strong> @ced</div>
-                </div>
-                <div class="col-md-6">
-                    <h5 class="mb-1">Resumen</h5>
-                    <div><strong>Total de facturas:</strong> @cant</div>
-                    <div><strong>Monto total ($):</strong> @total</div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<!-- Resultados -->
-@if (tieneCedula && Model != null && Model.Any())
-{
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped mb-0 align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Fecha de Entrega</th>
-                            <th>Tracking</th>
-                            <th class="text-end">Monto Total ($)</th>
-                            <th class="text-end" style="width: 300px;">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var f in Model)
-                        {
-                            <tr>
-                                <td>@f.FechaEntrega.ToString("dd/MM/yyyy")</td>
-                                <td>@f.NumeroTracking</td>
-                                <td class="text-end">@f.MontoTotal.ToString("C2", us)</td>
-                                <td class="text-end">
-                                    <a asp-action="Details" asp-route-id="@f.Id" class="btn btn-sm btn-outline-primary me-1">
-                                        <i class="bi bi-eye"></i> Detalles
-                                    </a>
-                                    <a asp-action="Edit" asp-route-id="@f.Id" class="btn btn-sm btn-outline-warning me-1">
-                                        <i class="bi bi-pencil-square"></i> Editar
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@f.Id" class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash"></i> Eliminar
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-}
-else if (tieneCedula)
-{
-    <p class="text-muted mt-2">No hay facturas registradas para esta cédula.</p>
-}
+</div>

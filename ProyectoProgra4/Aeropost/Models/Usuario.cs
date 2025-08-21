@@ -95,6 +95,7 @@ namespace Aeropost.Models
         [NotMapped]
         [ValidateNever]
         [Display(Name = "Confirmar Contraseña")]
+        [DataType(DataType.Password)]
         public string? ConfirmPassword { get; set; }
     }
 }

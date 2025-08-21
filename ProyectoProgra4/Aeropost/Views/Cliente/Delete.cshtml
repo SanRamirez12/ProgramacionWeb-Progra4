@@ -3,35 +3,88 @@
     ViewData["Title"] = "Eliminar cliente";
 }
 
-<h1 class="mb-3">Eliminar cliente</h1>
-
-<div class="alert alert-warning">
-    <strong>¿Está seguro que desea eliminar este cliente?</strong>
-</div>
-
-<div class="card shadow-sm mb-3">
-    <div class="card-body">
-        <div class="row g-3">
-            <div class="col-md-6">
-                <h5 class="mb-1">Cliente</h5>
-                <div><strong>Nombre:</strong> @Model.Nombre</div>
-                <div><strong>Cédula:</strong> @Model.Cedula</div>
-                <div><strong>Tipo:</strong> @Model.Tipo</div>
-            </div>
-            <div class="col-md-6">
-                <h5 class="mb-1">Contacto</h5>
-                <div><strong>Correo:</strong> @Model.Correo</div>
-                <div><strong>Teléfono:</strong> @Model.Telefono</div>
-                <div><strong>Dirección:</strong> @Model.Direccion</div>
+<div class="delete-container">
+    <!-- Sección de encabezado con alerta -->
+    <div class="delete-header">
+        <h1 class="section-title">Eliminar Cliente</h1>
+        <div class="alert-warning">
+            
+            <div class="alert-content">
+                <strong>¿Está seguro que desea eliminar este cliente?</strong>
+                <p class="alert-subtitle">Esta acción no se puede deshacer.</p>
             </div>
         </div>
     </div>
-</div>
 
-<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-flex gap-2">
-    @Html.AntiForgeryToken()
-    <!-- Id oculto como pediste -->
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Eliminar</button>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
-</form>
+    <!-- Tarjeta con información del cliente -->
+    <div class="client-info-card">
+        <div class="card-header">
+            <h3 class="card-title">Información del Cliente</h3>
+        </div>
+
+        <div class="info-grid">
+            <!-- Información personal -->
+            <div class="info-section">
+                <h4 class="subsection-title">
+                   
+                    Datos Personales
+                </h4>
+                <div class="info-details">
+                    <div class="info-item">
+                        <span class="info-label">Nombre:</span>
+                        <span class="info-value">@Model.Nombre</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Cédula:</span>
+                        <span class="info-value">@Model.Cedula</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tipo:</span>
+                        <span class="info-value">@Model.Tipo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de contacto -->
+            <div class="info-section">
+                <h4 class="subsection-title">
+                   
+                    Información de Contacto
+                </h4>
+                <div class="info-details">
+                    <div class="info-item">
+                        <span class="info-label">Correo:</span>
+                        <span class="info-value">@Model.Correo</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Teléfono:</span>
+                        <span class="info-value">@Model.Telefono</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Dirección:</span>
+                        <span class="info-value">@Model.Direccion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario de confirmación -->
+    <div class="delete-actions">
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="delete-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-actions">
+                <button type="submit" class="btn-delete">
+                    
+                    Eliminar Cliente
+                </button>
+                <a asp-action="Index" class="btn-cancel">
+                   
+                    Volver a la Lista
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

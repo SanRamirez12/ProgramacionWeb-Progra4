@@ -5,211 +5,273 @@
     var clientes = ViewBag.Clientes as List<Aeropost.Models.Cliente> ?? new List<Aeropost.Models.Cliente>();
 }
 
-<h1>Editar Factura</h1>
-<hr />
+<!-- Contenedor principal usando el diseño de clientes -->
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <!-- Título con estilo moderno -->
+        <h1 class="clientes-title">✏️ Editar Factura</h1>
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Edit" method="post">
-            @Html.AntiForgeryToken()
-            <input type="hidden" asp-for="Id" />
+        <!-- Tarjeta moderna para el formulario -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="Edit" method="post" class="client-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+                    <!-- Resumen de errores de validación -->
+                    <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
-            <!-- Selección de CÉDULA -->
-            <div class="form-group mb-2">
-                <label class="control-label" for="CedulaCliente">Cédula del Cliente</label>
-                <select id="CedulaCliente" name="CedulaCliente" class="form-control">
-                    <option value="">-- Seleccione un cliente --</option>
-                    @foreach (var c in clientes)
-                    {
-                        if (Model?.CedulaCliente == c.Cedula)
-                        {
-                            <option value="@c.Cedula" selected="selected">@c.Cedula</option>
-                        }
-                        else
-                        {
-                            <option value="@c.Cedula">@c.Cedula</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="CedulaCliente" class="text-danger"></span>
+                    <!-- Grid del formulario -->
+                    <div class="form-grid">
+                        <!-- Selección de CÉDULA -->
+                        <div class="form-group">
+                            <label class="form-label" for="CedulaCliente">
+                                <span class="label-icon">🆔</span>
+                                Cédula del Cliente
+                            </label>
+                            <select id="CedulaCliente" name="CedulaCliente" class="form-select">
+                                <option value="">-- Seleccione un cliente --</option>
+                                @foreach (var c in clientes)
+                                {
+                                    if (Model?.CedulaCliente == c.Cedula)
+                                    {
+                                        <option value="@c.Cedula" selected="selected">@c.Cedula</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@c.Cedula">@c.Cedula</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="CedulaCliente" class="field-validation"></span>
+                        </div>
+
+                        <!-- Selección de TRACKING -->
+                        <div class="form-group">
+                            <label class="form-label" for="NumeroTracking">
+                                <span class="label-icon">📦</span>
+                                Número de Tracking
+                            </label>
+                            <select id="NumeroTracking" name="NumeroTracking" class="form-select" disabled>
+                                <option value="">-- Seleccione un paquete --</option>
+                            </select>
+                            <span asp-validation-for="NumeroTracking" class="field-validation"></span>
+                        </div>
+
+                        <!-- Fecha de entrega - ancho completo -->
+                        <div class="form-group form-group-wide">
+                            <label asp-for="FechaEntrega" class="form-label">
+                                <span class="label-icon">📅</span>
+                                Fecha de Entrega
+                            </label>
+                            <input asp-for="FechaEntrega" class="form-input" type="date" />
+                            <span asp-validation-for="FechaEntrega" class="field-validation"></span>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Cliente - Tarjeta interna -->
+                    <div class="modern-card" style="margin-bottom: 2rem; background: rgba(96, 165, 250, 0.05);">
+                        <div class="modern-card-body">
+                            <h5 style="color: #1e3a8a; margin-bottom: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.2rem;">👤</span>
+                                Datos del Cliente
+                            </h5>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="label-icon">👨‍💼</span>
+                                        Nombre
+                                    </label>
+                                    <input id="CliNombre" class="form-input" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="label-icon">📧</span>
+                                        Correo
+                                    </label>
+                                    <input id="CliCorreo" class="form-input" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="label-icon">📞</span>
+                                        Teléfono
+                                    </label>
+                                    <input id="CliTelefono" class="form-input" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="label-icon">🏠</span>
+                                        Dirección
+                                    </label>
+                                    <input id="CliDireccion" class="form-input" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Datos del Paquete - Tarjeta interna -->
+                    <div class="modern-card" style="margin-bottom: 2rem; background: rgba(16, 185, 129, 0.05);">
+                        <div class="modern-card-body">
+                            <h5 style="color: #1e3a8a; margin-bottom: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="font-size: 1.2rem;">📋</span>
+                                Datos del Paquete
+                            </h5>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label asp-for="Peso" class="form-label">
+                                        <span class="label-icon">⚖️</span>
+                                        Peso (kg)
+                                    </label>
+                                    <input asp-for="Peso" id="Peso" class="form-input" disabled />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ValorTotalPaquete" class="form-label">
+                                        <span class="label-icon">💰</span>
+                                        Valor Total del Paquete
+                                    </label>
+                                    <input asp-for="ValorTotalPaquete" id="ValorTotalPaquete" class="form-input" disabled />
+                                </div>
+                                <div class="form-group" style="display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem;">
+                                    <input class="form-check-input" asp-for="EsProductoEspecial" id="EsProductoEspecial" disabled style="width: 20px; height: 20px; accent-color: #3b82f6;" />
+                                    <label class="form-label" for="EsProductoEspecial" style="margin: 0; cursor: pointer;">
+                                        <span class="label-icon">⭐</span>
+                                        @Html.DisplayNameFor(m => m.EsProductoEspecial)
+                                    </label>
+                                    <input type="hidden" asp-for="EsProductoEspecial" />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="MontoTotal" class="form-label">
+                                        <span class="label-icon">💵</span>
+                                        Monto Total a Pagar
+                                    </label>
+                                    <input asp-for="MontoTotal" id="MontoTotal" class="form-input" disabled style="font-weight: 600; color: #059669;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-icon">💾</span>
+                            Guardar Cambios
+                        </button>
+                        <a asp-action="Index" class="btn-cancel">
+                            <span class="btn-icon">↩️</span>
+                            Volver a la Lista
+                        </a>
+                    </div>
+                </form>
             </div>
-
-            <!-- Datos del CLIENTE (solo lectura) -->
-            <fieldset class="mb-2" style="border:1px solid #ddd; padding:10px;">
-                <legend style="font-size:1rem;">Datos del cliente</legend>
-                <div class="form-group mb-1">
-                    <label>Nombre</label>
-                    <input id="CliNombre" class="form-control" readonly />
-                </div>
-                <div class="form-group mb-1">
-                    <label>Correo</label>
-                    <input id="CliCorreo" class="form-control" readonly />
-                </div>
-                <div class="form-group mb-1">
-                    <label>Teléfono</label>
-                    <input id="CliTelefono" class="form-control" readonly />
-                </div>
-                <div class="form-group mb-1">
-                    <label>Dirección</label>
-                    <input id="CliDireccion" class="form-control" readonly />
-                </div>
-            </fieldset>
-
-            <!-- Selección de TRACKING -->
-            <div class="form-group mb-2">
-                <label class="control-label" for="NumeroTracking">Número de Tracking</label>
-                <select id="NumeroTracking" name="NumeroTracking" class="form-control" disabled>
-                    <option value="">-- Seleccione un paquete --</option>
-                </select>
-                <span asp-validation-for="NumeroTracking" class="text-danger"></span>
-            </div>
-
-            <!-- Fecha de entrega -->
-            <div class="form-group mb-2">
-                <label asp-for="FechaEntrega" class="control-label"></label>
-                <input asp-for="FechaEntrega" class="form-control" type="date" />
-                <span asp-validation-for="FechaEntrega" class="text-danger"></span>
-            </div>
-
-            <!-- Vista previa de PAQUETE / MONTO (solo lectura) -->
-            <fieldset class="mb-3" style="border:1px solid #ddd; padding:10px;">
-                <legend style="font-size:1rem;">Datos del paquete</legend>
-                <div class="form-group mb-1">
-                    <label asp-for="Peso" class="control-label"></label>
-                    <input asp-for="Peso" id="Peso" class="form-control" disabled />
-                </div>
-                <div class="form-group mb-1">
-                    <label asp-for="ValorTotalPaquete" class="control-label"></label>
-                    <input asp-for="ValorTotalPaquete" id="ValorTotalPaquete" class="form-control" disabled />
-                </div>
-                <div class="form-group form-check mb-1">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="EsProductoEspecial" id="EsProductoEspecial" disabled />
-                        @Html.DisplayNameFor(m => m.EsProductoEspecial)
-                    </label>
-                    <input type="hidden" asp-for="EsProductoEspecial" />
-                </div>
-                <div class="form-group mb-1">
-                    <label asp-for="MontoTotal" class="control-label"></label>
-                    <input asp-for="MontoTotal" id="MontoTotal" class="form-control" disabled />
-                </div>
-            </fieldset>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-<script>
-(function(){
-    const selCedula = document.getElementById('CedulaCliente');
-    const selTrack  = document.getElementById('NumeroTracking');
+    <script>
+        (function(){
+            const selCedula = document.getElementById('CedulaCliente');
+            const selTrack  = document.getElementById('NumeroTracking');
 
-    const fNombre   = document.getElementById('CliNombre');
-    const fCorreo   = document.getElementById('CliCorreo');
-    const fTel      = document.getElementById('CliTelefono');
-    const fDir      = document.getElementById('CliDireccion');
+            const fNombre   = document.getElementById('CliNombre');
+            const fCorreo   = document.getElementById('CliCorreo');
+            const fTel      = document.getElementById('CliTelefono');
+            const fDir      = document.getElementById('CliDireccion');
 
-    const inpPeso   = document.getElementById('Peso');
-    const inpValor  = document.getElementById('ValorTotalPaquete');
-    const chkEsp    = document.getElementById('EsProductoEspecial');
-    const inpMonto  = document.getElementById('MontoTotal');
+            const inpPeso   = document.getElementById('Peso');
+            const inpValor  = document.getElementById('ValorTotalPaquete');
+            const chkEsp    = document.getElementById('EsProductoEspecial');
+            const inpMonto  = document.getElementById('MontoTotal');
 
-    // Carga inicial si el modelo ya tiene cédula
-    document.addEventListener('DOMContentLoaded', async function(){
-        const ced = selCedula.value || '';
-        if(ced){
-            await cargarCliente(ced);
-            await cargarPaquetes(ced, '@Model.NumeroTracking');
-        }
-    });
-
-    selCedula.addEventListener('change', async function(){
-        limpiarCliente();
-        limpiarPaquete();
-        selTrack.innerHTML = '<option value="">-- Seleccione un paquete --</option>';
-        selTrack.disabled = true;
-
-        const ced = this.value;
-        if(!ced) return;
-
-        await cargarCliente(ced);
-        await cargarPaquetes(ced, null);
-    });
-
-    selTrack.addEventListener('change', function(){
-        const opt = this.selectedOptions[0];
-        if(!opt || !opt.value){ limpiarPaquete(); return; }
-
-        const peso = parseFloat(opt.dataset.peso || '0');
-        const valor = parseFloat(opt.dataset.valor || '0');
-        const especial = (opt.dataset.especial === 'true');
-
-        inpPeso.value  = peso.toFixed(2);
-        inpValor.value = valor.toFixed(2);
-        chkEsp.checked = especial;
-
-        const base = peso * 12.0;
-        const iva  = valor * 0.13;
-        const adic = especial ? (valor * 0.10) : 0;
-        const total = Math.round((base + iva + adic) * 100) / 100;
-        inpMonto.value = total.toFixed(2);
-    });
-
-    async function cargarCliente(ced){
-        try{
-            const urlCli = '@Url.Action("ClientePorCedula","Cliente")' + '?cedula=' + encodeURIComponent(ced);
-            const rCli = await fetch(urlCli);
-            const cli = await rCli.json();
-            if (cli) {
-                fNombre.value = cli.nombre || '';
-                fCorreo.value = cli.correo || '';
-                fTel.value    = cli.telefono || '';
-                fDir.value    = cli.direccion || '';
-            }
-        }catch(e){ console.error(e); }
-    }
-
-    async function cargarPaquetes(ced, trackingActual){
-        try{
-            const urlPaq = '@Url.Action("PaquetesPorCedula","Factura")' + '?cedula=' + encodeURIComponent(ced);
-            const rPaq = await fetch(urlPaq);
-            const paqs = await rPaq.json();
-
-            selTrack.innerHTML = '<option value="">-- Seleccione un paquete --</option>';
-
-            paqs.forEach(p => {
-                const opt = document.createElement('option');
-                opt.value = p.tracking;
-                opt.textContent = p.tracking;
-                opt.dataset.peso = p.peso;
-                opt.dataset.valor = p.valor;
-                opt.dataset.especial = p.especial ? 'true' : 'false';
-                if (trackingActual && p.tracking === trackingActual) opt.selected = true;
-                selTrack.appendChild(opt);
+            // Carga inicial si el modelo ya tiene cédula
+            document.addEventListener('DOMContentLoaded', async function(){
+                const ced = selCedula.value || '';
+                if(ced){
+                    await cargarCliente(ced);
+                    await cargarPaquetes(ced, '@Model.NumeroTracking');
+                }
             });
 
-            selTrack.disabled = paqs.length === 0;
+            selCedula.addEventListener('change', async function(){
+                limpiarCliente();
+                limpiarPaquete();
+                selTrack.innerHTML = '<option value="">-- Seleccione un paquete --</option>';
+                selTrack.disabled = true;
 
-            // Si había tracking actual, dispara el change para pintar preview
-            if(trackingActual){
-                selTrack.dispatchEvent(new Event('change'));
+                const ced = this.value;
+                if(!ced) return;
+
+                await cargarCliente(ced);
+                await cargarPaquetes(ced, null);
+            });
+
+            selTrack.addEventListener('change', function(){
+                const opt = this.selectedOptions[0];
+                if(!opt || !opt.value){ limpiarPaquete(); return; }
+
+                const peso = parseFloat(opt.dataset.peso || '0');
+                const valor = parseFloat(opt.dataset.valor || '0');
+                const especial = (opt.dataset.especial === 'true');
+
+                inpPeso.value  = peso.toFixed(2);
+                inpValor.value = valor.toFixed(2);
+                chkEsp.checked = especial;
+
+                const base = peso * 12.0;
+                const iva  = valor * 0.13;
+                const adic = especial ? (valor * 0.10) : 0;
+                const total = Math.round((base + iva + adic) * 100) / 100;
+                inpMonto.value = total.toFixed(2);
+            });
+
+            async function cargarCliente(ced){
+                try{
+                    const urlCli = '@Url.Action("ClientePorCedula", "Cliente")' + '?cedula=' + encodeURIComponent(ced);
+                    const rCli = await fetch(urlCli);
+                    const cli = await rCli.json();
+                    if (cli) {
+                        fNombre.value = cli.nombre || '';
+                        fCorreo.value = cli.correo || '';
+                        fTel.value    = cli.telefono || '';
+                        fDir.value    = cli.direccion || '';
+                    }
+                }catch(e){ console.error(e); }
             }
-        }catch(e){ console.error(e); }
-    }
 
-    function limpiarCliente(){
-        fNombre.value = ''; fCorreo.value = ''; fTel.value = ''; fDir.value = '';
-    }
-    function limpiarPaquete(){
-        inpPeso.value = ''; inpValor.value=''; chkEsp.checked=false; inpMonto.value='';
-    }
-})();
-</script>
+            async function cargarPaquetes(ced, trackingActual){
+                try{
+                    const urlPaq = '@Url.Action("PaquetesPorCedula", "Factura")' + '?cedula=' + encodeURIComponent(ced);
+                    const rPaq = await fetch(urlPaq);
+                    const paqs = await rPaq.json();
+
+                    selTrack.innerHTML = '<option value="">-- Seleccione un paquete --</option>';
+
+                    paqs.forEach(p => {
+                        const opt = document.createElement('option');
+                        opt.value = p.tracking;
+                        opt.textContent = p.tracking;
+                        opt.dataset.peso = p.peso;
+                        opt.dataset.valor = p.valor;
+                        opt.dataset.especial = p.especial ? 'true' : 'false';
+                        if (trackingActual && p.tracking === trackingActual) opt.selected = true;
+                        selTrack.appendChild(opt);
+                    });
+
+                    selTrack.disabled = paqs.length === 0;
+
+                    // Si había tracking actual, dispara el change para pintar preview
+                    if(trackingActual){
+                        selTrack.dispatchEvent(new Event('change'));
+                    }
+                }catch(e){ console.error(e); }
+            }
+
+            function limpiarCliente(){
+                fNombre.value = ''; fCorreo.value = ''; fTel.value = ''; fDir.value = '';
+            }
+            function limpiarPaquete(){
+                inpPeso.value = ''; inpValor.value=''; chkEsp.checked=false; inpMonto.value='';
+            }
+        })();
+    </script>
 }

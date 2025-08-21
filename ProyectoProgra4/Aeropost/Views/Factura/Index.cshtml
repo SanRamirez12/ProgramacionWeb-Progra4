@@ -1,66 +1,83 @@
 ﻿@model IEnumerable<Aeropost.Models.Factura>
-
 @{
     ViewData["Title"] = "Facturas";
     var us = System.Globalization.CultureInfo.CreateSpecificCulture("en-US"); // formato $ y punto decimal
 }
 
-<h1 class="mb-4 text-center">Lista de Facturas</h1>
+<div class="bitacora-container">
+    <!-- Sección de bienvenida -->
+    <div class="welcome-section">
+        <h1 class="welcome-title">Lista de Facturas</h1>
+    </div>
 
-<p class="mb-3 text-center">
-    <a asp-action="Create" class="btn btn-success me-2">
-        <i class="bi bi-plus-circle"></i> Facturar
-    </a>
-    <a asp-action="ReporteMensual" class="btn btn-outline-info me-2">
-        <i class="bi bi-calendar3"></i> Reporte Mensual
-    </a>
-    <a asp-action="PorCedula" class="btn btn-outline-secondary me-2">
-        <i class="bi bi-person-badge"></i> Buscar por Cédula
-    </a>
-    <a asp-action="PorTracking" class="btn btn-outline-dark">
-        <i class="bi bi-upc-scan"></i> Buscar por Tracking
-    </a>
-</p>
+    <!-- Contenido principal -->
+    <div class="main-content-card">
+        <!-- Botones de acción -->
+        <div class="action-buttons">
+            <a asp-action="Create" class="btn-track">
+                
+                Facturar
+            </a>
+            <a asp-action="ReporteMensual" class="btn-track">
+                
+                Reporte Mensual
+            </a>
+            <a asp-action="PorCedula" class="btn-track">
+                
+                Buscar por Cédula
+            </a>
+            <a asp-action="PorTracking" class="btn-track">
+                
+                Buscar por Tracking
+            </a>
+        </div>
 
-<table class="table table-striped table-hover table-bordered align-middle shadow-sm">
-    <thead class="table-primary text-center">
-        <tr>
-            <th>Número de tracking</th>
-            <th>Cédula del cliente</th>
-            <th>Peso (lb)</th>
-            <th>Valor total del paquete ($)</th>
-            <th>Producto especial</th>
-            <th>Fecha de entrega</th>
-            <th>Monto total ($)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.NumeroTracking</td>
-                <td>@item.CedulaCliente</td>
-                <td>@item.Peso.ToString("N2", us)</td>
-                <td>@item.ValorTotalPaquete.ToString("C2", us)</td>
-                <td class="text-center">
-                    @(item.EsProductoEspecial ? "Sí" : "No")
-                </td>
-                <td>@item.FechaEntrega.ToString("dd/MM/yyyy")</td>
-                <td class="fw-bold text-success">@item.MontoTotal.ToString("C2", us)</td>
-                <td class="text-center">
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1">
-                        <i class="bi bi-eye"></i> Detalles
-                    </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning me-1">
-                        <i class="bi bi-pencil-square"></i> Editar
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
-                        <i class="bi bi-trash"></i> Eliminar
-                    </a>
-                </td>
-
-            </tr>
-        }
-    </tbody>
-</table>
+        <!-- Tabla de facturas -->
+        <div class="table-container">
+            <table class="data-table">
+                <thead class="table-header">
+                    <tr>
+                        <th>Número de Tracking</th>
+                        <th>Cédula del Cliente</th>
+                        <th>Peso (lb)</th>
+                        <th>Valor Total del Paquete ($)</th>
+                        <th>Producto Especial</th>
+                        <th>Fecha de Entrega</th>
+                        <th>Monto Total ($)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-row">
+                            <td>@item.NumeroTracking</td>
+                            <td>@item.CedulaCliente</td>
+                            <td>@item.Peso.ToString("N2", us)</td>
+                            <td>@item.ValorTotalPaquete.ToString("C2", us)</td>
+                            <td>
+                                @if (item.EsProductoEspecial)
+                                {
+                                    <span class="badge-yes">Sí</span>
+                                }
+                                else
+                                {
+                                    <span class="badge-no">No</span>
+                                }
+                            </td>
+                            <td>@item.FechaEntrega.ToString("dd/MM/yyyy")</td>
+                            <td class="amount-total">@item.MontoTotal.ToString("C2", us)</td>
+                            <td>
+                                <div class="action-buttons-row">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-details">Ver</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn-delete">Eliminar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div></table>

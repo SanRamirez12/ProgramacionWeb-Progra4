@@ -7,110 +7,150 @@
     var tieneCedula = ViewBag.Cedula != null && !string.IsNullOrWhiteSpace((string)ViewBag.Cedula);
 }
 
-<h1 class="mb-3">Reporte de paquetes por cliente</h1>
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <h1 class="clientes-title">Reporte de paquetes por cliente</h1>
 
-<!-- Formulario de búsqueda (GET a la misma acción) -->
-<div class="card shadow-sm mb-3">
-    <div class="card-body">
-        <form asp-action="ReportePorCliente" method="get" class="row g-3">
-            <div class="col-md-6">
-                <label for="cedula" class="form-label">Número de cédula</label>
-                <input type="text"
-                       id="cedula"
-                       name="cedula"
-                       value="@(tieneCedula ? (string)ViewBag.Cedula : string.Empty)"
-                       class="form-control"
-                       placeholder="103450789"
-                       required />
-                <div class="form-text">Digite la cédula y presione “Buscar”.</div>
-            </div>
-            <div class="col-md-6 d-flex align-items-end gap-2">
-                <button type="submit" class="btn btn-primary">Buscar</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver a Paquetes</a>
-            </div>
-        </form>
-    </div>
-</div>
+        <!-- Formulario de búsqueda -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="ReportePorCliente" method="get" class="client-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="cedula" class="form-label">
+                                Número de cédula
+                            </label>
+                            <input type="text"
+                                   id="cedula"
+                                   name="cedula"
+                                   value="@(tieneCedula ? (string)ViewBag.Cedula : string.Empty)"
+                                   class="form-input"
+                                   placeholder="103450789"
+                                   required />
+                            <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">
+                                Digite la cédula y presione "Buscar".
+                            </div>
+                        </div>
 
-@if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
-{
-    <div class="alert alert-warning">
-        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        <div class="form-group" style="display: flex; align-items: flex-end; gap: 1rem;">
+                            <button type="submit" class="btn-modern-primary">
+                                Buscar
+                            </button>
+                            <a asp-action="Index" class="btn-modern-secondary" style="text-decoration: none;">
+                                Volver a Paquetes
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Mensajes de validación -->
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
         {
-            @err.ErrorMessage
-            <br />
+            <div class="alert-warning">
+                <div class="alert-icon">!</div>
+                <div>
+                    <strong>Error:</strong>
+                    @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        @err.ErrorMessage
+                        <br />
+                    }
+                </div>
+            </div>
         }
-    </div>
-}
 
-<!-- Resumen (solo si hay cédula ingresada) -->
-@if (tieneCedula)
-{
-    <div class="card shadow-sm mb-3">
-        <div class="card-body">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <h5 class="mb-1">Cliente</h5>
-                    <div><strong>Nombre:</strong> @(ViewBag.ClienteNombre ?? "—")</div>
-                    <div><strong>Cédula:</strong> @ViewBag.Cedula</div>
-                </div>
-                <div class="col-md-6">
-                    <h5 class="mb-1">Resumen</h5>
-                    <div><strong>Total de paquetes:</strong> @(ViewBag.TotalPaquetes ?? 0)</div>
-                    <div><strong>Peso total (lb):</strong> @(((decimal)(ViewBag.PesoTotal ?? 0m)).ToString("N2", us))</div>
-                    <div><strong>Valor bruto total ($):</strong> @(((decimal)(ViewBag.ValorBrutoTotal ?? 0m)).ToString("C2", us))</div>
-                    <div><strong>Con condición especial:</strong> @(ViewBag.ConEspecial ?? 0)</div>
+        <!-- Resumen del cliente -->
+        @if (tieneCedula)
+        {
+            <div class="modern-card">
+                <div class="modern-card-body">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div>
+                            <h3 style="color: #1e3a8a; font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">Cliente</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div><strong>Nombre:</strong> @(ViewBag.ClienteNombre ?? "—")</div>
+                                <div><strong>Cédula:</strong> @ViewBag.Cedula</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="color: #1e3a8a; font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;">Resumen</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div><strong>Total de paquetes:</strong> @(ViewBag.TotalPaquetes ?? 0)</div>
+                                <div><strong>Peso total (lb):</strong> @(((decimal)(ViewBag.PesoTotal ?? 0m)).ToString("N2", us))</div>
+                                <div><strong>Valor bruto total ($):</strong> @(((decimal)(ViewBag.ValorBrutoTotal ?? 0m)).ToString("C2", us))</div>
+                                <div><strong>Con condición especial:</strong> @(ViewBag.ConEspecial ?? 0)</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-}
+        }
 
-<!-- Resultados -->
-@if (tieneCedula && Model != null && Model.Any())
-{
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped mb-0 align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Número de Tracking</th>
-                            <th class="text-end">Peso (lb)</th>
-                            <th class="text-end">Valor Bruto ($)</th>
-                            <th>Tienda</th>
-                            <th>Especial</th>
-                            <th>Fecha Registro</th>
-                            <th class="text-end" style="width: 200px;">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var p in Model)
-                        {
+        <!-- Tabla de resultados -->
+        @if (tieneCedula && Model != null && Model.Any())
+        {
+            <div class="modern-card">
+                <div class="modern-card-body" style="padding: 0;">
+                    <table class="modern-table" style="width: 100%; table-layout: fixed;">
+                        <thead>
                             <tr>
-                                <td>@p.NumeroTracking</td>
-                                <td class="text-end">@p.Peso.ToString("N2", us)</td>
-                                <td class="text-end">@p.ValorTotalBruto.ToString("C2", us)</td>
-                                <td>@p.TiendaOrigen</td>
-                                <td>@(p.CondicionEspecial ? "Sí" : "No")</td>
-                                <td>@p.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
-                                <td class="text-end">
-                                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-warning me-1">
-                                        <i class="bi bi-pencil-square"></i> Editar
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash"></i> Eliminar
-                                    </a>
-                                </td>
+                                <th style="width: 20%;">Número de Tracking</th>
+                                <th style="width: 12%; text-align: right;">Peso (lb)</th>
+                                <th style="width: 15%; text-align: right;">Valor Bruto ($)</th>
+                                <th style="width: 12%;">Tienda</th>
+                                <th style="width: 10%;">Especial</th>
+                                <th style="width: 15%;">Fecha Registro</th>
+                                <th style="width: 16%; text-align: center;">Acciones</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model)
+                            {
+                                <tr>
+                                    <td>@p.NumeroTracking</td>
+                                    <td style="text-align: right;">@p.Peso.ToString("N2", us)</td>
+                                    <td style="text-align: right;">@p.ValorTotalBruto.ToString("C2", us)</td>
+                                    <td>@p.TiendaOrigen</td>
+                                    <td>
+                                        @if (p.CondicionEspecial)
+                                        {
+                                            <span style="color: #10b981; font-weight: 500;">Sí</span>
+                                        }
+                                        else
+                                        {
+                                            <span style="color: #ef4444; font-weight: 500;">No</span>
+                                        }
+                                    </td>
+                                    <td>@p.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>
+                                        <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                                            <a asp-action="Edit" asp-route-id="@p.Id" class="btn-action-edit" style="text-decoration: none;">
+                                                Editar
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@p.Id" class="btn-action-delete" style="text-decoration: none;">
+                                                Eliminar
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        }
+        else if (tieneCedula)
+        {
+            <div class="modern-card">
+                <div class="modern-card-body" style="text-align: center; padding: 3rem;">
+                    <p style="color: #6b7280; font-style: italic; font-size: 1.1rem;">
+                        No hay paquetes registrados para esta cédula.
+                    </p>
+                </div>
+            </div>
+        }
+
     </div>
-}
-else if (tieneCedula)
-{
-    <p class="text-muted mt-2">No hay paquetes registrados para esta cédula.</p>
-}
+</div></div>

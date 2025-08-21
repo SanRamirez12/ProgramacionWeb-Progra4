@@ -1,79 +1,117 @@
 ﻿@using System.Globalization
 @model Aeropost.Models.Paquete
-
 @{
     ViewData["Title"] = "Eliminar paquete";
     var us = CultureInfo.CreateSpecificCulture("en-US"); // $ y punto decimal
     var nombreCliente = ViewBag.ClienteNombre as string ?? "—";
 }
 
-<h1 class="mb-3">Eliminar paquete</h1>
+<!-- Contenedor principal usando el diseño de eliminación -->
+<div class="delete-container">
+    <!-- Encabezado con título y alerta -->
+    <div class="delete-header">
+        <h1 class="section-title">Eliminar Paquete</h1>
 
-<div class="alert alert-warning">
-    <strong>¿Está seguro que desea eliminar este paquete?</strong>
-</div>
-
-<!-- Resumen estilo "reporte por cliente" -->
-<div class="card shadow-sm mb-3">
-    <div class="card-body">
-        <div class="row g-3">
-            <div class="col-md-6">
-                <h5 class="mb-1">Cliente</h5>
-                <div><strong>Nombre:</strong> @nombreCliente</div>
-                <div><strong>Cédula:</strong> @Model.ClienteAsociado</div>
-            </div>
-            <div class="col-md-6">
-                <h5 class="mb-1">Resumen</h5>
-                <div><strong>Peso (lb):</strong> @Model.Peso.ToString("N2", us)</div>
-                <div><strong>Valor bruto ($):</strong> @Model.ValorTotalBruto.ToString("C2", us)</div>
-                <div><strong>Condición especial:</strong> @(Model.CondicionEspecial ? "Sí" : "No")</div>
-                <div><strong>Fecha de registro:</strong> @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</div>
+        <!-- Alerta de advertencia -->
+        <div class="alert-warning">
+            <div class="alert-icon">⚠️</div>
+            <div>
+                <strong>¿Está seguro que desea eliminar este paquete?</strong>
+                <br>
+                Esta acción no se puede deshacer.
             </div>
         </div>
     </div>
-</div>
 
-<!-- Tabla con el paquete (1 fila) -->
-<div class="card shadow-sm mb-3">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-striped mb-0 align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>Número de Tracking</th>
-                        <th class="text-end">Peso (lb)</th>
-                        <th class="text-end">Valor Bruto ($)</th>
-                        <th>Tienda</th>
-                        <th>Especial</th>
-                        <th>Fecha Registro</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@Model.NumeroTracking</td>
-                        <td class="text-end">@Model.Peso.ToString("N2", us)</td>
-                        <td class="text-end">@Model.ValorTotalBruto.ToString("C2", us)</td>
-                        <td>@Model.TiendaOrigen</td>
-                        <td>@(Model.CondicionEspecial ? "Sí" : "No")</td>
-                        <td>@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Resumen del Cliente y Paquete -->
+    <div class="modern-card" style="width: 100%; max-width: 1000px; background: rgba(96, 165, 250, 0.05);">
+        <div class="modern-card-body">
+            <div class="form-grid">
+                <div class="form-group">
+                    <h5 style="color: #1e3a8a; margin-bottom: 1rem; font-weight: 600;">Información del Cliente</h5>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Nombre:</strong> @nombreCliente
+                    </div>
+                    <div>
+                        <strong>Cédula:</strong> @Model.ClienteAsociado
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 style="color: #1e3a8a; margin-bottom: 1rem; font-weight: 600;">Datos del Paquete</h5>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Peso (lb):</strong> @Model.Peso.ToString("N2", us)
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Valor bruto:</strong> <span style="color: #059669; font-weight: 600;">@Model.ValorTotalBruto.ToString("C2", us)</span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Condición especial:</strong>
+                        @if (Model.CondicionEspecial)
+                        {
+                            <span style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 500;">Sí</span>
+                        }
+                        else
+                        {
+                            <span style="background: #e5e7eb; color: #6b7280; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 500;">No</span>
+                        }
+                    </div>
+                    <div>
+                        <strong>Fecha de registro:</strong> @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Tabla del Paquete -->
+    <div class="modern-card" style="width: 100%; max-width: 1000px;">
+        <div class="modern-card-body" style="padding: 0;">
+            <div style="overflow-x: auto;">
+                <table class="modern-table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Número de Tracking</th>
+                            <th style="text-align: right;">Peso (lb)</th>
+                            <th style="text-align: right;">Valor Bruto</th>
+                            <th style="text-align: left;">Tienda</th>
+                            <th style="text-align: center;">Especial</th>
+                            <th style="text-align: left;">Fecha Registro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>@Model.NumeroTracking</strong></td>
+                            <td style="text-align: right;">@Model.Peso.ToString("N2", us)</td>
+                            <td style="text-align: right; font-weight: 600; color: #059669;">@Model.ValorTotalBruto.ToString("C2", us)</td>
+                            <td>@Model.TiendaOrigen</td>
+                            <td style="text-align: center;">
+                                @if (Model.CondicionEspecial)
+                                {
+                                    <span style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 500;">Sí</span>
+                                }
+                                else
+                                {
+                                    <span style="background: #e5e7eb; color: #6b7280; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.75rem; font-weight: 500;">No</span>
+                                }
+                            </td>
+                            <td>@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario de confirmación -->
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display: flex; gap: 1rem; justify-content: center; width: 100%; max-width: 400px;">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit" class="btn-action-delete" style="flex: 1; padding: 0.875rem 2rem; font-size: 1rem;">
+            Confirmar Eliminación
+        </button>
+        <a asp-action="Index" class="btn-modern-secondary" style="flex: 1; padding: 0.875rem 2rem; font-size: 1rem; text-decoration: none; display: flex; align-items: center; justify-content: center;">
+            Cancelar
+        </a>
+    </form>
 </div>
-
-<!-- Formulario de confirmación -->
-<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-flex gap-2">
-    @Html.AntiForgeryToken()
-
-    <!--  Id oculto  -->
-    <input type="hidden" asp-for="Id" />
-
-    <button type="submit" class="btn btn-danger">
-        Eliminar
-    </button>
-    <a asp-action="Index" class="btn btn-secondary">
-        Volver
-    </a>
-</form>

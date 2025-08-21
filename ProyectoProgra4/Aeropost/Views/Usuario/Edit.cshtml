@@ -3,79 +3,136 @@
     ViewData["Title"] = "Editar Usuario";
 }
 
-<h1>Editar Usuario</h1>
-<hr />
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <!-- Título de la página -->
+        <h1 class="clientes-title">Editar Usuario</h1>
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Edit" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- Tarjeta moderna para el formulario -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="Edit" method="post" class="client-form">
+                    <!-- Resumen de errores de validación -->
+                    <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
-            <!-- NECESARIO para el POST -->
-            <input type="hidden" asp-for="Id" />
+                    <!-- Campo oculto necesario para el POST -->
+                    <input type="hidden" asp-for="Id" />
 
-            <!-- Opcional: bloque de diagnóstico para ver qué invalida -->
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-warning">
-                    <strong>Diagnóstico ModelState:</strong>
-                    <ul>
-                        @foreach (var kvp in ViewData.ModelState)
-                        {
-                            foreach (var err in kvp.Value.Errors)
-                            {
-                                <li><code>@kvp.Key</code>: @err.ErrorMessage</li>
-                            }
-                        }
-                    </ul>
-                </div>
-            }
+                    <!-- Bloque de diagnóstico para ModelState (solo si hay errores) -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert-warning" style="margin-bottom: 2rem;">
+                            <div class="alert-icon">⚠</div>
+                            <div>
+                                <h4 style="margin: 0 0 0.5rem 0; font-weight: 600;">Diagnóstico ModelState:</h4>
+                                <ul style="margin: 0; padding-left: 1.5rem;">
+                                    @foreach (var kvp in ViewData.ModelState)
+                                    {
+                                        foreach (var err in kvp.Value.Errors)
+                                        {
+                                            <li><code style="background: rgba(255,255,255,0.3); padding: 0.2rem 0.4rem; border-radius: 4px;">@kvp.Key</code>: @err.ErrorMessage</li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
 
-            <div class="form-group">
-                <label asp-for="Nombre"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <!-- Grid del formulario -->
+                    <div class="form-grid">
+                        <!-- Campo Nombre -->
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Nombre
+                            </label>
+                            <input asp-for="Nombre" class="form-input" />
+                            <span asp-validation-for="Nombre" class="field-validation"></span>
+                        </div>
+
+                        <!-- Campo Cédula (readonly) -->
+                        <div class="form-group">
+                            <label asp-for="Cedula" class="form-label">
+                                <span class="label-icon">🆔</span>
+                                Cédula
+                            </label>
+                            <input asp-for="Cedula" class="form-input" readonly style="background-color: #f8fafc; color: #6b7280;" />
+                            <span asp-validation-for="Cedula" class="field-validation"></span>
+                        </div>
+
+                        <!-- Campo Género (radio buttons) -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="label-icon">⚧</span>
+                                Género
+                            </label>
+                            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; color: #374151; cursor: pointer;">
+                                    <input type="radio" asp-for="Genero" value="Masculino" style="margin: 0;" />
+                                    Masculino
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; color: #374151; cursor: pointer;">
+                                    <input type="radio" asp-for="Genero" value="Femenino" style="margin: 0;" />
+                                    Femenino
+                                </label>
+                            </div>
+                            <span asp-validation-for="Genero" class="field-validation"></span>
+                        </div>
+
+                        <!-- Campo Fecha de Registro -->
+                        <div class="form-group">
+                            <label asp-for="FechaRegistro" class="form-label">
+                                <span class="label-icon">📅</span>
+                                Fecha de Registro
+                            </label>
+                            <input asp-for="FechaRegistro" type="date" class="form-input" />
+                            <span asp-validation-for="FechaRegistro" class="field-validation"></span>
+                        </div>
+
+                        <!-- Campo Estado (radio buttons) -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <span class="label-icon">🔄</span>
+                                Estado
+                            </label>
+                            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; color: #374151; cursor: pointer;">
+                                    <input type="radio" asp-for="Estado" value="Activo" style="margin: 0;" />
+                                    Activo
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; color: #374151; cursor: pointer;">
+                                    <input type="radio" asp-for="Estado" value="Inactivo" style="margin: 0;" />
+                                    Inactivo
+                                </label>
+                            </div>
+                            <span asp-validation-for="Estado" class="field-validation"></span>
+                        </div>
+
+                        <!-- Campo Correo (ocupa todo el ancho) -->
+                        <div class="form-group form-group-wide">
+                            <label asp-for="Correo" class="form-label">
+                                <span class="label-icon">✉</span>
+                                Correo Electrónico
+                            </label>
+                            <input asp-for="Correo" class="form-input" type="email" />
+                            <span asp-validation-for="Correo" class="field-validation"></span>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-icon">💾</span>
+                            Guardar Cambios
+                        </button>
+                        <a asp-action="Index" class="btn-cancel">
+                            <span class="btn-icon">↩</span>
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Cedula"></label>
-                <input asp-for="Cedula" class="form-control" readonly />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label>Género</label><br />
-                <input type="radio" asp-for="Genero" value="Masculino" /> Masculino
-                <input type="radio" asp-for="Genero" value="Femenino" /> Femenino
-                <span asp-validation-for="Genero" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FechaRegistro"></label>
-                <input asp-for="FechaRegistro" type="date" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label>Estado</label><br />
-                <input type="radio" asp-for="Estado" value="Activo" /> Activo
-                <input type="radio" asp-for="Estado" value="Inactivo" /> Inactivo
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Correo"></label>
-                <input asp-for="Correo" class="form-control" type="email" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-
-            @* No mostrar Username ni Password en EDIT *@
-
-            <div class="form-group mt-3">
-                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -83,6 +140,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
 }
-

@@ -1,64 +1,102 @@
 ﻿@model Aeropost.Models.Paquete
-
 @{
     ViewData["Title"] = "Crear Paquete";
 }
 
-<h2 class="mb-4">Registrar Paquete</h2>
+<!-- Contenedor principal usando el diseño existente -->
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <!-- Título con estilo moderno -->
+        <h1 class="clientes-title">Registrar Paquete</h1>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <form asp-action="Create">
-            <div class="mb-3">
-                <label asp-for="Peso" class="form-label fw-bold"></label>
-                <input asp-for="Peso" class="form-control" placeholder="Ingrese el peso en lb" />
-                <span asp-validation-for="Peso" class="text-danger"></span>
-            </div>
+        <!-- Tarjeta moderna para el formulario -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="Create" class="client-form">
+                    <!-- Grid del formulario -->
+                    <div class="form-grid">
+                        <!-- Peso -->
+                        <div class="form-group">
+                            <label asp-for="Peso" class="form-label">
+                                Peso (lb)
+                            </label>
+                            <input asp-for="Peso" class="form-input" placeholder="Ingrese el peso en lb" />
+                            <span asp-validation-for="Peso" class="field-validation"></span>
+                        </div>
 
-            <div class="mb-3">
-                <label asp-for="ValorTotalBruto" class="form-label fw-bold"></label>
-                <input asp-for="ValorTotalBruto" class="form-control" placeholder="Ingrese el valor total bruto" />
-                <span asp-validation-for="ValorTotalBruto" class="text-danger"></span>
-            </div>
+                        <!-- Valor Total Bruto -->
+                        <div class="form-group">
+                            <label asp-for="ValorTotalBruto" class="form-label">
+                                Valor Total Bruto
+                            </label>
+                            <input asp-for="ValorTotalBruto" class="form-input" placeholder="Ingrese el valor total bruto" />
+                            <span asp-validation-for="ValorTotalBruto" class="field-validation"></span>
+                        </div>
 
-            <div class="mb-3">
-                <label asp-for="TiendaOrigen" class="form-label fw-bold"></label>
-                <select asp-for="TiendaOrigen" class="form-select">
-                    <option value="">Seleccione la tienda de origen</option>
-                    <option value="Amazon">Amazon</option>
-                    <option value="eBay">eBay</option>
-                    <option value="AliExpress">AliExpress</option>
-                    <option value="Temu">Temu</option>
-                    <option value="Shein">Shein</option>
-                </select>
-                <span asp-validation-for="TiendaOrigen" class="text-danger"></span>
-            </div>
+                        <!-- Tienda de Origen -->
+                        <div class="form-group">
+                            <label asp-for="TiendaOrigen" class="form-label">
+                                Tienda de Origen
+                            </label>
+                            <select asp-for="TiendaOrigen" class="form-select">
+                                <option value="">Seleccione la tienda de origen</option>
+                                <option value="Amazon">Amazon</option>
+                                <option value="eBay">eBay</option>
+                                <option value="AliExpress">AliExpress</option>
+                                <option value="Temu">Temu</option>
+                                <option value="Shein">Shein</option>
+                            </select>
+                            <span asp-validation-for="TiendaOrigen" class="field-validation"></span>
+                        </div>
 
-            <div class="mb-3">
-                <label asp-for="CondicionEspecial" class="form-label fw-bold"></label>
-                <div>
-                    <input type="radio" asp-for="CondicionEspecial" value="true" /> Sí
-                    <input type="radio" asp-for="CondicionEspecial" value="false" /> No
-                </div>
-                <span asp-validation-for="CondicionEspecial" class="text-danger"></span>
-            </div>
+                        <!-- Fecha de Registro -->
+                        <div class="form-group">
+                            <label asp-for="FechaRegistro" class="form-label">
+                                Fecha de Registro
+                            </label>
+                            <input asp-for="FechaRegistro" class="form-input" type="date" />
+                            <span asp-validation-for="FechaRegistro" class="field-validation"></span>
+                        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" type="date" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
+                        <!-- Cédula del Cliente - ancho completo -->
+                        <div class="form-group form-group-wide">
+                            <label asp-for="ClienteAsociado" class="form-label">
+                                Cédula del Cliente
+                            </label>
+                            <input asp-for="ClienteAsociado" class="form-input" placeholder="Ingrese la cédula del cliente asociado" />
+                            <span asp-validation-for="ClienteAsociado" class="field-validation"></span>
+                        </div>
 
-            <div class="mb-3">
-                <label asp-for="ClienteAsociado" class="form-label fw-bold">Cédula del Cliente</label>
-                <input asp-for="ClienteAsociado" class="form-control" placeholder="Ingrese la cédula del cliente asociado" />
-                <span asp-validation-for="ClienteAsociado" class="text-danger"></span>
-            </div>
+                        <!-- Condición Especial - ancho completo -->
+                        <div class="form-group form-group-wide">
+                            <label asp-for="CondicionEspecial" class="form-label">
+                                Condición Especial
+                            </label>
+                            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" asp-for="CondicionEspecial" value="true" style="width: 18px; height: 18px; accent-color: #3b82f6;" />
+                                    <span>Sí</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="radio" asp-for="CondicionEspecial" value="false" style="width: 18px; height: 18px; accent-color: #3b82f6;" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                            <span asp-validation-for="CondicionEspecial" class="field-validation"></span>
+                        </div>
+                    </div>
 
-            <div class="d-flex justify-content-between">
-                <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
-                <button type="submit" class="btn btn-success">Crear</button>
+                    <!-- Botones de acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            Crear Paquete
+                        </button>
+                        <a asp-action="Index" class="btn-cancel">
+                            Volver al Listado
+                        </a>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>

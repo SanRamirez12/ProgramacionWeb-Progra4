@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Aeropost.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/css.css" asp-append-version="true" />
 </head>
 <body>
     @using Microsoft.AspNetCore.Http
@@ -40,7 +41,7 @@
                     {
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Bitácora</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Paquete" asp-action="Index">Paquete</a>
@@ -58,7 +59,7 @@
 
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <span class="navbar-text me-3">Hola, @usuario</span>
+                                <span class="nav-link text-dark">Hola, @usuario</span>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Cerrar sesión</a>
@@ -86,7 +87,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="text-muted">
             &copy; 2025 - Aeropost
         </div>
     </footer>

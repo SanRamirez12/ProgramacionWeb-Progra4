@@ -3,71 +3,75 @@
     ViewData["Title"] = "Clientes";
 }
 
-<h2 class="mb-3">Clientes</h2>
+<!-- Contenedor principal de clientes -->
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <h2 class="clientes-title">Clientes</h2>
 
-<!-- Buscar + acciones -->
-<div class="card shadow-sm mb-3">
-    <div class="card-body">
-        <form method="get" asp-action="Index" class="row g-2">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input name="cedula"
-                           value="@ViewBag.CedulaFiltro"
-                           class="form-control"
-                           placeholder="Buscar por cédula" />
-                    <button class="btn btn-primary" type="submit">Buscar</button>
-                    <a class="btn btn-outline-secondary" asp-action="Index">Limpiar</a>
-                </div>
+        <!-- Buscar + acciones -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form method="get" asp-action="Index" class="row g-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input name="cedula"
+                                   value="@ViewBag.CedulaFiltro"
+                                   class="form-control modern-input"
+                                   placeholder="Buscar por cédula" />
+                            <button class="btn btn-modern-primary" type="submit">Buscar</button>
+                            <a class="btn btn-modern-secondary" asp-action="Index">Limpiar</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end gap-2">
+                        <a class="btn btn-modern-success" asp-action="ReportePorTipo">
+                            Reporte por tipo
+                        </a>
+                        <a class="btn btn-modern-outline-success" asp-action="Create">
+                            Agregar cliente
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6 d-flex justify-content-end gap-2">
-                <a class="btn btn-success" asp-action="ReportePorTipo">
-                    Reporte por tipo
-                </a>
-                <a class="btn btn-outline-success" asp-action="Create">
-                    Agregar cliente
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<div class="card shadow-sm">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-striped mb-0 align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Correo</th>
-                        <th>Teléfono</th>
-                        <th class="text-end" style="width:200px;">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var c in Model)
-                    {
+        <!-- Tabla -->
+        <div class="modern-card">
+            <div class="table-responsive">
+                <table class="table modern-table mb-0">
+                    <thead>
                         <tr>
-                            <td>@c.Cedula</td>
-                            <td>@c.Nombre</td>
-                            <td>@c.Tipo</td>
-                            <td>@c.Correo</td>
-                            <td>@c.Telefono</td>
-                            <td class="text-end">
-                                <a class="btn btn-sm btn-outline-warning me-1"
-                                   asp-action="Edit" asp-route-id="@c.Id">
-                                    <i class="bi bi-pencil-square"></i> Editar
-                                </a>
-                                <a class="btn btn-sm btn-outline-danger"
-                                   asp-action="Delete" asp-route-id="@c.Id">
-                                    <i class="bi bi-trash"></i> Eliminar
-                                </a>
-                            </td>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th class="text-end" style="width:200px;">Acciones</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model)
+                        {
+                            <tr>
+                                <td>@c.Cedula</td>
+                                <td>@c.Nombre</td>
+                                <td>@c.Tipo</td>
+                                <td>@c.Correo</td>
+                                <td>@c.Telefono</td>
+                                <td class="text-end">
+                                    <a class="btn btn-action-edit me-1"
+                                       asp-action="Edit" asp-route-id="@c.Id">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a class="btn btn-action-delete"
+                                       asp-action="Delete" asp-route-id="@c.Id">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -3,100 +3,177 @@
     ViewData["Title"] = "Crear Usuario";
 }
 
-<h1>Crear Usuario</h1>
-<hr />
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <h1 class="clientes-title">Crear Usuario</h1>
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="Create" method="post" class="client-form">
 
-            <!-- DIAGNÓSTICO: imprime todos los errores del ModelState -->
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-warning">
-                    <strong>Diagnóstico ModelState:</strong>
-                    <ul>
-                        @foreach (var kvp in ViewData.ModelState)
-                        {
-                            foreach (var err in kvp.Value.Errors)
-                            {
-                                <li><code>@kvp.Key</code>: @err.ErrorMessage</li>
-                            }
-                        }
-                    </ul>
-                </div>
-            }
+                    <!-- Resumen de errores de validación -->
+                    <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
+                    <!-- DIAGNÓSTICO: imprime todos los errores del ModelState -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert-warning">
+                            <div class="alert-icon">⚠️</div>
+                            <div>
+                                <strong>Diagnóstico ModelState:</strong>
+                                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                                    @foreach (var kvp in ViewData.ModelState)
+                                    {
+                                        foreach (var err in kvp.Value.Errors)
+                                        {
+                                            <li><code>@kvp.Key</code>: @err.ErrorMessage</li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
 
-            <div class="form-group">
-                <label asp-for="Nombre"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <!-- Grid del formulario -->
+                    <div class="form-grid">
+
+                        <!-- Nombre -->
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Nombre
+                            </label>
+                            <input asp-for="Nombre" class="form-input" placeholder="Ingrese el nombre completo" />
+                            <span asp-validation-for="Nombre" class="field-validation"></span>
+                        </div>
+
+                        <!-- Cédula -->
+                        <div class="form-group">
+                            <label asp-for="Cedula" class="form-label">
+                                <span class="label-icon">🆔</span>
+                                Cédula
+                            </label>
+                            <input asp-for="Cedula" class="form-input" type="text" placeholder="Ingrese la cédula" />
+                            <span asp-validation-for="Cedula" class="field-validation"></span>
+                        </div>
+
+                        <!-- Correo -->
+                        <div class="form-group">
+                            <label asp-for="Correo" class="form-label">
+                                <span class="label-icon">📧</span>
+                                Correo
+                            </label>
+                            <input asp-for="Correo" class="form-input" type="email" placeholder="ejemplo@correo.com" />
+                            <span asp-validation-for="Correo" class="field-validation"></span>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="form-group">
+                            <label asp-for="Username" class="form-label">
+                                <span class="label-icon">👨‍💻</span>
+                                Usuario
+                            </label>
+                            <input asp-for="Username" class="form-input" placeholder="Nombre de usuario" />
+                            <span asp-validation-for="Username" class="field-validation"></span>
+                        </div>
+
+                        <!-- Fecha de Registro -->
+                        <div class="form-group">
+                            <label asp-for="FechaRegistro" class="form-label">
+                                <span class="label-icon">📅</span>
+                                Fecha de Registro
+                            </label>
+                            <input asp-for="FechaRegistro" class="form-input" type="date" />
+                            <span asp-validation-for="FechaRegistro" class="field-validation"></span>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="form-group">
+                            <label asp-for="Password" class="form-label">
+                                <span class="label-icon">🔐</span>
+                                Contraseña
+                            </label>
+                            <input asp-for="Password" class="form-input" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" />
+                            <span asp-validation-for="Password" class="field-validation"></span>
+                        </div>
+
+                        <!-- Confirmar Contraseña -->
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="form-label">
+                                <span class="label-icon">🔒</span>
+                                Confirmar Contraseña
+                            </label>
+                            <input asp-for="ConfirmPassword" class="form-input" type="password" autocomplete="new-password" placeholder="Repita la contraseña" />
+                            <span asp-validation-for="ConfirmPassword" class="field-validation"></span>
+                        </div>
+
+                        <!-- Género - Campo que ocupa todo el ancho -->
+                        <div class="form-group form-group-wide">
+                            <label class="form-label">
+                                <span class="label-icon">⚧</span>
+                                Género
+                            </label>
+                            <div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #374151;">
+                                    <input type="radio" asp-for="Genero" value="Masculino" style="margin: 0;" />
+                                    Masculino
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #374151;">
+                                    <input type="radio" asp-for="Genero" value="Femenino" style="margin: 0;" />
+                                    Femenino
+                                </label>
+                            </div>
+                            <span asp-validation-for="Genero" class="field-validation"></span>
+                        </div>
+
+                        <!-- Estado - Campo que ocupa todo el ancho -->
+                        <div class="form-group form-group-wide">
+                            <label class="form-label">
+                                <span class="label-icon">🟢</span>
+                                Estado
+                            </label>
+                            <div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #374151;">
+                                    <input type="radio" asp-for="Estado" value="Activo" style="margin: 0;" />
+                                    Activo
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #374151;">
+                                    <input type="radio" asp-for="Estado" value="Inactivo" style="margin: 0;" />
+                                    Inactivo
+                                </label>
+                            </div>
+                            <span asp-validation-for="Estado" class="field-validation"></span>
+                        </div>
+
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="form-actions">
+                        <a asp-action="Index" class="btn-cancel" style="text-decoration: none;">
+                            <span class="btn-icon">↶</span>
+                            Cancelar
+                        </a>
+                        <button type="reset" class="btn-modern-secondary">
+                            <span class="btn-icon">🗑</span>
+                            Limpiar
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-icon">💾</span>
+                            Crear
+                        </button>
+                    </div>
+
+                </form>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Cedula"></label>
-                <input asp-for="Cedula" class="form-control" type="text" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label>Género</label><br />
-                <input type="radio" asp-for="Genero" value="Masculino" /> Masculino
-                <input type="radio" asp-for="Genero" value="Femenino" /> Femenino
-                <span asp-validation-for="Genero" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FechaRegistro"></label>
-                <input asp-for="FechaRegistro" class="form-control" type="date" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label>Estado</label><br />
-                <input type="radio" asp-for="Estado" value="Activo" /> Activo
-                <input type="radio" asp-for="Estado" value="Inactivo" /> Inactivo
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Correo"></label>
-                <input asp-for="Correo" class="form-control" type="email" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" autocomplete="new-password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mt-3">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-                <button type="reset" class="btn btn-light">Limpiar</button>
-            </div>
-        </form>
+        <!-- Enlace adicional -->
+        <div style="text-align: center; margin-top: 2rem;">
+            <a asp-action="Index" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                Volver a la Lista
+            </a>
+        </div>
     </div>
-</div>
-
-<div class="mt-3">
-    <a asp-action="Index">Volver a la Lista</a>
 </div>
 
 @section Scripts {
@@ -132,6 +209,3 @@
         })();
     </script>
 }
-
-
-

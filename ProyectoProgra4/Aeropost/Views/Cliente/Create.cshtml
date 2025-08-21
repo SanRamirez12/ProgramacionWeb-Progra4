@@ -4,61 +4,102 @@
     ViewData["Title"] = "Agregar cliente";
 }
 
-<h1 class="mb-3">Agregar cliente</h1>
+<div class="bitacora-container">
+    <!-- Sección de encabezado -->
+    <div class="welcome-section">
+        <h1 class="welcome-title">Agregar Cliente</h1>
+    </div>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <form asp-action="Create" method="post">
-            @Html.AntiForgeryToken()
+    <!-- Contenido principal -->
+    <div class="main-content-card">
+        <div class="form-container">
+            <form asp-action="Create" method="post" class="client-form">
+                @Html.AntiForgeryToken()
 
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+                <!-- Resumen de errores de validación -->
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
-            <div class="mb-3">
-                <label asp-for="Nombre" class="form-label">Nombre</label>
-                <input asp-for="Nombre" class="form-control" placeholder="Nombre completo" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
+                <!-- Grid de campos del formulario -->
+                <div class="form-grid">
+                    <!-- Campo Nombre -->
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="form-label">
+                            <span class="label-icon">👤</span>
+                            Nombre
+                        </label>
+                        <input asp-for="Nombre" class="form-input" placeholder="Nombre completo" />
+                        <span asp-validation-for="Nombre" class="field-validation"></span>
+                    </div>
 
-            <div class="mb-3">
-                <label asp-for="Cedula" class="form-label">Cédula</label>
-                <input asp-for="Cedula" class="form-control" placeholder="123456789" />
-                <span asp-validation-for="Cedula" class="text-danger"></span>
-            </div>
+                    <!-- Campo Cédula -->
+                    <div class="form-group">
+                        <label asp-for="Cedula" class="form-label">
+                            <span class="label-icon">🆔</span>
+                            Cédula
+                        </label>
+                        <input asp-for="Cedula" class="form-input" placeholder="123456789" />
+                        <span asp-validation-for="Cedula" class="field-validation"></span>
+                    </div>
 
-            <div class="mb-3">
-                <label asp-for="Tipo" class="form-label">Tipo</label>
-                <select asp-for="Tipo" class="form-select">
-                    <option value="">-- Seleccione --</option>
-                    <option value="Regular">Regular</option>
-                    <option value="Frecuente">Frecuente</option>
-                    <option value="Suspendido">Suspendido</option>
-                </select>
-                <span asp-validation-for="Tipo" class="text-danger"></span>
-            </div>
+                    <!-- Campo Tipo -->
+                    <div class="form-group">
+                        <label asp-for="Tipo" class="form-label">
+                            <span class="label-icon">📋</span>
+                            Tipo
+                        </label>
+                        <select asp-for="Tipo" class="form-select">
+                            <option value="">-- Seleccione --</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Frecuente">Frecuente</option>
+                            <option value="Suspendido">Suspendido</option>
+                        </select>
+                        <span asp-validation-for="Tipo" class="field-validation"></span>
+                    </div>
 
-            <div class="mb-3">
-                <label asp-for="Correo" class="form-label">Correo</label>
-                <input asp-for="Correo" class="form-control" type="email" placeholder="correo@dominio.com" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
+                    <!-- Campo Correo -->
+                    <div class="form-group">
+                        <label asp-for="Correo" class="form-label">
+                            <span class="label-icon">📧</span>
+                            Correo
+                        </label>
+                        <input asp-for="Correo" class="form-input" type="email" placeholder="correo@dominio.com" />
+                        <span asp-validation-for="Correo" class="field-validation"></span>
+                    </div>
 
-            <div class="mb-3">
-                <label asp-for="Direccion" class="form-label">Dirección</label>
-                <input asp-for="Direccion" class="form-control" placeholder="Dirección de entrega" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
+                    <!-- Campo Dirección -->
+                    <div class="form-group form-group-wide">
+                        <label asp-for="Direccion" class="form-label">
+                            <span class="label-icon">🏠</span>
+                            Dirección
+                        </label>
+                        <input asp-for="Direccion" class="form-input" placeholder="Dirección de entrega" />
+                        <span asp-validation-for="Direccion" class="field-validation"></span>
+                    </div>
 
-            <div class="mb-3">
-                <label asp-for="Telefono" class="form-label">Teléfono</label>
-                <input asp-for="Telefono" class="form-control" type="tel" placeholder="8888-8888" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
+                    <!-- Campo Teléfono -->
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="form-label">
+                            <span class="label-icon">📞</span>
+                            Teléfono
+                        </label>
+                        <input asp-for="Telefono" class="form-input" type="tel" placeholder="8888-8888" />
+                        <span asp-validation-for="Telefono" class="field-validation"></span>
+                    </div>
+                </div>
 
-            <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">Crear</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
-            </div>
-        </form>
+                <!-- Botones de acción -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                        
+                        Crear Cliente
+                    </button>
+                    <a asp-action="Index" class="btn-cancel">
+                        
+                        Volver
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -67,4 +108,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-

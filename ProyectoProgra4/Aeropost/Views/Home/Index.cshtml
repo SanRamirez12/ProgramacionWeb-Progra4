@@ -1,39 +1,61 @@
 ﻿@{
-    ViewData["Title"] = "Bitácora";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bienvenido @((ViewBag.Usuario ?? "Invitado"))</h1>
+<div class="bitacora-container">
+    <!-- Sección de bienvenida -->
+    <div class="welcome-section">
+        <h1 class="welcome-title">Bienvenido @((ViewBag.Usuario ?? "Invitado"))</h1>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content-card">
+        <section id="acerca-de">
+            <h1 class="section-title">Acerca de</h1>
+
+            <h2 class="university-title">Universidad Latina de Costa Rica</h2>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <span class="info-label">Curso:</span>
+                    <p class="info-text">Ingeniería en Sistemas Computacionales</p>
+                </div>
+                <div class="info-card">
+                    <span class="info-label">Profesora:</span>
+                    <p class="info-text">ADRIANA STEPHANIE RUBIO ESCOBAR</p>
+                </div>
+            </div>
+
+            <div class="students-section">
+                <h3 class="subsection-title">Estudiantes</h3>
+                <ul class="students-list">
+                    <li class="student-item">José Alberto Álvarez Navarro — 20210110651</li>
+                    <li class="student-item">Luis Felipe Méndez Navarro — 20240116329</li>
+                    <li class="student-item">Luis Alonso Matarrita Obregón — 202401114039</li>
+                    <li class="student-item">Santiago Ramírez Elizondo — 202401112941</li>
+                </ul>
+            </div>
+
+            <div class="motivation-section">
+                <h3 class="subsection-title">Nuestra motivación</h3>
+                <p class="motivation-text">
+                    Como estudiantes de Ingeniería en Sistemas Computacionales, nos mueve la pasión por
+                    aprender, crear soluciones innovadoras y aplicar la tecnología en proyectos que representen
+                    un reto real. Este trabajo refleja nuestro esfuerzo colaborativo, disciplina y compromiso con
+                    nuestra formación profesional.
+                </p>
+            </div>
+
+            <div class="image-section">
+                
+                 <img src="~/css/logo_ulatina_1.png" alt="Logo Universidad Latina de Costa Rica" class="university-logo" /> 
+               
+            </div>
+
+            <footer class="footer-section">
+                <p class="footer-text">Este proyecto fue desarrollado con fines académicos en la Universidad Latina de Costa Rica.</p>
+            </footer>
+        </section>
+    </div>
 </div>
-
-<section id="acerca-de">
-    <h1>Acerca de</h1>
-
-    <h2>Universidad Latina de Costa Rica</h2>
-    <p><strong>Curso:</strong> Ingeniería en Sistemas Computacionales</p>
-    <p><strong>Profesora:</strong> ADRIANA STEPHANIE RUBIO ESCOBAR</p>
-
-    <h3>Estudiantes</h3>
-    <ul>
-        <li>José Alberto Álvarez Navarro — 20210110651</li>
-        <li>Luis Felipe Méndez Navarro — 20240116329</li>
-        <li>Luis Alonso Matarrita Obregón — 202401114039</li>
-        <li>Santiago Ramírez Elizondo — 202401112941</li>
-    </ul>
-
-    <h3>Nuestra motivación</h3>
-    <p>
-        Como estudiantes de Ingeniería en Sistemas Computacionales, nos mueve la pasión por
-        aprender, crear soluciones innovadoras y aplicar la tecnología en proyectos que representen
-        un reto real. Este trabajo refleja nuestro esfuerzo colaborativo, disciplina y compromiso con
-        nuestra formación profesional.
-    </p>
-
-    <h3>Imagen representativa</h3>
-    <!-- <img src="~/img/logo-universidad.png" alt="Logo Universidad Latina de Costa Rica" width="250" /> -->
-
-    <footer>
-        <p><em>Este proyecto fue desarrollado con fines académicos en la Universidad Latina de Costa Rica.</em></p>
-    </footer>
-</section>
 

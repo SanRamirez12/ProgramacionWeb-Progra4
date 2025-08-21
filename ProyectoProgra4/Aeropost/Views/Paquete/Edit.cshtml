@@ -1,71 +1,116 @@
 ﻿@model Aeropost.Models.Paquete
-
 @{
     ViewData["Title"] = "Editar Paquete";
 }
 
-<h2 class="mb-4">Editar Paquete</h2>
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <h1 class="clientes-title">Editar Paquete</h1>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <!--Debe postear a Edit y por POST -->
-        <form asp-action="Edit" method="post">
-            @Html.AntiForgeryToken()
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <form asp-action="Edit" method="post" class="client-form">
+                    @Html.AntiForgeryToken()
 
-            <!-- Necesarios para que el POST reciba el Id y conserve el tracking anterior -->
-            <input asp-for="Id" type="hidden" />
-            <input asp-for="NumeroTracking" type="hidden" />
+                    <!-- Campos ocultos necesarios -->
+                    <input asp-for="Id" type="hidden" />
+                    <input asp-for="NumeroTracking" type="hidden" />
 
-            <div class="mb-3">
-                <label asp-for="Peso" class="form-label fw-bold"></label>
-                <input asp-for="Peso" class="form-control" placeholder="Ingrese el peso en lb" />
-                <span asp-validation-for="Peso" class="text-danger"></span>
+                    <!-- Grid del formulario -->
+                    <div class="form-grid">
+
+                        <!-- Peso -->
+                        <div class="form-group">
+                            <label asp-for="Peso" class="form-label">
+                                <span class="label-icon">⚖️</span>
+                                Peso (lb)
+                            </label>
+                            <input asp-for="Peso" class="form-input" placeholder="Ingrese el peso en lb" />
+                            <span asp-validation-for="Peso" class="field-validation"></span>
+                        </div>
+
+                        <!-- Valor Total Bruto -->
+                        <div class="form-group">
+                            <label asp-for="ValorTotalBruto" class="form-label">
+                                <span class="label-icon">💰</span>
+                                Valor Total Bruto
+                            </label>
+                            <input asp-for="ValorTotalBruto" class="form-input" placeholder="Ingrese el valor total bruto" />
+                            <span asp-validation-for="ValorTotalBruto" class="field-validation"></span>
+                        </div>
+
+                        <!-- Tienda de Origen -->
+                        <div class="form-group">
+                            <label asp-for="TiendaOrigen" class="form-label">
+                                <span class="label-icon">🏪</span>
+                                Tienda de Origen
+                            </label>
+                            <select asp-for="TiendaOrigen" class="form-select">
+                                <option value="">Seleccione la tienda de origen</option>
+                                <option value="Amazon">Amazon</option>
+                                <option value="eBay">eBay</option>
+                                <option value="AliExpress">AliExpress</option>
+                                <option value="Temu">Temu</option>
+                                <option value="Shein">Shein</option>
+                            </select>
+                            <span asp-validation-for="TiendaOrigen" class="field-validation"></span>
+                        </div>
+
+                        <!-- Fecha de Registro -->
+                        <div class="form-group">
+                            <label asp-for="FechaRegistro" class="form-label">
+                                <span class="label-icon">📅</span>
+                                Fecha de Registro
+                            </label>
+                            <input asp-for="FechaRegistro" class="form-input" type="date" />
+                            <span asp-validation-for="FechaRegistro" class="field-validation"></span>
+                        </div>
+
+                        <!-- Cliente Asociado -->
+                        <div class="form-group">
+                            <label asp-for="ClienteAsociado" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Cédula del Cliente
+                            </label>
+                            <input asp-for="ClienteAsociado" class="form-input" placeholder="Ingrese la cédula del cliente asociado" />
+                            <span asp-validation-for="ClienteAsociado" class="field-validation"></span>
+                        </div>
+
+                        <!-- Condición Especial - Campo que ocupa todo el ancho -->
+                        <div class="form-group form-group-wide">
+                            <label class="form-label">
+                                <span class="label-icon">⭐</span>
+                                Condición Especial
+                            </label>
+                            <div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #374151;">
+                                    <input type="radio" asp-for="CondicionEspecial" value="true" id="espSi" style="margin: 0;" />
+                                    Sí
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #374151;">
+                                    <input type="radio" asp-for="CondicionEspecial" value="false" id="espNo" style="margin: 0;" />
+                                    No
+                                </label>
+                            </div>
+                            <span asp-validation-for="CondicionEspecial" class="field-validation"></span>
+                        </div>
+
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="form-actions">
+                        <a asp-action="Index" class="btn-cancel">
+                            <span class="btn-icon">↶</span>
+                            Volver al listado
+                        </a>
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-icon">💾</span>
+                            Guardar cambios
+                        </button>
+                    </div>
+
+                </form>
             </div>
-
-            <div class="mb-3">
-                <label asp-for="ValorTotalBruto" class="form-label fw-bold"></label>
-                <input asp-for="ValorTotalBruto" class="form-control" placeholder="Ingrese el valor total bruto" />
-                <span asp-validation-for="ValorTotalBruto" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="TiendaOrigen" class="form-label fw-bold"></label>
-                <select asp-for="TiendaOrigen" class="form-select">
-                    <option value="">Seleccione la tienda de origen</option>
-                    <option value="Amazon">Amazon</option>
-                    <option value="eBay">eBay</option>
-                    <option value="AliExpress">AliExpress</option>
-                    <option value="Temu">Temu</option>
-                    <option value="Shein">Shein</option>
-                </select>
-                <span asp-validation-for="TiendaOrigen" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="CondicionEspecial" class="form-label fw-bold"></label>
-                <div>
-                    <input type="radio" asp-for="CondicionEspecial" value="true" id="espSi" /> <label for="espSi">Sí</label>
-                    <input type="radio" asp-for="CondicionEspecial" value="false" id="espNo" class="ms-3" /> <label for="espNo">No</label>
-                </div>
-                <span asp-validation-for="CondicionEspecial" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" type="date" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="ClienteAsociado" class="form-label fw-bold">Cédula del Cliente</label>
-                <input asp-for="ClienteAsociado" class="form-control" placeholder="Ingrese la cédula del cliente asociado" />
-                <span asp-validation-for="ClienteAsociado" class="text-danger"></span>
-            </div>
-
-            <div class="d-flex justify-content-between">
-                <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
-                <button type="submit" class="btn btn-success">Guardar cambios</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

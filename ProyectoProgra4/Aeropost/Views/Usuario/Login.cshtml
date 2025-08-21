@@ -1,79 +1,48 @@
-﻿@model Aeropost.Models.Usuario
+﻿@* Modelo asociado a la vista *@
+@model Aeropost.Models.Usuario
 
 @{
+    // Título de la página
     ViewData["Title"] = "Login";
 }
 
+@* Oculta el menú principal si existe *@
 <script>
     var menu = document.getElementById("menu");
-    menu.style.display = "none";
+    if (menu) menu.style.display = "none";
 </script>
 
+<div class="login-container">
+    <div class="login-card">
+        <h1>Login</h1>
+        <h4>Usuario</h4>
 
-<h1>Login</h1>
-
-<h4>Usuario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
+        <form asp-action="Login" class="login-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" name="username"/>
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" type ="password" name="password"/>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Ingresar" class="btn btn-primary" />
-                <input type="reset" value="Cancelar" class="btn btn-primary" />
+
+            @Html.HiddenFor(model => model.Id)
+
+            <input asp-for="Username" class="form-control" placeholder="Username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+
+            <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+            <div class="form-actions">
+                <input type="submit" value="Ingresar" class="btn-primary btn" />
+                <input type="reset" value="Cancelar" class="btn-secondary btn" />
             </div>
         </form>
-    </div>
-    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-{ //esto hay que cambiarlo mejor con archivos css
-    <div style="background: linear-gradient(135deg,#ff4e50,#f9d423); 
-                color:#fff; 
-                padding:15px 20px; 
-                border-radius:12px; 
-                box-shadow:0 6px 18px rgba(0,0,0,.2); 
-                margin-top:15px;
-                display:flex; 
-                align-items:center; 
-                gap:12px; 
-                animation:fadeIn 0.4s ease;">
-        
-        <span style="font-size:22px; 
-                     line-height:1; 
-                     background:rgba(255,255,255,.25); 
-                     padding:8px; 
-                     border-radius:50%;">⚠</span>
-        
-        <div>
-            <strong style="display:block; font-size:16px;">No se pudo iniciar sesión</strong>
-            <span>@ViewBag.ErrorMessage</span>
-        </div>
-    </div>
 
-    <script>
-        // Animación simple usando JavaScript puro
-        document.addEventListener("DOMContentLoaded", function () {
-            const alertBox = document.querySelector("div[style*='linear-gradient']");
-            alertBox.style.opacity = "0";
-            alertBox.style.transform = "translateY(-8px)";
-            setTimeout(() => {
-                alertBox.style.transition = "all 0.4s ease";
-                alertBox.style.opacity = "1";
-                alertBox.style.transform = "translateY(0)";
-            }, 10);
-        });
-    </script>
-}
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert-error">
+                <span class="alert-icon">⚠</span>
+                <div>
+                    <strong>No se pudo iniciar sesión</strong>
+                    <span>@ViewBag.ErrorMessage</span>
+                </div>
+            </div>
+        }
+    </div>
 </div>
-
-

@@ -1,0 +1,3218 @@
+﻿/* Reset de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+   
+}
+
+/* Contenedor principal del login */
+.login-container {
+    display: flex; /* Flexbox para centrar */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    position: fixed; /* Posición fija */
+    top: 60px; /* Debajo del header (ajusta según tu header) */
+    left: 0;
+    right: 0;
+    bottom: 30px; /* Espacio para el footer (ajusta según la altura de tu footer) */
+    background-image: url('166171-macos_12_monterey_blue_modd_official_stock_wallpaper_6k_resolution_light-1920x1080.jpg'); /* Fondo */
+    background-size: cover; /* Cubrir todo el espacio */
+    background-position: center;
+    background-repeat: no-repeat; /* Evita que se repita la imagen */
+    font-family: 'Arial', sans-serif;
+}
+/* Tarjeta de login */
+.login-card {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    padding: 50px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: center;
+}
+
+    .login-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Título */
+    .login-card h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Subtítulo */
+    .login-card h4 {
+        font-size: 16px;
+        margin-bottom: 30px;
+        color: #666;
+    }
+
+/* Formulario */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+    /* Inputs */
+    .login-form .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+    }
+
+        .login-form .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+/* Botones */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-secondary {
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+/* Mensaje de error */
+.alert-error {
+    background: linear-gradient(135deg,#ff4e50,#f9d423);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.2);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.alert-icon {
+    font-size: 22px;
+    line-height: 1;
+    background: rgba(255,255,255,.25);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+/* Animación fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ========================================
+   ESTILOS PARA EL HEADER CON COLORES DE LA IMAGEN
+   ======================================== */
+
+/* BARRA DE NAVEGACIÓN PRINCIPAL */
+.navbar {
+    /* Fondo degradado en tonos azules que coincide con la imagen */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%) !important;
+    /* Borde inferior sutil con transparencia */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+    /* Sombra suave debajo del header */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    /* Elimina el margen inferior por defecto de Bootstrap */
+    margin-bottom: 0 !important;
+    /* Espaciado interno vertical */
+    padding: 12px 0;
+    /* Efecto de desenfoque para look moderno */
+    backdrop-filter: blur(10px);
+}
+
+/* LOGO/MARCA DE LA EMPRESA */
+.navbar-brand {
+    /* Texto en blanco para contraste */
+    color: #ffffff !important;
+    /* Texto en negrita */
+    font-weight: bold;
+    /* Tamaño de fuente más grande */
+    font-size: 1.5rem;
+    /* Sombra al texto para que se vea mejor */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* Animación suave para cambios */
+    transition: all 0.3s ease;
+}
+
+    /* EFECTO CUANDO PASAS EL MOUSE SOBRE EL LOGO */
+    .navbar-brand:hover {
+        /* Color más claro al pasar el mouse */
+        color: #e0f2fe !important;
+        /* Aumenta ligeramente el tamaño */
+        transform: scale(1.05);
+    }
+
+/* ENLACES DE NAVEGACIÓN (Bitácora, Paquete, Cliente, etc.) */
+.nav-link {
+    /* Color celeste claro para los enlaces */
+    color: #e0f2fe !important;
+    /* Texto semi-negrita */
+    font-weight: 500;
+    /* Animación suave para todos los cambios */
+    transition: all 0.3s ease;
+    /* Espaciado interno de cada enlace */
+    padding: 8px 16px !important;
+    /* Esquinas redondeadas */
+    border-radius: 6px;
+    /* Pequeño margen entre enlaces */
+    margin: 0 2px;
+}
+
+    /* EFECTO AL PASAR EL MOUSE SOBRE LOS ENLACES */
+    .nav-link:hover {
+        /* Color blanco completo al hacer hover */
+        color: #ffffff !important;
+        /* Fondo semi-transparente al pasar el mouse */
+        background-color: rgba(255, 255, 255, 0.15);
+        /* Mueve el enlace ligeramente hacia arriba */
+        transform: translateY(-2px);
+    }
+
+    /* EFECTO AL HACER CLIC EN UN ENLACE */
+    .nav-link:focus {
+        color: #ffffff !important;
+        /* Fondo más visible cuando se hace clic */
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ENLACE ACTIVO (página actual) */
+    .nav-link.active {
+        color: #ffffff !important;
+        /* Fondo más prominente para la página actual */
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+/* TEXTO INFORMATIVO (como "Hola, usuario") */
+.navbar-text {
+    /* Color celeste para el texto */
+    color: #e0f2fe !important;
+    /* Texto semi-negrita */
+    font-weight: 500;
+    /* Sombra sutil al texto */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* BOTÓN MENÚ MÓVIL (hamburguesa) */
+.navbar-toggler {
+    /* Borde semi-transparente */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* Fondo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Animación suave */
+    transition: all 0.3s ease;
+}
+
+    /* EFECTO HOVER EN BOTÓN MÓVIL */
+    .navbar-toggler:hover {
+        /* Fondo más visible al hacer hover */
+        background-color: rgba(255, 255, 255, 0.2);
+        /* Borde más visible */
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+/* ICONO DEL BOTÓN MÓVIL (las tres líneas) */
+.navbar-toggler-icon {
+    /* Cambia el color del icono a blanco semi-transparente */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* CONTENEDOR PRINCIPAL DEL NAVBAR */
+.container-fluid {
+    /* Espaciado horizontal en pantallas grandes */
+    padding: 0 2rem;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA MÓVILES
+   ======================================== */
+@media (max-width: 576px) {
+    /* Menos espaciado en móviles */
+    .container-fluid {
+        padding: 0 1rem;
+    }
+
+    /* Logo más pequeño en móviles */
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    /* Enlaces más compactos en móviles */
+    .nav-link {
+        padding: 6px 12px !important;
+        margin: 2px 0;
+    }
+}
+
+/* ========================================
+   MENÚS DESPLEGABLES (si los necesitas)
+   ======================================== */
+.dropdown-menu {
+    /* Mismo fondo degradado que el navbar */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    /* Borde semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Sombra más pronunciada para el dropdown */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ELEMENTOS DENTRO DEL MENÚ DESPLEGABLE */
+.dropdown-item {
+    /* Color de texto celeste */
+    color: #e0f2fe;
+    /* Animación suave */
+    transition: all 0.3s ease;
+}
+
+    /* HOVER EN ELEMENTOS DEL DROPDOWN */
+    .dropdown-item:hover {
+        /* Fondo semi-transparente al hacer hover */
+        background-color: rgba(255, 255, 255, 0.15);
+        /* Texto blanco al hacer hover */
+        color: #ffffff;
+    }
+
+/* ========================================
+   EFECTO CRISTAL (GLASSMORPHISM)
+   ======================================== */
+/* Capa adicional para efecto de cristal */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Gradiente sutil de transparencias blancas */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    /* No interfiere con los clics */
+    pointer-events: none;
+}
+/* ========================================
+   ESTILOS PARA EL FOOTER 
+   ======================================== */
+
+/* FOOTER PRINCIPAL */
+.footer {
+    /* Mismo fondo degradado que el navbar */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%) !important;
+    /* Borde superior sutil con transparencia */
+    border-top: 2px solid rgba(255, 255, 255, 0.1) !important;
+    /* Sombra hacia arriba para darle profundidad */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+    /* Espaciado interno */
+    padding: 2px 0;
+    /* Efecto de desenfoque para consistencia con el navbar */
+    backdrop-filter: blur(10px);
+    /* Posición fija en la parte inferior */
+    position: relative;
+    /* Asegura que esté al fondo de la página */
+    margin-top: auto;
+}
+
+
+    /* TEXTO DEL COPYRIGHT */
+    .footer .text-muted {
+        text-align: center;
+        /* Cambia el color gris por celeste claro */
+        color: #ffffff !important;
+        /* Texto semi-negrita */
+        font-weight: 500;
+        /* Sombra sutil al texto para que se vea mejor */
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        /* Tamaño de fuente ligeramente más grande */
+        font-size: 0.95rem;
+        /* Espaciado de letras para mejor legibilidad */
+        letter-spacing: 0.5px;
+        /* Elimina el margen inferior por defecto */
+        margin-bottom: 0;
+    }
+
+    /* EFECTO CRISTAL ADICIONAL (igual que el navbar) */
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* Gradiente sutil de transparencias blancas */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+        /* No interfiere con los clics */
+        pointer-events: none;
+    }
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA MÓVILES
+   ======================================== */
+@media (max-width: 576px) {
+    /* Menos espaciado en móviles */
+    .footer {
+        padding: 15px 0;
+    }
+
+        /* Texto más pequeño en móviles */
+        .footer .text-muted {
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+}
+
+/* ========================================
+ FOOTER FIJO EN LA PARTE INFERIOR
+   ======================================== */
+
+
+.footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000;
+}
+
+body {
+    padding-bottom: 80px;
+}
+
+
+/* ========================================
+   EFECTO HOVER PARA EL FOOTER
+   ======================================== */
+
+.footer:hover {
+    /* Transición suave */
+    transition: all 0.3s ease;
+}
+
+    .footer:hover::before {
+        /* Aumenta ligeramente la opacidad del efecto cristal */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 100%);
+    }
+
+/* Reset de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+   
+}
+
+/* Contenedor principal del login */
+.login-container {
+    display: flex; /* Flexbox para centrar */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    position: fixed; /* Posición fija */
+    top: 60px; /* Debajo del header (ajusta según tu header) */
+    left: 0;
+    right: 0;
+    bottom: 30px; /* Espacio para el footer (ajusta según la altura de tu footer) */
+    background-image: url('166171-macos_12_monterey_blue_modd_official_stock_wallpaper_6k_resolution_light-1920x1080.jpg'); /* Fondo */
+    background-size: cover; /* Cubrir todo el espacio */
+    background-position: center;
+    background-repeat: no-repeat; /* Evita que se repita la imagen */
+    font-family: 'Arial', sans-serif;
+}
+/* Tarjeta de login */
+.login-card {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    padding: 50px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: center;
+}
+
+    .login-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Título */
+    .login-card h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    /* Subtítulo */
+    .login-card h4 {
+        font-size: 16px;
+        margin-bottom: 30px;
+        color: #666;
+    }
+
+/* Formulario */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+    /* Inputs */
+    .login-form .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+    }
+
+        .login-form .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+/* Botones */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-secondary {
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+/* Mensaje de error */
+.alert-error {
+    background: linear-gradient(135deg,#ff4e50,#f9d423);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.2);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.alert-icon {
+    font-size: 22px;
+    line-height: 1;
+    background: rgba(255,255,255,.25);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+/* Animación fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ========================================
+   ESTILOS PARA EL HEADER CON COLORES DE LA IMAGEN
+   ======================================== */
+
+/* BARRA DE NAVEGACIÓN PRINCIPAL */
+.navbar {
+    /* Fondo degradado en tonos azules que coincide con la imagen */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%) !important;
+    /* Borde inferior sutil con transparencia */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+    /* Sombra suave debajo del header */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    /* Elimina el margen inferior por defecto de Bootstrap */
+    margin-bottom: 0 !important;
+    /* Espaciado interno vertical */
+    padding: 12px 0;
+    /* Efecto de desenfoque para look moderno */
+    backdrop-filter: blur(10px);
+}
+
+/* LOGO/MARCA DE LA EMPRESA */
+.navbar-brand {
+    /* Texto en blanco para contraste */
+    color: #ffffff !important;
+    /* Texto en negrita */
+    font-weight: bold;
+    /* Tamaño de fuente más grande */
+    font-size: 1.5rem;
+    /* Sombra al texto para que se vea mejor */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* Animación suave para cambios */
+    transition: all 0.3s ease;
+}
+
+    /* EFECTO CUANDO PASAS EL MOUSE SOBRE EL LOGO */
+    .navbar-brand:hover {
+        /* Color más claro al pasar el mouse */
+        color: #e0f2fe !important;
+        /* Aumenta ligeramente el tamaño */
+        transform: scale(1.05);
+    }
+
+/* ENLACES DE NAVEGACIÓN (Bitácora, Paquete, Cliente, etc.) */
+.nav-link {
+    /* Color celeste claro para los enlaces */
+    color: #e0f2fe !important;
+    /* Texto semi-negrita */
+    font-weight: 500;
+    /* Animación suave para todos los cambios */
+    transition: all 0.3s ease;
+    /* Espaciado interno de cada enlace */
+    padding: 8px 16px !important;
+    /* Esquinas redondeadas */
+    border-radius: 6px;
+    /* Pequeño margen entre enlaces */
+    margin: 0 2px;
+}
+
+    /* EFECTO AL PASAR EL MOUSE SOBRE LOS ENLACES */
+    .nav-link:hover {
+        /* Color blanco completo al hacer hover */
+        color: #ffffff !important;
+        /* Fondo semi-transparente al pasar el mouse */
+        background-color: rgba(255, 255, 255, 0.15);
+        /* Mueve el enlace ligeramente hacia arriba */
+        transform: translateY(-2px);
+    }
+
+    /* EFECTO AL HACER CLIC EN UN ENLACE */
+    .nav-link:focus {
+        color: #ffffff !important;
+        /* Fondo más visible cuando se hace clic */
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ENLACE ACTIVO (página actual) */
+    .nav-link.active {
+        color: #ffffff !important;
+        /* Fondo más prominente para la página actual */
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+/* TEXTO INFORMATIVO (como "Hola, usuario") */
+.navbar-text {
+    /* Color celeste para el texto */
+    color: #e0f2fe !important;
+    /* Texto semi-negrita */
+    font-weight: 500;
+    /* Sombra sutil al texto */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* BOTÓN MENÚ MÓVIL (hamburguesa) */
+.navbar-toggler {
+    /* Borde semi-transparente */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* Fondo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Animación suave */
+    transition: all 0.3s ease;
+}
+
+    /* EFECTO HOVER EN BOTÓN MÓVIL */
+    .navbar-toggler:hover {
+        /* Fondo más visible al hacer hover */
+        background-color: rgba(255, 255, 255, 0.2);
+        /* Borde más visible */
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+/* ICONO DEL BOTÓN MÓVIL (las tres líneas) */
+.navbar-toggler-icon {
+    /* Cambia el color del icono a blanco semi-transparente */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* CONTENEDOR PRINCIPAL DEL NAVBAR */
+.container-fluid {
+    /* Espaciado horizontal en pantallas grandes */
+    padding: 0 2rem;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA MÓVILES
+   ======================================== */
+@media (max-width: 576px) {
+    /* Menos espaciado en móviles */
+    .container-fluid {
+        padding: 0 1rem;
+    }
+
+    /* Logo más pequeño en móviles */
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    /* Enlaces más compactos en móviles */
+    .nav-link {
+        padding: 6px 12px !important;
+        margin: 2px 0;
+    }
+}
+
+/* ========================================
+   MENÚS DESPLEGABLES (si los necesitas)
+   ======================================== */
+.dropdown-menu {
+    /* Mismo fondo degradado que el navbar */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    /* Borde semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Sombra más pronunciada para el dropdown */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ELEMENTOS DENTRO DEL MENÚ DESPLEGABLE */
+.dropdown-item {
+    /* Color de texto celeste */
+    color: #e0f2fe;
+    /* Animación suave */
+    transition: all 0.3s ease;
+}
+
+    /* HOVER EN ELEMENTOS DEL DROPDOWN */
+    .dropdown-item:hover {
+        /* Fondo semi-transparente al hacer hover */
+        background-color: rgba(255, 255, 255, 0.15);
+        /* Texto blanco al hacer hover */
+        color: #ffffff;
+    }
+
+/* ========================================
+   EFECTO CRISTAL (GLASSMORPHISM)
+   ======================================== */
+/* Capa adicional para efecto de cristal */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Gradiente sutil de transparencias blancas */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    /* No interfiere con los clics */
+    pointer-events: none;
+}
+/* ========================================
+   ESTILOS PARA EL FOOTER 
+   ======================================== */
+
+/* FOOTER PRINCIPAL */
+.footer {
+    /* Mismo fondo degradado que el navbar */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%) !important;
+    /* Borde superior sutil con transparencia */
+    border-top: 2px solid rgba(255, 255, 255, 0.1) !important;
+    /* Sombra hacia arriba para darle profundidad */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+    /* Espaciado interno */
+    padding: 2px 0;
+    /* Efecto de desenfoque para consistencia con el navbar */
+    backdrop-filter: blur(10px);
+    /* Posición fija en la parte inferior */
+    position: relative;
+    /* Asegura que esté al fondo de la página */
+    margin-top: auto;
+}
+
+
+    /* TEXTO DEL COPYRIGHT */
+    .footer .text-muted {
+        text-align: center;
+        /* Cambia el color gris por celeste claro */
+        color: #ffffff !important;
+        /* Texto semi-negrita */
+        font-weight: 500;
+        /* Sombra sutil al texto para que se vea mejor */
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        /* Tamaño de fuente ligeramente más grande */
+        font-size: 0.95rem;
+        /* Espaciado de letras para mejor legibilidad */
+        letter-spacing: 0.5px;
+        /* Elimina el margen inferior por defecto */
+        margin-bottom: 0;
+    }
+
+    /* EFECTO CRISTAL ADICIONAL (igual que el navbar) */
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* Gradiente sutil de transparencias blancas */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+        /* No interfiere con los clics */
+        pointer-events: none;
+    }
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA MÓVILES
+   ======================================== */
+@media (max-width: 576px) {
+    /* Menos espaciado en móviles */
+    .footer {
+        padding: 15px 0;
+    }
+
+        /* Texto más pequeño en móviles */
+        .footer .text-muted {
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+}
+
+/* ========================================
+ FOOTER FIJO EN LA PARTE INFERIOR
+   ======================================== */
+
+
+.footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000;
+}
+
+body {
+    padding-bottom: 80px;
+}
+
+
+/* ========================================
+   EFECTO HOVER PARA EL FOOTER
+   ======================================== */
+
+.footer:hover {
+    /* Transición suave */
+    transition: all 0.3s ease;
+}
+
+    .footer:hover::before {
+        /* Aumenta ligeramente la opacidad del efecto cristal */
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 100%);
+    }
+/* ========================================
+   ESTILOS ADICIONALES PARA BITÁCORA
+   ======================================== */
+
+/* Contenedor principal de bitácora */
+.bitacora-container {
+    /* Usa flexbox para organizar elementos verticalmente */
+    display: flex;
+    flex-direction: column;
+    /* Alinea contenido al inicio (arriba) */
+    justify-content: flex-start;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Posición fija que ocupa toda la ventana */
+    position: fixed;
+    top: 60px; /* Debajo del navbar */
+    left: 0; /* Desde el borde izquierdo */
+    right: 0; /* Hasta el borde derecho */
+    bottom: 80px; /* Arriba del footer */
+    /* Fondo blanco sólido */
+    background-color: #ffffff;
+    /* Fuente consistente con el resto del sitio */
+    font-family: 'Arial', sans-serif;
+    /* Permite scroll vertical si el contenido es muy largo */
+    overflow-y: auto;
+    /* Espaciado interno: 2rem arriba/abajo, 1rem izq/der */
+    padding: 2rem 1rem;
+}
+
+/* Sección de bienvenida - tarjeta superior */
+.welcome-section {
+    /* Fondo blanco con 95% opacidad (casi opaco) */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Espaciado interno: 2rem arriba/abajo, 3rem izq/der */
+    padding: 2rem 3rem;
+    /* Esquinas redondeadas */
+    border-radius: 15px;
+    /* Sombra suave para efecto de elevación */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Ocupa todo el ancho disponible */
+    width: 100%;
+    /* Pero no más de 1000px en pantallas grandes */
+    max-width: 1000px;
+    /* Texto centrado */
+    text-align: center;
+    /* Espacio debajo de esta sección */
+    margin-bottom: 2rem;
+    /* Transición suave para efectos hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    /* Efecto hover en la sección de bienvenida */
+    .welcome-section:hover {
+        /* Mueve ligeramente hacia arriba */
+        transform: translateY(-3px);
+        /* Aumenta la sombra para mayor sensación de elevación */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+/* Título de bienvenida */
+.welcome-title {
+    /* Tamaño de fuente grande */
+    font-size: 2.5rem;
+    /* Peso de fuente ligero para elegancia */
+    font-weight: 300;
+    /* Color azul oscuro consistente con el tema */
+    color: #1e3a8a;
+    /* Pequeño espacio debajo */
+    margin-bottom: 0.5rem;
+}
+
+/* Contenido principal - tarjeta grande */
+.main-content-card {
+    /* Fondo blanco con 95% opacidad */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Espaciado interno generoso */
+    padding: 3rem;
+    /* Esquinas más redondeadas que la sección de bienvenida */
+    border-radius: 20px;
+    /* Sombra más pronunciada */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    /* Ocupa todo el ancho disponible */
+    width: 100%;
+    /* Máximo 1000px */
+    max-width: 1000px;
+    /* Efecto de desenfoque de fondo (glassmorphism) */
+    backdrop-filter: blur(15px);
+    /* Borde sutil blanco para efecto cristal */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Título principal de sección ("Acerca de") */
+.section-title {
+    /* Tamaño muy grande para jerarquía visual */
+    font-size: 2.8rem;
+    /* Peso muy ligero para elegancia */
+    font-weight: 200;
+    /* Color azul oscuro */
+    color: #1e3a8a;
+    /* Espacio generoso debajo */
+    margin-bottom: 2rem;
+    /* Centrado */
+    text-align: center;
+    /* Posición relativa para el pseudo-elemento */
+    position: relative;
+}
+
+    /* Línea decorativa debajo del título principal */
+    .section-title::after {
+        /* Pseudo-elemento vacío */
+        content: '';
+        /* Posicionado absolutamente respecto al título */
+        position: absolute;
+        /* 10px debajo del texto */
+        bottom: -10px;
+        /* Centrado horizontalmente */
+        left: 50%;
+        transform: translateX(-50%);
+        /* Dimensiones de la línea */
+        width: 80px;
+        height: 3px;
+        /* Gradiente azul */
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        /* Esquinas redondeadas */
+        border-radius: 2px;
+    }
+
+/* Título de universidad */
+.university-title {
+    /* Tamaño mediano-grande */
+    font-size: 2rem;
+    /* Peso normal */
+    font-weight: 400;
+    /* Azul medio */
+    color: #3b82f6;
+    /* Espacio debajo */
+    margin-bottom: 1.5rem;
+    /* Centrado */
+    text-align: center;
+}
+
+/* Grid contenedor para las tarjetas de información */
+.info-grid {
+    /* Grid CSS para layout responsivo */
+    display: grid;
+    /* Columnas que se adaptan: mínimo 300px, máximo igual espacio */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Espacio entre tarjetas */
+    gap: 2rem;
+    /* Espacio debajo del grid */
+    margin-bottom: 2.5rem;
+}
+
+/* Tarjetas individuales de información (curso, profesora) */
+.info-card {
+    /* Fondo con gradiente azul muy sutil */
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(147, 197, 253, 0.1));
+    /* Espaciado interno */
+    padding: 1.5rem;
+    /* Esquinas redondeadas */
+    border-radius: 12px;
+    /* Borde azul sutil */
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    /* Transiciones para efectos hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    /* Efecto hover en tarjetas de información */
+    .info-card:hover {
+        /* Mueve ligeramente hacia arriba */
+        transform: translateY(-2px);
+        /* Añade sombra */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+/* Etiquetas en las tarjetas (Curso:, Profesora:) */
+.info-label {
+    /* Texto en negrita */
+    font-weight: 600;
+    /* Color azul oscuro */
+    color: #1e3a8a;
+    /* Mostrar como bloque en línea */
+    display: inline-block;
+    /* Pequeño espacio debajo */
+    margin-bottom: 0.5rem;
+}
+
+/* Texto de información en las tarjetas */
+.info-text {
+    /* Color gris oscuro para buena legibilidad */
+    color: #4a4a4a;
+    /* Tamaño normal */
+    font-size: 1rem;
+    /* Altura de línea para mejor legibilidad */
+    line-height: 1.5;
+}
+
+/* Contenedor de la sección de estudiantes */
+.students-section {
+    /* Espaciado vertical generoso */
+    margin: 2.5rem 0;
+}
+
+/* Títulos de subsecciones (Estudiantes, Nuestra motivación, etc.) */
+.subsection-title {
+    /* Tamaño mediano */
+    font-size: 1.8rem;
+    /* Peso medio */
+    font-weight: 500;
+    /* Azul medio */
+    color: #3b82f6;
+    /* Espacio debajo */
+    margin-bottom: 1.5rem;
+    /* Posición relativa para la línea decorativa */
+    position: relative;
+    /* Espacio a la izquierda para la línea */
+    padding-left: 20px;
+}
+
+    /* Línea decorativa vertical a la izquierda de subsecciones */
+    .subsection-title::before {
+        /* Pseudo-elemento */
+        content: '';
+        /* Posicionado absolutamente */
+        position: absolute;
+        /* En el borde izquierdo */
+        left: 0;
+        /* Centrado verticalmente */
+        top: 50%;
+        transform: translateY(-50%);
+        /* Dimensiones de la línea */
+        width: 4px;
+        height: 30px;
+        /* Gradiente azul vertical */
+        background: linear-gradient(180deg, #3b82f6, #60a5fa);
+        /* Esquinas redondeadas */
+        border-radius: 2px;
+    }
+
+/* Lista de estudiantes sin bullets */
+.students-list {
+    /* Quita los bullets por defecto */
+    list-style: none;
+    /* Usa grid para layout vertical */
+    display: grid;
+    /* Espacio entre elementos */
+    gap: 1rem;
+}
+
+/* Items individuales de estudiantes */
+.student-item {
+    /* Fondo blanco semi-transparente */
+    background: rgba(255, 255, 255, 0.7);
+    /* Espaciado interno */
+    padding: 1.2rem 1.5rem;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Borde azul a la izquierda para destacar */
+    border-left: 4px solid #60a5fa;
+    /* Sombra sutil */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    /* Transición para efectos hover */
+    transition: all 0.3s ease;
+}
+
+    /* Efecto hover en items de estudiantes */
+    .student-item:hover {
+        /* Mueve hacia la derecha */
+        transform: translateX(5px);
+        /* Aumenta la sombra */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        /* Cambia color del borde izquierdo */
+        border-left-color: #3b82f6;
+    }
+
+/* Contenedor de la sección de motivación */
+.motivation-section {
+    /* Espaciado vertical */
+    margin: 2.5rem 0;
+    /* Espaciado interno */
+    padding: 2rem;
+    /* Fondo con gradiente azul muy sutil */
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(96, 165, 250, 0.05));
+    /* Esquinas redondeadas */
+    border-radius: 15px;
+    /* Borde azul sutil */
+    border: 1px solid rgba(96, 165, 250, 0.1);
+}
+
+/* Texto de motivación */
+.motivation-text {
+    /* Tamaño ligeramente mayor que el normal */
+    font-size: 1.1rem;
+    /* Altura de línea para buena legibilidad */
+    line-height: 1.8;
+    /* Color gris oscuro */
+    color: #374151;
+    /* Justificado para apariencia formal */
+    text-align: justify;
+    /* Estilo itálico para énfasis */
+    font-style: italic;
+}
+
+/* Contenedor de la sección de imagen */
+.image-section {
+    /* Espaciado vertical */
+    margin: 2.5rem 0;
+    /* Centrado */
+    text-align: center;
+}
+
+/* Logo de la universidad (cuando se muestre) */
+.university-logo {
+    /* Tamaño máximo */
+    max-width: 500px;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Sombra para elevación */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    /* Transición para hover */
+    transition: transform 0.3s ease;
+}
+
+    /* Efecto hover en el logo */
+    .university-logo:hover {
+        /* Escala ligeramente más grande */
+        transform: scale(1.05);
+    }
+
+/* Footer interno de la sección */
+.footer-section {
+    /* Espaciado arriba */
+    margin-top: 3rem;
+    /* Espaciado interno arriba */
+    padding-top: 2rem;
+    /* Línea separadora arriba */
+    border-top: 2px solid rgba(96, 165, 250, 0.2);
+    /* Centrado */
+    text-align: center;
+}
+
+/* Texto del footer interno */
+.footer-text {
+    /* Estilo itálico */
+    font-style: italic;
+    /* Color gris medio */
+    color: #6b7280;
+    /* Tamaño ligeramente menor */
+    font-size: 0.95rem;
+    /* Altura de línea */
+    line-height: 1.6;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVOS
+   ======================================== */
+
+/* Tablets y pantallas medianas (768px y menores) */
+@media (max-width: 768px) {
+    /* Reduce padding del contenedor principal */
+    .bitacora-container {
+        padding: 1rem 0.5rem;
+    }
+
+    /* Reduce padding de las tarjetas principales */
+    .welcome-section,
+    .main-content-card {
+        padding: 2rem;
+        /* Añade márgenes laterales pequeños */
+        margin: 0 0.5rem 1.5rem 0.5rem;
+    }
+
+    /* Reduce tamaños de fuente para pantallas más pequeñas */
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .university-title {
+        font-size: 1.6rem;
+    }
+
+    /* Grid de una sola columna en tablets */
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* Reduce tamaño de subtítulos */
+    .subsection-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Móviles pequeños (480px y menores) */
+@media (max-width: 480px) {
+    /* Padding aún más pequeño para las tarjetas */
+    .welcome-section,
+    .main-content-card {
+        padding: 1.5rem;
+        /* Márgenes laterales mínimos */
+        margin: 0 0.25rem 1rem 0.25rem;
+    }
+
+    /* Fuentes más pequeñas para móviles */
+    .welcome-title {
+        font-size: 1.8rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+/* ========================================
+   ESTILOS ADICIONALES PARA FORMULARIO CLIENTE
+   ======================================== */
+
+/* Contenedor del formulario */
+.form-container {
+    /* Sin estilos adicionales, hereda de main-content-card */
+}
+
+/* Formulario principal */
+.client-form {
+    /* Sin márgenes o padding adicionales */
+    margin: 0;
+    padding: 0;
+}
+
+/* Resumen de errores de validación */
+.validation-summary {
+    /* Fondo rojo suave para errores */
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    /* Color de texto rojo */
+    color: #dc2626;
+    /* Espaciado interno */
+    padding: 1rem 1.5rem;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Borde rojo sutil */
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    /* Espacio debajo */
+    margin-bottom: 2rem;
+    /* Ocultar si no hay errores */
+    display: none;
+}
+
+    /* Mostrar el resumen si contiene errores */
+    .validation-summary:not(:empty) {
+        display: block;
+    }
+
+/* Grid del formulario - layout responsivo */
+.form-grid {
+    /* Grid CSS para layout de campos */
+    display: grid;
+    /* 2 columnas en pantallas grandes, 1 en pequeñas */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Espacio entre campos */
+    gap: 1.5rem;
+    /* Espacio debajo del grid */
+    margin-bottom: 2.5rem;
+}
+
+/* Grupo de campo individual */
+.form-group {
+    /* Flexbox para organizar verticalmente */
+    display: flex;
+    flex-direction: column;
+    /* Espacio entre label, input y validación */
+    gap: 0.5rem;
+}
+
+/* Campo que ocupa todo el ancho (dirección) */
+.form-group-wide {
+    /* Ocupa ambas columnas del grid */
+    grid-column: 1 / -1;
+}
+
+/* Etiquetas de los campos */
+.form-label {
+    /* Peso de fuente medio */
+    font-weight: 500;
+    /* Color azul oscuro consistente */
+    color: #1e3a8a;
+    /* Tamaño ligeramente mayor */
+    font-size: 1rem;
+    /* Flexbox para alinear icono y texto */
+    display: flex;
+    align-items: center;
+    /* Espacio entre icono y texto */
+    gap: 0.5rem;
+    /* Espacio debajo */
+    margin-bottom: 0.5rem;
+}
+
+/* Iconos en las etiquetas */
+.label-icon {
+    /* Tamaño del emoji/icono */
+    font-size: 1.1rem;
+    /* Opacidad reducida para sutil */
+    opacity: 0.7;
+}
+
+/* Campos de entrada (input) */
+.form-input {
+    /* Ancho completo */
+    width: 100%;
+    /* Espaciado interno */
+    padding: 0.875rem 1rem;
+    /* Tamaño de fuente */
+    font-size: 1rem;
+    /* Borde gris claro */
+    border: 2px solid #e5e7eb;
+    /* Esquinas redondeadas */
+    border-radius: 8px;
+    /* Color de fondo */
+    background-color: #ffffff;
+    /* Transición suave para focus */
+    transition: all 0.3s ease;
+    /* Incluir padding en el ancho */
+    box-sizing: border-box;
+}
+
+    /* Estado focus de los inputs */
+    .form-input:focus {
+        /* Sin outline por defecto */
+        outline: none;
+        /* Borde azul al enfocar */
+        border-color: #3b82f6;
+        /* Sombra azul sutil */
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        /* Fondo ligeramente azulado */
+        background-color: #fafbff;
+    }
+
+/* Campos select (dropdown) */
+.form-select {
+    /* Hereda estilos de form-input */
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    /* Cursor pointer para indicar interactividad */
+    cursor: pointer;
+}
+
+    /* Focus en select */
+    .form-select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background-color: #fafbff;
+    }
+
+/* Mensajes de validación de campo */
+.field-validation {
+    /* Color rojo para errores */
+    color: #dc2626;
+    /* Tamaño pequeño */
+    font-size: 0.875rem;
+    /* Peso medio */
+    font-weight: 500;
+    /* Altura de línea */
+    line-height: 1.4;
+    /* Ocultar por defecto */
+    display: none;
+    /* Espaciado superior pequeño */
+    margin-top: 0.25rem;
+}
+
+    /* Mostrar validación cuando hay errores */
+    .field-validation:not(:empty) {
+        display: block;
+    }
+
+/* Contenedor de botones de acción */
+.form-actions {
+    /* Flexbox para alinear botones */
+    display: flex;
+    /* Centrar botones */
+    justify-content: center;
+    /* Espacio entre botones */
+    gap: 1rem;
+    /* Espaciado superior */
+    margin-top: 2rem;
+    /* Borde superior decorativo */
+    padding-top: 2rem;
+    border-top: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* Botón de envío (Crear) */
+.btn-submit {
+    /* Flexbox para icono y texto */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Espaciado interno */
+    padding: 0.875rem 2rem;
+    /* Color de fondo azul */
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    /* Texto blanco */
+    color: white;
+    /* Sin borde */
+    border: none;
+    /* Esquinas redondeadas */
+    border-radius: 8px;
+    /* Peso de fuente */
+    font-weight: 500;
+    /* Tamaño de fuente */
+    font-size: 1rem;
+    /* Cursor pointer */
+    cursor: pointer;
+    /* Transiciones suaves */
+    transition: all 0.3s ease;
+    /* Quitar decoración de enlace si se usa */
+    text-decoration: none;
+    /* Sombra sutil */
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+}
+
+    /* Hover en botón de envío */
+    .btn-submit:hover {
+        /* Fondo más oscuro */
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        /* Mover ligeramente hacia arriba */
+        transform: translateY(-2px);
+        /* Aumentar sombra */
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Active en botón de envío */
+    .btn-submit:active {
+        /* Mover hacia abajo para efecto de clic */
+        transform: translateY(0);
+    }
+
+/* Botón de cancelar (Volver) */
+.btn-cancel {
+    /* Flexbox para icono y texto */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Espaciado interno */
+    padding: 0.875rem 2rem;
+    /* Fondo gris */
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    /* Texto blanco */
+    color: white;
+    /* Sin borde */
+    border: none;
+    /* Esquinas redondeadas */
+    border-radius: 8px;
+    /* Peso de fuente */
+    font-weight: 500;
+    /* Tamaño de fuente */
+    font-size: 1rem;
+    /* Cursor pointer */
+    cursor: pointer;
+    /* Transiciones suaves */
+    transition: all 0.3s ease;
+    /* Quitar decoración de enlace */
+    text-decoration: none;
+    /* Sombra sutil */
+    box-shadow: 0 2px 10px rgba(107, 114, 128, 0.2);
+}
+
+    /* Hover en botón de cancelar */
+    .btn-cancel:hover {
+        /* Fondo más oscuro */
+        background: linear-gradient(135deg, #4b5563, #374151);
+        /* Mover ligeramente hacia arriba */
+        transform: translateY(-2px);
+        /* Aumentar sombra */
+        box-shadow: 0 4px 20px rgba(107, 114, 128, 0.3);
+    }
+
+    /* Active en botón de cancelar */
+    .btn-cancel:active {
+        /* Mover hacia abajo para efecto de clic */
+        transform: translateY(0);
+    }
+
+/* Iconos en los botones */
+.btn-icon {
+    /* Tamaño del emoji/icono */
+    font-size: 1rem;
+    /* Opacidad reducida para sutil */
+    opacity: 0.9;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA FORMULARIO
+   ======================================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+    /* Grid de una sola columna en tablets */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    /* Botones en columna en lugar de fila */
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    /* Botones de ancho completo en móviles */
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    /* Reducir padding de inputs */
+    .form-input,
+    .form-select {
+        padding: 0.75rem 0.875rem;
+    }
+
+    /* Reducir padding de botones */
+    .btn-submit,
+    .btn-cancel {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    /* Reducir espaciado del grid */
+    .form-grid {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* ========================================
+   MEJORAS DE ACCESIBILIDAD
+   ======================================== */
+
+/* Focus visible mejorado para navegación por teclado */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.btn-submit:focus-visible,
+.btn-cancel:focus-visible {
+    /* Outline visible para usuarios de teclado */
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Reducir animaciones para usuarios que las prefieren reducidas */
+@media (prefers-reduced-motion: reduce) {
+    .form-input,
+    .form-select,
+    .btn-submit,
+    .btn-cancel {
+        transition: none;
+    }
+}
+
+/* ESTILOS ADICIONALES SOLO PARA LA LISTA DE CLIENTES */
+
+/* Contenedor principal de clientes */
+.clientes-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 80px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    overflow-y: auto;
+    padding: 2rem 1rem;
+}
+
+/* Wrapper del contenido */
+.clientes-wrapper {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Título de página */
+.clientes-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #1e3a8a;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+    .clientes-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        border-radius: 2px;
+    }
+
+/* Tarjetas modernas */
+.modern-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .modern-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+/* Cuerpo de tarjeta */
+.modern-card-body {
+    padding: 2rem;
+}
+
+/* Botones modernos */
+.btn-modern-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+}
+
+    .btn-modern-primary:hover {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+        color: white;
+    }
+
+.btn-modern-secondary {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .btn-modern-secondary:hover {
+        background: linear-gradient(135deg, #4b5563, #374151);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+.btn-modern-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .btn-modern-success:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+.btn-modern-outline-success {
+    border: 2px solid #10b981;
+    color: #10b981;
+    background: transparent;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .btn-modern-outline-success:hover {
+        background: #10b981;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+/* Input moderno */
+.modern-input {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+    .modern-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background-color: #fafbff;
+    }
+
+/* Tabla moderna */
+.modern-table {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+    .modern-table thead {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    }
+
+        .modern-table thead th {
+            color: #ffffff;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            border: none;
+            padding: 1.2rem 1rem;
+        }
+
+    .modern-table tbody tr {
+        border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+        .modern-table tbody tr:hover {
+            background-color: rgba(96, 165, 250, 0.05);
+        }
+
+    .modern-table tbody td {
+        padding: 1rem;
+        border: none;
+        vertical-align: middle;
+    }
+
+/* Botones pequeños de acción */
+.btn-action-edit {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+    .btn-action-edit:hover {
+        background: linear-gradient(135deg, #d97706, #b45309);
+        transform: translateY(-1px);
+        color: white;
+    }
+
+.btn-action-delete {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+    .btn-action-delete:hover {
+        background: linear-gradient(135deg, #dc2626, #b91c1c);
+        transform: translateY(-1px);
+        color: white;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .clientes-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .modern-card-body {
+        padding: 1.5rem;
+    }
+
+    .clientes-title {
+        font-size: 2rem;
+    }
+}
+/* ========================================
+   ESTILOS ADICIONALES PARA ELIMINAR CLIENTE
+   ======================================== */
+
+/* Contenedor principal de eliminación */
+.delete-container {
+    /* Usa flexbox para organizar elementos verticalmente */
+    display: flex;
+    flex-direction: column;
+    /* Alinea contenido al inicio */
+    justify-content: flex-start;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Posición fija que ocupa toda la ventana */
+    position: fixed;
+    top: 60px; /* Debajo del navbar */
+    left: 0;
+    right: 0;
+    bottom: 80px; /* Arriba del footer */
+    /* Fondo blanco sólido */
+    background-color: #ffffff;
+    /* Fuente consistente */
+    font-family: 'Arial', sans-serif;
+    /* Scroll vertical si es necesario */
+    overflow-y: auto;
+    /* Espaciado interno */
+    padding: 2rem 1rem;
+    /* Espacio entre elementos */
+    gap: 2rem;
+}
+
+/* Sección del encabezado con título y alerta */
+.delete-header {
+    /* Ancho completo pero máximo 800px */
+    width: 100%;
+    max-width: 800px;
+    /* Centrado del texto */
+    text-align: center;
+}
+
+    /* Reutiliza el estilo section-title existente para consistencia */
+    .delete-header .section-title {
+        /* Ya definido en el CSS principal - hereda todos los estilos */
+        margin-bottom: 1.5rem;
+    }
+
+/* Alerta de advertencia personalizada */
+.alert-warning {
+    /* Fondo degradado naranja/amarillo para advertencia */
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    /* Texto blanco para contraste */
+    color: #ffffff;
+    /* Espaciado interno */
+    padding: 1.5rem 2rem;
+    /* Esquinas redondeadas */
+    border-radius: 12px;
+    /* Sombra para elevación */
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+    /* Flexbox para organizar icono y contenido */
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    /* Transición suave */
+    transition: transform 0.3s ease;
+    /* Espacio superior */
+    margin-top: 1rem;
+}
+
+    /* Efecto hover sutil en la alerta */
+    .alert-warning:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Icono de la alerta */
+    .alert-warning .alert-icon {
+        /* Tamaño del emoji */
+        font-size: 1.5rem;
+        /* Flexbox para no encogerse */
+        flex-shrink: 0;
+        /* Fondo semi-transparente */
+        background: rgba(255, 255, 255, 0.2);
+        /* Padding circular */
+        padding: 0.5rem;
+        /* Forma circular */
+        border-radius: 50%;
+        /* Centrado */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+/* Contenido de la alerta */
+.alert-content {
+    /* Ocupa el espacio restante */
+    flex: 1;
+}
+
+/* Subtítulo de la alerta */
+.alert-subtitle {
+    /* Tamaño más pequeño */
+    font-size: 0.9rem;
+    /* Opacidad reducida */
+    opacity: 0.9;
+    /* Sin peso de fuente */
+    font-weight: normal;
+    /* Pequeño margen superior */
+    margin-top: 0.5rem;
+    /* Sin margen inferior */
+    margin-bottom: 0;
+}
+
+/* Tarjeta de información del cliente */
+.client-info-card {
+    /* Reutiliza estilos de main-content-card pero con ajustes */
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 800px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Transición suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    /* Efecto hover en la tarjeta de información */
+    .client-info-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+/* Encabezado de la tarjeta */
+.card-header {
+    /* Borde inferior decorativo */
+    border-bottom: 2px solid rgba(96, 165, 250, 0.2);
+    /* Espaciado inferior */
+    padding-bottom: 1rem;
+    /* Margen inferior */
+    margin-bottom: 2rem;
+    /* Centrado */
+    text-align: center;
+}
+
+/* Título de la tarjeta */
+.card-title {
+    /* Tamaño mediano */
+    font-size: 1.8rem;
+    /* Peso ligero */
+    font-weight: 300;
+    /* Color azul consistente */
+    color: #1e3a8a;
+    /* Sin margen */
+    margin: 0;
+}
+
+/* Grid de información - reutiliza estilos existentes */
+.client-info-card .info-grid {
+    /* Ya definido en el CSS principal - hereda estilos */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 0; /* Sin margen inferior aquí */
+}
+
+/* Secciones de información individuales */
+.info-section {
+    /* Fondo sutil */
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.05), rgba(147, 197, 253, 0.05));
+    /* Espaciado interno */
+    padding: 1.5rem;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Borde sutil */
+    border: 1px solid rgba(96, 165, 250, 0.1);
+}
+
+    /* Reutiliza subsection-title pero sin línea izquierda para este contexto */
+    .info-section .subsection-title {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #3b82f6;
+        margin-bottom: 1rem;
+        /* Flexbox para icono y texto */
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        /* Sin línea decorativa para este uso */
+        padding-left: 0;
+    }
+
+        /* Sobrescribe el pseudo-elemento ::before para esta sección */
+        .info-section .subsection-title::before {
+            display: none;
+        }
+
+/* Contenedor de detalles */
+.info-details {
+    /* Espacio entre elementos */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Items individuales de información */
+.info-item {
+    /* Flexbox para label y valor */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Espaciado interno */
+    padding: 0.5rem 0;
+    /* Borde inferior sutil */
+    border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+}
+
+    /* Último item sin borde inferior */
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Labels de información - reutiliza estilos de info-label */
+    .info-item .info-label {
+        /* Ya definido en CSS principal - hereda estilos */
+        font-weight: 600;
+        color: #1e3a8a;
+        /* Ancho fijo para alineación */
+        min-width: 80px;
+        /* Margen derecho */
+        margin-right: 1rem;
+    }
+
+/* Valores de información */
+.info-value {
+    /* Color gris oscuro */
+    color: #374151;
+    /* Peso normal */
+    font-weight: 400;
+    /* Alineado a la derecha */
+    text-align: right;
+    /* Permite que el texto se ajuste */
+    flex: 1;
+    /* Permite quebrar palabras largas */
+    word-break: break-word;
+}
+
+/* Sección de acciones de eliminación */
+.delete-actions {
+    /* Ancho completo pero máximo 800px */
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Formulario de eliminación */
+.delete-form {
+    /* Sin estilos adicionales - hereda de form-actions */
+}
+
+    /* Reutiliza form-actions existente */
+    .delete-form .form-actions {
+        /* Ya definido en CSS principal - hereda todos los estilos */
+        /* Solo ajustes específicos si son necesarios */
+        padding-top: 1.5rem;
+        border-top: 2px solid rgba(96, 165, 250, 0.2);
+    }
+
+/* Botón de eliminar - estilo personalizado basado en btn-submit */
+.btn-delete {
+    /* Copia estructura de btn-submit pero con colores de peligro */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    /* Gradiente rojo para peligro */
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    /* Sombra roja */
+    box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+}
+
+    /* Hover en botón de eliminar */
+    .btn-delete:hover {
+        /* Fondo más oscuro */
+        background: linear-gradient(135deg, #b91c1c, #991b1b);
+        transform: translateY(-2px);
+        /* Sombra más intensa */
+        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+    }
+
+    /* Active en botón de eliminar */
+    .btn-delete:active {
+        transform: translateY(0);
+    }
+
+    /* El botón cancelar reutiliza btn-cancel existente sin cambios */
+
+    /* Iconos en botones - reutiliza btn-icon existente */
+    .btn-delete .btn-icon,
+    .btn-cancel .btn-icon {
+        /* Ya definido en CSS principal */
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA ELIMINACIÓN
+   ======================================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+    /* Reduce espaciado del contenedor */
+    .delete-container {
+        padding: 1.5rem 0.75rem;
+        gap: 1.5rem;
+    }
+
+    /* Reduce padding de tarjetas */
+    .client-info-card {
+        padding: 1.5rem;
+    }
+
+        /* Grid de una columna */
+        .client-info-card .info-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+    /* Ajusta alerta de advertencia */
+    .alert-warning {
+        padding: 1.25rem 1.5rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    /* Botones en columna */
+    .delete-form .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .btn-delete,
+    .btn-cancel {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    /* Espaciado mínimo */
+    .delete-container {
+        padding: 1rem 0.5rem;
+        gap: 1.25rem;
+    }
+
+    /* Padding reducido */
+    .client-info-card {
+        padding: 1.25rem;
+    }
+
+    /* Títulos más pequeños */
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .info-section .subsection-title {
+        font-size: 1.2rem;
+    }
+
+    /* Items de información en columna para pantallas muy pequeñas */
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+        .info-item .info-label {
+            min-width: auto;
+            margin-right: 0;
+        }
+
+    .info-value {
+        text-align: left;
+    }
+
+    /* Alerta más compacta */
+    .alert-warning {
+        padding: 1rem;
+    }
+
+    /* Botones más compactos */
+    .btn-delete,
+    .btn-cancel {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ========================================
+   MEJORAS DE ACCESIBILIDAD
+   ======================================== */
+
+/* Focus visible para el botón de eliminar */
+.btn-delete:focus-visible {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+}
+
+/* Reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    .delete-container,
+    .client-info-card,
+    .alert-warning,
+    .btn-delete,
+    .btn-cancel {
+        transition: none;
+    }
+
+        .client-info-card:hover,
+        .alert-warning:hover {
+            transform: none;
+        }
+}
+/* ========================================
+   ESTILOS ADICIONALES PARA REPORTE DE CLIENTES
+   ======================================== */
+
+/* Contenedor principal del reporte */
+.report-container {
+    /* Flexbox vertical */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* Posición fija ocupando la ventana */
+    position: fixed;
+    top: 60px; /* Debajo del navbar */
+    left: 0;
+    right: 0;
+    bottom: 80px; /* Arriba del footer */
+    /* Fondo blanco */
+    background-color: #ffffff;
+    /* Fuente consistente */
+    font-family: 'Arial', sans-serif;
+    /* Scroll vertical */
+    overflow-y: auto;
+    /* Espaciado interno */
+    padding: 2rem 1rem;
+    /* Espacio entre secciones */
+    gap: 1.5rem;
+}
+
+/* Encabezado del reporte */
+.report-header {
+    /* Ancho completo pero máximo 1200px */
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+    /* Reutiliza section-title existente */
+    .report-header .section-title {
+        /* Hereda todos los estilos de section-title */
+        margin-bottom: 1rem;
+    }
+
+/* Tarjeta de filtros */
+.filter-card {
+    /* Similar a main-content-card */
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1200px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .filter-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+/* Encabezado de tarjeta */
+.card-header {
+    border-bottom: 2px solid rgba(96, 165, 250, 0.2);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Formulario de filtros */
+.filter-form {
+    /* Sin estilos adicionales - hereda form styles */
+}
+
+    /* Reutiliza form-grid, form-group, form-label, form-select existentes */
+    .filter-form .form-grid {
+        /* Grid de una sola columna para el select */
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+/* Sección de resumen del reporte */
+.report-summary {
+    /* Fondo con gradiente azul muy sutil */
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.05), rgba(96, 165, 250, 0.08));
+    /* Espaciado interno */
+    padding: 1.5rem 2rem;
+    /* Esquinas redondeadas */
+    border-radius: 12px;
+    /* Borde sutil */
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    /* Ancho completo */
+    width: 100%;
+    max-width: 1200px;
+    /* Flexbox para organizar items */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    /* Transición suave */
+    transition: transform 0.3s ease;
+    flex-wrap: wrap;
+}
+
+    .report-summary:hover {
+        transform: translateY(-1px);
+    }
+
+/* Items individuales del resumen */
+.summary-item {
+    /* Flexbox para label y valor */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Fondo blanco semi-transparente */
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels del resumen */
+.summary-label {
+    font-weight: 500;
+    color: #1e3a8a;
+    font-size: 0.95rem;
+}
+
+/* Valores del resumen */
+.summary-value {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Badges de tipo de cliente */
+.type-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+    /* Diferentes colores para cada tipo */
+    .type-badge.type-all {
+        background: linear-gradient(135deg, #6b7280, #9ca3af);
+        color: white;
+    }
+
+    .type-badge.type-regular {
+        background: linear-gradient(135deg, #10b981, #34d399);
+        color: white;
+    }
+
+    .type-badge.type-frecuente {
+        background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        color: white;
+    }
+
+    .type-badge.type-suspendido {
+        background: linear-gradient(135deg, #ef4444, #f87171);
+        color: white;
+    }
+
+/* Badge de conteo */
+.count-badge {
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Tarjeta de resultados */
+.results-card {
+    /* Similar a filter-card */
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1200px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Flexibilidad para contenido variable */
+    min-height: 300px;
+}
+
+/* Contenedor de tabla */
+.table-container {
+    /* Scroll horizontal si es necesario */
+    overflow-x: auto;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Sombra interna sutil */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabla principal del reporte */
+.report-table {
+    /* Ancho completo */
+    width: 100%;
+    /* Colapsar bordes */
+    border-collapse: collapse;
+    /* Fondo blanco */
+    background-color: white;
+    /* Esquinas redondeadas */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    /* Encabezado de tabla */
+    .report-table thead {
+        /* Fondo degradado azul */
+        background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    }
+
+    .report-table th {
+        /* Texto blanco */
+        color: white;
+        /* Espaciado interno */
+        padding: 1rem 0.75rem;
+        /* Alineación izquierda */
+        text-align: left;
+        /* Peso de fuente */
+        font-weight: 600;
+        /* Tamaño de fuente */
+        font-size: 0.875rem;
+        /* Espaciado de letras */
+        letter-spacing: 0.5px;
+        /* Sombra al texto */
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        /* Sin borde */
+        border: none;
+        /* Texto en mayúsculas */
+        text-transform: uppercase;
+    }
+
+/* Iconos en encabezados */
+.th-icon {
+    margin-right: 0.5rem;
+    opacity: 0.8;
+}
+
+/* Filas del cuerpo de la tabla */
+.report-table tbody tr {
+    /* Transición suave para hover */
+    transition: background-color 0.2s ease;
+}
+
+    /* Filas alternas con fondo ligeramente diferente */
+    .report-table tbody tr:nth-child(even) {
+        background-color: rgba(96, 165, 250, 0.03);
+    }
+
+    /* Hover en filas */
+    .report-table tbody tr:hover {
+        background-color: rgba(96, 165, 250, 0.1);
+        transform: scale(1.01);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+/* Celdas del cuerpo */
+.report-table td {
+    /* Espaciado interno */
+    padding: 0.875rem 0.75rem;
+    /* Borde inferior sutil */
+    border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+    /* Color de texto */
+    color: #374151;
+    /* Tamaño de fuente */
+    font-size: 0.9rem;
+    /* Altura de línea */
+    line-height: 1.4;
+}
+
+/* Estilos específicos por columna */
+.td-cedula {
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+.td-nombre {
+    font-weight: 500;
+    color: #111827;
+}
+
+.td-correo {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #4b5563;
+}
+
+.td-telefono {
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+/* Estado sin resultados */
+.no-results {
+    /* Centrado */
+    text-align: center;
+    /* Espaciado interno generoso */
+    padding: 4rem 2rem;
+    /* Color de fondo sutil */
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.05), rgba(147, 197, 253, 0.05));
+    /* Esquinas redondeadas */
+    border-radius: 12px;
+    /* Borde sutil */
+    border: 2px dashed rgba(96, 165, 250, 0.3);
+}
+
+/* Icono de sin resultados */
+.no-results-icon {
+    font-size: 4rem;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
+/* Título de sin resultados */
+.no-results-title {
+    font-size: 1.5rem;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Texto de sin resultados */
+.no-results-text {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA REPORTE
+   ======================================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+    /* Reducir espaciado del contenedor */
+    .report-container {
+        padding: 1.5rem 0.75rem;
+        gap: 1.25rem;
+    }
+
+    /* Reducir padding de tarjetas */
+    .filter-card,
+    .results-card {
+        padding: 1.5rem;
+    }
+
+    /* Resumen en columna */
+    .report-summary {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    /* Items de resumen en columna */
+    .summary-item {
+        justify-content: center;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Botones en columna */
+    .filter-form .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    /* Tabla responsiva */
+    .report-table {
+        font-size: 0.8rem;
+    }
+
+        .report-table th,
+        .report-table td {
+            padding: 0.75rem 0.5rem;
+        }
+
+    /* Ocultar columnas menos importantes en móviles */
+    .th-telefono,
+    .td-telefono {
+        display: none;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    /* Espaciado mínimo */
+    .report-container {
+        padding: 1rem 0.5rem;
+        gap: 1rem;
+    }
+
+    /* Padding reducido */
+    .filter-card,
+    .results-card {
+        padding: 1.25rem;
+    }
+
+    /* Títulos más pequeños */
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Tabla más compacta */
+    .report-table {
+        font-size: 0.75rem;
+    }
+
+        .report-table th,
+        .report-table td {
+            padding: 0.5rem 0.375rem;
+        }
+
+    /* Ocultar más columnas en pantallas muy pequeñas */
+    .th-correo,
+    .td-correo,
+    .th-telefono,
+    .td-telefono {
+        display: none;
+    }
+
+    /* Ajustar badges */
+    .type-badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    /* Reducir icono de sin resultados */
+    .no-results-icon {
+        font-size: 3rem;
+    }
+
+    .no-results-title {
+        font-size: 1.25rem;
+    }
+
+    .no-results-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Pantallas extra pequeñas - Tabla tipo card en móviles */
+@media (max-width: 380px) {
+    /* Convertir tabla en cards para pantallas muy pequeñas */
+    .report-table,
+    .report-table thead,
+    .report-table tbody,
+    .report-table th,
+    .report-table td,
+    .report-table tr {
+        display: block;
+    }
+
+        /* Ocultar encabezado de tabla */
+        .report-table thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        /* Estilo de card para cada fila */
+        .report-table tr {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        /* Cada celda como un item de información */
+        .report-table td {
+            border: none;
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 40%;
+            text-align: right;
+        }
+
+    /* Añadir labels usando pseudo-elementos */
+    .td-cedula::before {
+        content: "Cédula: ";
+    }
+
+    .td-nombre::before {
+        content: "Nombre: ";
+    }
+
+    .td-tipo::before {
+        content: "Tipo: ";
+    }
+
+    .td-correo::before {
+        content: "Correo: ";
+    }
+
+    .td-telefono::before {
+        content: "Teléfono: ";
+    }
+
+    .report-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 35%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: #1e3a8a;
+    }
+}
+
+/* ========================================
+   MEJORAS DE ACCESIBILIDAD
+   ======================================== */
+
+/* Focus visible para elementos interactivos */
+.filter-form .form-select:focus-visible,
+.btn-submit:focus-visible,
+.btn-cancel:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Reducir animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+    .report-container,
+    .filter-card,
+    .results-card,
+    .report-summary,
+    .report-table tr,
+    .btn-submit,
+    .btn-cancel {
+        transition: none;
+    }
+
+        .filter-card:hover,
+        .results-card:hover,
+        .report-summary:hover,
+        .report-table tbody tr:hover {
+            transform: none;
+        }
+}
+
+/* Mejorar contraste para usuarios con dificultades visuales */
+@media (prefers-contrast: high) {
+    .type-badge {
+        border: 2px solid currentColor;
+    }
+
+    .report-table th {
+        background: #1e3a8a;
+    }
+
+    .summary-item {
+        border: 1px solid #3b82f6;
+    }
+}
+/* ========================================
+   ESTILOS PARA LISTA DE FACTURAS
+   ======================================== */
+
+/* Contenedor de botones de acción principales */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Botón de reporte */
+.btn-report {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+}
+
+    .btn-report:hover {
+        background: linear-gradient(135deg, #047857, #059669);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+/* Botón de búsqueda por cédula */
+.btn-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.2);
+}
+
+    .btn-search:hover {
+        background: linear-gradient(135deg, #6d28d9, #7c3aed);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+/* Botón de búsqueda por tracking */
+.btn-track {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #374151, #4b5563);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 10px rgba(75, 85, 99, 0.2);
+}
+
+    .btn-track:hover {
+        background: linear-gradient(135deg, #1f2937, #374151);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(75, 85, 99, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+
+/* Contenedor de la tabla */
+.table-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* Tabla principal */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+/* Encabezado de la tabla */
+.table-header {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+    .table-header th {
+        padding: 1rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+/* Filas de la tabla */
+.table-row {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease;
+}
+
+    .table-row:hover {
+        background-color: #f8fafc;
+    }
+
+    .table-row td {
+        padding: 0.875rem;
+        text-align: center;
+        color: #374151;
+    }
+
+/* Badges para producto especial */
+.badge-yes {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge-no {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Monto total destacado */
+.amount-total {
+    font-weight: 600;
+    color: #059669;
+}
+
+/* Contenedor de botones de acción en filas */
+.action-buttons-row {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Botón de detalles */
+.btn-details {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+    .btn-details:hover {
+        background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        transform: translateY(-1px);
+        color: white;
+        text-decoration: none;
+    }
+
+/* Botón de editar */
+.btn-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+    .btn-edit:hover {
+        background: linear-gradient(135deg, #d97706, #b45309);
+        transform: translateY(-1px);
+        color: white;
+        text-decoration: none;
+    }
+
+/* Botón de eliminar */
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #dc2626, #b91c1c);
+        transform: translateY(-1px);
+        color: white;
+        text-decoration: none;
+    }
+
+/* ========================================
+   ESTILOS RESPONSIVOS PARA FACTURAS
+   ======================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .action-buttons {
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-report,
+    .btn-search,
+    .btn-track {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .data-table {
+        font-size: 0.9rem;
+    }
+
+    .table-header th,
+    .table-row td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .action-buttons-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .btn-details,
+    .btn-edit,
+    .btn-delete {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-submit,
+    .btn-report,
+    .btn-search,
+    .btn-track {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .table-container {
+        border-radius: 8px;
+        overflow-x: auto;
+    }
+
+    .data-table {
+        min-width: 800px;
+        font-size: 0.85rem;
+    }
+
+    .table-header th,
+    .table-row td {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.8rem;
+    }
+}

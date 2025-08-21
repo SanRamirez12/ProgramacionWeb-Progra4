@@ -1,57 +1,93 @@
 ﻿@model IEnumerable<Aeropost.Models.Usuario>
-
 @{
     ViewData["Title"] = "Usuarios";
 }
 
-<h1>Usuarios</h1>
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <!-- Título de la página -->
+        <h1 class="clientes-title">Usuarios</h1>
 
-<div class="mb-3 d-flex justify-content-between">
-        <a asp-action="Create" class="btn btn-success">Agregar usuario</a>
+        <!-- Tarjeta con botón de agregar -->
+        <div class="modern-card">
+            <div class="modern-card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; color: #1e3a8a; font-weight: 500;">Gestión de Usuarios</h3>
+                    <a asp-action="Create" class="btn-modern-success" style="text-decoration: none;">
+                        Agregar usuario
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta con la tabla -->
+        <div class="modern-card">
+            <div class="modern-card-body" style="padding: 0;">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cédula</th>
+                            <th>Género</th>
+                            <th>Fecha de registro</th>
+                            <th>Estado</th>
+                            <th>Correo</th>
+                            <th>Username</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Nombre</td>
+                                <td>@item.Cedula</td>
+                                <td>@item.Genero</td>
+                                <td>@item.FechaRegistro.ToShortDateString()</td>
+                                <td>
+                                    @if (item.Estado == "Activo")
+                                    {
+                                        <span style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="background: linear-gradient(135deg, #6b7280, #4b5563); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 500;">Inactivo</span>
+                                    }
+                                </td>
+                                <td>@item.Correo</td>
+                                <td>@item.Username</td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action-edit" style="text-decoration: none;">
+                                            Editar
+                                        </a>
+                                        <a asp-action="ChangePassword" asp-route-id="@item.Id" class="btn-modern-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem; text-decoration: none;">
+                                            Cambiar contraseña
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action-delete" style="text-decoration: none;">
+                                            Eliminar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- Mensaje cuando no hay usuarios -->
+                @if (!Model.Any())
+                {
+                    <div style="padding: 3rem; text-align: center; color: #6b7280;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">No hay usuarios registrados</h3>
+                        <p style="margin: 0;">Comienza agregando tu primer usuario al sistema.</p>
+                        <div style="margin-top: 1.5rem;">
+                            <a asp-action="Create" class="btn-modern-primary" style="text-decoration: none;">
+                                Agregar primer usuario
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
-
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Cédula</th>
-            <th>Género</th>
-            <th>Fecha de registro</th>
-            <th>Estado</th>
-            <th>Correo</th>
-            <th>Username</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Cedula</td>
-                <td>@item.Genero</td>
-                <td>@item.FechaRegistro.ToShortDateString()</td>
-                <td>
-                    @if (item.Estado == "Activo")
-                    {
-                        <span class="badge bg-success">Activo</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">Inactivo</span>
-                    }
-                </td>
-                <td>@item.Correo</td>
-                <td>@item.Username</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
-                    <a asp-action="ChangePassword" asp-route-id="@item.Id" class="btn btn-info btn-sm">Cambiar contraseña</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-

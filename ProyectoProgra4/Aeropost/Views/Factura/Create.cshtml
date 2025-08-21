@@ -5,100 +5,153 @@
     var clientes = ViewBag.Clientes as List<Aeropost.Models.Cliente> ?? new List<Aeropost.Models.Cliente>();
 }
 
-<h1>Crear Factura</h1>
-<hr />
+<div class="bitacora-container">
+    <!-- Sección de bienvenida -->
+    <div class="welcome-section">
+        <h1 class="welcome-title">Crear Nueva Factura</h1>
+    </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create" method="post">
+    <!-- Contenido principal -->
+    <div class="main-content-card">
+        <form asp-action="Create" method="post" class="client-form">
             @Html.AntiForgeryToken()
 
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+            <!-- Resumen de errores de validación -->
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
-            <!-- Selección de CÉDULA -->
-            <div class="form-group mb-2">
-                <label class="control-label" for="CedulaCliente">Cédula del Cliente</label>
-                <select id="CedulaCliente" name="CedulaCliente" class="form-control">
-                    <option value="">-- Seleccione un cliente --</option>
-                    @foreach (var c in clientes)
-                    {
-                        if (Model?.CedulaCliente == c.Cedula)
-                        {
-                            <option value="@c.Cedula" selected="selected">@c.Cedula</option>
-                        }
-                        else
-                        {
-                            <option value="@c.Cedula">@c.Cedula</option>
-                        }
-                    }
-                </select>
-            </div>
-
-            <!-- Datos del CLIENTE (solo lectura) -->
-            <fieldset class="mb-2" style="border:1px solid #ddd; padding:10px;">
-                <legend style="font-size:1rem;">Datos del cliente</legend>
-                <div class="form-group mb-1">
-                    <label>Nombre</label>
-                    <input id="CliNombre" class="form-control" readonly />
-                </div>
-                <div class="form-group mb-1">
-                    <label>Correo</label>
-                    <input id="CliCorreo" class="form-control" readonly />
-                </div>
-                <div class="form-group mb-1">
-                    <label>Teléfono</label>
-                    <input id="CliTelefono" class="form-control" readonly />
-                </div>
-                <div class="form-group mb-1">
-                    <label>Dirección</label>
-                    <input id="CliDireccion" class="form-control" readonly />
-                </div>
-            </fieldset>
-
-            <!-- Selección de TRACKING (se carga según cédula) -->
-            <div class="form-group mb-2">
-                <label class="control-label" for="NumeroTracking">Número de Tracking</label>
-                <select id="NumeroTracking" name="NumeroTracking" class="form-control" disabled>
-                    <option value="">-- Seleccione un paquete --</option>
-                </select>
-                <span asp-validation-for="NumeroTracking" class="text-danger"></span>
-            </div>
-
-            <!-- Fecha de entrega -->
-            <div class="form-group mb-2">
-                <label asp-for="FechaEntrega" class="control-label"></label>
-                <input asp-for="FechaEntrega" class="form-control" type="date" />
-                <span asp-validation-for="FechaEntrega" class="text-danger"></span>
-            </div>
-
-            <!-- Vista previa de PAQUETE / MONTO (solo lectura) -->
-            <fieldset class="mb-3" style="border:1px solid #ddd; padding:10px;">
-                <legend style="font-size:1rem;">Datos del paquete</legend>
-                <div class="form-group mb-1">
-                    <label asp-for="Peso" class="control-label"></label>
-                    <input asp-for="Peso" id="Peso" class="form-control" disabled />
-                </div>
-                <div class="form-group mb-1">
-                    <label asp-for="ValorTotalPaquete" class="control-label"></label>
-                    <input asp-for="ValorTotalPaquete" id="ValorTotalPaquete" class="form-control" disabled />
-                </div>
-                <div class="form-group form-check mb-1">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="EsProductoEspecial" id="EsProductoEspecial" disabled />
-                        @Html.DisplayNameFor(m => m.EsProductoEspecial)
+            <!-- Grid del formulario -->
+            <div class="form-grid">
+                <!-- Selección de Cliente -->
+                <div class="form-group">
+                    <label class="form-label" for="CedulaCliente">
+                       
+                        Cédula del Cliente
                     </label>
-                    <!-- hidden opcional si quisieras postearlo, pero el Service lo recalcula -->
-                    <input type="hidden" asp-for="EsProductoEspecial" />
+                    <select id="CedulaCliente" name="CedulaCliente" class="form-select">
+                        <option value="">-- Seleccione un cliente --</option>
+                        @foreach (var c in clientes)
+                        {
+                            if (Model?.CedulaCliente == c.Cedula)
+                            {
+                                <option value="@c.Cedula" selected="selected">@c.Cedula</option>
+                            }
+                            else
+                            {
+                                <option value="@c.Cedula">@c.Cedula</option>
+                            }
+                        }
+                    </select>
                 </div>
-                <div class="form-group mb-1">
-                    <label asp-for="MontoTotal" class="control-label"></label>
-                    <input asp-for="MontoTotal" id="MontoTotal" class="form-control" disabled />
-                </div>
-            </fieldset>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Crear</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                <!-- Fecha de Entrega -->
+                <div class="form-group">
+                    <label asp-for="FechaEntrega" class="form-label">
+                        
+                        Fecha de Entrega
+                    </label>
+                    <input asp-for="FechaEntrega" class="form-input" type="date" />
+                    <span asp-validation-for="FechaEntrega" class="field-validation"></span>
+                </div>
+            </div>
+
+            <!-- Datos del Cliente (solo lectura) -->
+            <div class="info-card" style="margin-bottom: 2rem;">
+                <h3 class="subsection-title">Datos del Cliente</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">
+                            
+                            Nombre
+                        </label>
+                        <input id="CliNombre" class="form-input" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            
+                            Correo
+                        </label>
+                        <input id="CliCorreo" class="form-input" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            
+                            Teléfono
+                        </label>
+                        <input id="CliTelefono" class="form-input" readonly />
+                    </div>
+                    <div class="form-group form-group-wide">
+                        <label class="form-label">
+                          
+                            Dirección
+                        </label>
+                        <input id="CliDireccion" class="form-input" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selección de Paquete -->
+            <div class="form-grid" style="margin-bottom: 2rem;">
+                <div class="form-group form-group-wide">
+                    <label class="form-label" for="NumeroTracking">
+                        
+                        Número de Tracking
+                    </label>
+                    <select id="NumeroTracking" name="NumeroTracking" class="form-select" disabled>
+                        <option value="">-- Seleccione un paquete --</option>
+                    </select>
+                    <span asp-validation-for="NumeroTracking" class="field-validation"></span>
+                </div>
+            </div>
+
+            <!-- Datos del Paquete (solo lectura) -->
+            <div class="info-card" style="margin-bottom: 2rem;">
+                <h3 class="subsection-title">Datos del Paquete</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label asp-for="Peso" class="form-label">
+                            
+                            Peso (kg)
+                        </label>
+                        <input asp-for="Peso" id="Peso" class="form-input" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ValorTotalPaquete" class="form-label">
+                            
+                            Valor Total del Paquete
+                        </label>
+                        <input asp-for="ValorTotalPaquete" id="ValorTotalPaquete" class="form-input" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">⭐</span>
+                            Producto Especial
+                        </label>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                            <input class="form-check-input" asp-for="EsProductoEspecial" id="EsProductoEspecial" disabled style="margin: 0;" />
+                            <span style="color: #4a4a4a;">Sí, es producto especial</span>
+                        </div>
+                        <input type="hidden" asp-for="EsProductoEspecial" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MontoTotal" class="form-label">
+                           
+                            Monto Total
+                        </label>
+                        <input asp-for="MontoTotal" id="MontoTotal" class="form-input" disabled />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                    
+                    Crear Factura
+                </button>
+                <a asp-action="Index" class="btn-submit">
+                   
+                    Volver
+                </a>
             </div>
         </form>
     </div>

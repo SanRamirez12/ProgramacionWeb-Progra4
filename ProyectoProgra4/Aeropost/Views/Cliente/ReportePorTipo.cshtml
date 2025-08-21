@@ -4,59 +4,131 @@
     string sel = ViewBag.TipoSeleccionado as string ?? "";
 }
 
-<h2 class="mb-3">Reporte de clientes por tipo</h2>
+<div class="report-container">
+    <!-- Encabezado del reporte -->
+    <div class="report-header">
+        <h1 class="section-title">Reporte de Clientes por Tipo</h1>
+    </div>
 
-<div class="card shadow-sm mb-3">
-    <div class="card-body">
-        <form method="post" asp-action="ReportePorTipo" class="row g-2">
+    <!-- Sección de filtros -->
+    <div class="filter-card">
+        <div class="card-header">
+            <h3 class="subsection-title">
+                <span class="label-icon">🔍</span>
+                Filtros de Búsqueda
+            </h3>
+        </div>
+
+        <form method="post" asp-action="ReportePorTipo" class="filter-form">
             @Html.AntiForgeryToken()
-            <div class="col-md-4">
-                <select name="tipo" class="form-select">
-                    <option value="" selected="@(string.IsNullOrEmpty(sel) ? "selected" : null)">Todos</option>
-                    <option value="Regular" selected="@(sel == "Regular" ? "selected" : null)">Regular</option>
-                    <option value="Frecuente" selected="@(sel == "Frecuente" ? "selected" : null)">Frecuente</option>
-                    <option value="Suspendido" selected="@(sel == "Suspendido" ? "selected" : null)">Suspendido</option>
-                </select>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">
+                       
+                        Tipo de Cliente
+                    </label>
+                    <select name="tipo" class="form-select">
+                        <option value="" selected="@(string.IsNullOrEmpty(sel) ? "selected" : null)">Todos los tipos</option>
+                        <option value="Regular" selected="@(sel == "Regular" ? "selected" : null)">Regular</option>
+                        <option value="Frecuente" selected="@(sel == "Frecuente" ? "selected" : null)">Frecuente</option>
+                        <option value="Suspendido" selected="@(sel == "Suspendido" ? "selected" : null)">Suspendido</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-auto">
-                <button type="submit" class="btn btn-primary">Generar</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                  
+                    Generar Reporte
+                </button>
+                <a asp-action="Index" class="btn-cancel">
+                    
+                    Volver a Clientes
+                </a>
             </div>
         </form>
     </div>
-</div>
 
-<p>
-    Tipo seleccionado: <strong>@(string.IsNullOrEmpty(sel) ? "Todos" : sel)</strong>
-    — Total: <strong>@ViewBag.Total</strong>
-</p>
+    <!-- Resumen del reporte -->
+    <div class="report-summary">
+        <div class="summary-item">
+            <span class="summary-label">Tipo seleccionado:</span>
+            <span class="summary-value type-badge type-@(string.IsNullOrEmpty(sel) ? "all" : sel.ToLower())">
+                @(string.IsNullOrEmpty(sel) ? "Todos" : sel)
+            </span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Total de registros:</span>
+            <span class="summary-value count-badge">@ViewBag.Total</span>
+        </div>
+    </div>
 
-<div class="card shadow-sm">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-striped mb-0 align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Correo</th>
-                        <th>Teléfono</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var c in Model)
-                    {
+    <!-- Tabla de resultados -->
+    <div class="results-card">
+        <div class="card-header">
+            <h3 class="subsection-title">
+               
+                Resultados del Reporte
+            </h3>
+        </div>
+
+        <div class="table-container">
+            @if (Model.Any())
+            {
+                <table class="report-table">
+                    <thead>
                         <tr>
-                            <td>@c.Cedula</td>
-                            <td>@c.Nombre</td>
-                            <td>@c.Tipo</td>
-                            <td>@c.Correo</td>
-                            <td>@c.Telefono</td>
+                            <th class="th-cedula">
+                                
+                                Cédula
+                            </th>
+                            <th class="th-nombre">
+                               
+                                Nombre
+                            </th>
+                            <th class="th-tipo">
+                               
+                                Tipo
+                            </th>
+                            <th class="th-correo">
+                                
+                                Correo
+                            </th>
+                            <th class="th-telefono">
+                               
+                                Teléfono
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model)
+                        {
+                            <tr class="table-row">
+                                <td class="td-cedula">@c.Cedula</td>
+                                <td class="td-nombre">@c.Nombre</td>
+                                <td class="td-tipo">
+                                    <span class="type-badge type-@(c.Tipo.ToLower())">
+                                        @c.Tipo
+                                    </span>
+                                </td>
+                                <td class="td-correo">@c.Correo</td>
+                                <td class="td-telefono">@c.Telefono</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="no-results">
+                   
+                    <h4 class="no-results-title">No se encontraron resultados</h4>
+                    <p class="no-results-text">
+                        No hay clientes que coincidan con los filtros seleccionados.
+                        Intente modificar los criterios de búsqueda.
+                    </p>
+                </div>
+            }
         </div>
     </div>
 </div>
