@@ -43,29 +43,28 @@ namespace Aeropost.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Usuario usuario /*, string ConfirmPassword si luego vuelves a usarlo*/)
+        public ActionResult Create(Usuario usuario)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    // Muestra exactamente qué falló
-                    ViewBag.ModelErrors = ModelState
-                        .Where(kvp => kvp.Value.Errors.Count > 0)
-                        .Select(kvp => $"{kvp.Key}: {string.Join(" | ", kvp.Value.Errors.Select(e => e.ErrorMessage))}")
-                        .ToList();
-                    return View(usuario);
-                }
+                // No queremos validar 'Id' en Create:
+                ModelState.Remove(nameof(Usuario.Id));
 
                 if (usuario.FechaRegistro == default)
                     usuario.FechaRegistro = DateTime.Now;
+
+                //Validaciones ConfirmPassword:
+                if (usuario.Password != usuario.ConfirmPassword)
+                    ModelState.AddModelError(nameof(usuario.ConfirmPassword), "Las contraseñas no coinciden.");
+
+                if (!ModelState.IsValid)
+                    return View(usuario);
 
                 services.agregarUsuario(usuario);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                // Muestra el error real (por ej. restricción de BD)
                 ModelState.AddModelError(string.Empty, $"Error al crear el usuario: {ex.Message}");
                 return View(usuario);
             }
@@ -94,18 +93,29 @@ namespace Aeropost.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    services.actualizarUsuario(usuario);
-                    return RedirectToAction(nameof(Index));
-                }
+                // Validación por si faltan scripts en el usuario
+                if (usuario.Password != usuario.ConfirmPassword)
+                    ModelState.AddModelError(nameof(usuario.ConfirmPassword), "Las contraseñas no coinciden.");
+
+                if (!ModelState.IsValid)
+                    return View(usuario);
+
+                // Recuperar el original y solo actualizar la contraseña
+                var original = services.buscarUsuario(usuario.Id);
+                original.Password = usuario.Password; // aquí idealmente hash
+
+                services.actualizarUsuario(original);
+                return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                // Log / manejar error si es necesario
+                ModelState.AddModelError(string.Empty, $"Error al actualizar: {ex.Message}");
+                return View(usuario);
             }
-            return View(usuario);
         }
+
+
+
 
         // GET: UsuarioController/Delete/5
         public ActionResult Delete(int id)
@@ -164,5 +174,7 @@ namespace Aeropost.Controllers
             }
 
         }
+
+
     }
 }

@@ -230,22 +230,31 @@ namespace Aeropost.Models
 
         public void actualizarUsuario(Usuario usuario)
         {
-            var usuarioAnterior = this.usuarios.FirstOrDefault(x => x.Id == usuario.Id);
-            if (usuarioAnterior != null)
-            {
-                usuarioAnterior.Nombre = usuario.Nombre;
-                usuarioAnterior.Genero = usuario.Genero;
-                usuarioAnterior.FechaRegistro = usuario.FechaRegistro;
-                usuarioAnterior.Estado = usuario.Estado;
-                usuarioAnterior.Correo = usuario.Correo;
-                usuarioAnterior.Username = usuario.Username;
-                usuarioAnterior.Password = usuario.Password;
+            var u = this.usuarios.FirstOrDefault(x => x.Id == usuario.Id);
+            if (u == null) throw new Exception("Ese usuario no está registrado");
 
-                SaveChanges();
-            }
-            else
-                throw new Exception("Ese usuario no está registrado");
+            // Actualiza SOLO datos no sensibles
+            u.Nombre = usuario.Nombre;
+            u.Genero = usuario.Genero;
+            u.FechaRegistro = usuario.FechaRegistro;
+            u.Estado = usuario.Estado;
+            u.Correo = usuario.Correo;
+            // Cedula: si quieres mantenerla fija, NO la toques:
+            // u.Cedula = usuario.Cedula; // <- déjala comentada si es fija
+
+            // Username y Password NO se tocan aquí
+            SaveChanges();
         }
+
+        public void actualizarPassword(int id, string newPassword)
+        {
+            var u = this.usuarios.FirstOrDefault(x => x.Id == id);
+            if (u == null) throw new Exception("Ese usuario no está registrado");
+
+            u.Password = newPassword; // aquí luego metes hash
+            SaveChanges();
+        }
+
 
         //Metodo que setea un usario admin generico para hacer el login inicial
         public Usuario login(string username, string password)
@@ -276,17 +285,8 @@ namespace Aeropost.Models
 
             return usuario;
         }
-
-        //Valida que dos contraseñas coincidan (comparación ordinal).
-        public bool PasswordsCoinciden(string password, string confirmPassword)
-        {
-            return string.Equals(password, confirmPassword, StringComparison.Ordinal);
-        }
         #endregion
 
-        #region Metodos de Bitacora
-
-        #endregion
-
+   
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Aeropost.Models
 {
@@ -42,6 +43,7 @@ namespace Aeropost.Models
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get => id; set => id = value; }
 
         [Required]
@@ -73,9 +75,16 @@ namespace Aeropost.Models
         [StringLength(50)]
         public string Username { get => username; set => username = value; }
 
-        [Required]
-        [StringLength(100, MinimumLength = 8)]
+        [Required, StringLength(100, MinimumLength = 8)]
         [DataType(DataType.Password)]
-        public string Password { get => password; set => password = value; }
+        public string Password { get; set; } = string.Empty;
+
+        //Propiedad auxiliar de solo validacion
+        [NotMapped]//no se guarda en BD
+        [Required(ErrorMessage = "Debe confirmar la contraseña")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")] //compara dos propiedades
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

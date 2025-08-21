@@ -13,15 +13,12 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
             <th>Cédula</th>
             <th>Género</th>
             <th>Fecha de registro</th>
             <th>Estado</th>
             <th>Correo</th>
-            <th>Usuario</th>
-            <th>Contraseña</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -29,22 +26,19 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Id</td>
                 <td>@item.Nombre</td>
                 <td>@item.Cedula</td>
                 <td>@item.Genero</td>
-                <td>@item.FechaRegistro</td>
+                <td>@item.FechaRegistro.ToShortDateString()</td>
                 <td>@item.Estado</td>
                 <td>@item.Correo</td>
-                <td>@item.Username</td>
-                <td>@item.Password</td>
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
 
