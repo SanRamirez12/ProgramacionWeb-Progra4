@@ -36,32 +36,43 @@ namespace Aeropost.Models
         }
 
         [Key]
-        [Required]
-        public int Id { get; set; }   
+        [Display(Name = "Id")]
+        public int Id { get => id; set => id = value; }
 
-        [Required]
-        [StringLength(100)]
-        public string Nombre { get; set; }   
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Nombre { get => nombre; set => nombre = value; }
 
-        [Required]
-        [StringLength(20)]
-        public string Cedula { get; set; }   
+        [Display(Name = "Cédula")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(20, ErrorMessage = "La {0} no puede exceder {1} caracteres.")]
+        [RegularExpression(@"^\d{1,20}$", ErrorMessage = "La {0} solo debe contener números.")]//cédula es solo números
+        public string Cedula { get => cedula; set => cedula = value; }
 
-        [Required]
-        [StringLength(50)]
-        public string Tipo { get; set; }    
+        [Display(Name = "Tipo")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Tipo { get => tipo; set => tipo = value; }
 
-        [Required]
-        [EmailAddress]
-        [StringLength(150)]
-        public string Correo { get; set; }  
+        [Display(Name = "Correo")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [EmailAddress(ErrorMessage = "El {0} no tiene un formato válido.")]
+        [StringLength(150, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Correo { get => correo; set => correo = value; }
 
-        [StringLength(250)]
-        public string Direccion { get; set; }   
+        [Display(Name = "Dirección")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(250, ErrorMessage = "La {0} no puede exceder {1} caracteres.")]
+        [DataType(DataType.MultilineText)]
+        public string Direccion { get => direccion; set => direccion = value; }
 
-        [StringLength(20)]
-        [Phone]
-        public string Telefono { get; set; }    
+        [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(20, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        [Phone(ErrorMessage = "El {0} no tiene un formato válido.")]
+        [RegularExpression(@"^\d{8,20}$", ErrorMessage = "El {0} debe tener solo números (8 a 20 dígitos).")]// solo números (sin guiones/espacios)
+        public string Telefono { get => telefono; set => telefono = value; }
 
 
     }

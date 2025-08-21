@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Aeropost.Models
 {
@@ -42,40 +44,57 @@ namespace Aeropost.Models
         }
 
         [Key]
-        public int Id { get => id; set => id = value; }
+        [Display(Name = "Id")]
+        public int Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Nombre { get => nombre; set => nombre = value; }
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Nombre { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(20)]
-        public string Cedula { get => cedula; set => cedula = value; }
+        [Display(Name = "Cédula")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(20, ErrorMessage = "La {0} no puede exceder {1} caracteres.")]
+        // Si deseas solo números, descomenta:
+        // [RegularExpression(@"^\d{1,20}$", ErrorMessage = "La {0} debe contener solo números.")]
+        public string Cedula { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(10)]
-        public string Genero { get => genero; set => genero = value; }
+        [Display(Name = "Género")]
+        [Required(ErrorMessage = "Debe seleccionar el {0}.")]
+        [StringLength(10, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Genero { get; set; } = string.Empty;
 
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
+        [Display(Name = "Fecha de Registro")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [DataType(DataType.Date, ErrorMessage = "La {0} no tiene un formato válido (dd/mm/aaaa).")]
+        public DateTime FechaRegistro { get; set; } = DateTime.Now;
 
-        [Required]
-        [StringLength(20)]
-        public string Estado { get => estado; set => estado = value; }
+        [Display(Name = "Estado")]
+        [Required(ErrorMessage = "Debe seleccionar el {0}.")]
+        [StringLength(20, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Estado { get; set; } = string.Empty;
 
-        [Required]
-        [EmailAddress]
-        [StringLength(100)]
-        public string Correo { get => correo; set => correo = value; }
+        [Display(Name = "Correo")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [EmailAddress(ErrorMessage = "El {0} no tiene un formato válido.")]
+        [StringLength(100, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Correo { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(50)]
-        public string Username { get => username; set => username = value; }
+        [Display(Name = "Usuario")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
+        public string Username { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(100, MinimumLength = 8)]
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "La {0} debe tener entre {2} y {1} caracteres.")]
         [DataType(DataType.Password)]
-        public string Password { get => password; set => password = value; }
+        public string Password { get; set; } = string.Empty;
+
+        // Solo para formularios (no BD / no validado por EF)
+        [NotMapped]
+        [ValidateNever]
+        [Display(Name = "Confirmar Contraseña")]
+        public string? ConfirmPassword { get; set; }
     }
 }

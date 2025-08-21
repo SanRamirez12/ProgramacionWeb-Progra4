@@ -23,21 +23,26 @@ namespace Aeropost.Controllers
         // GET: FacturaController/Details/5
         public ActionResult Details(int id)
         {
-            try
-            {
-                var factura = services.buscarFactura(id);
-                return View(factura);
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            var f = services.buscarFactura(id);
+            if (f == null) return RedirectToAction(nameof(Index));
+
+            var cli = services.buscarClientePorCedula(f.CedulaCliente);
+            ViewBag.Cliente = cli;
+
+            return View(f);
         }
+
+
 
         // GET: FacturaController/Create
         public ActionResult Create()
         {
-            return View();
+            ViewBag.Clientes = services.mostrarClientes()
+                                       .Cast<Cliente>()
+                                       .OrderBy(c => c.Nombre)
+                                       .ToList();
+
+            return View(new Factura { FechaEntrega = DateTime.Now });
         }
 
         // POST: FacturaController/Create
@@ -47,31 +52,39 @@ namespace Aeropost.Controllers
         {
             try
             {
+                // Los rellena/calcula el Service, así que quitamos su validación del POST
+                ModelState.Remove(nameof(Factura.Peso));
+                ModelState.Remove(nameof(Factura.ValorTotalPaquete));
+                ModelState.Remove(nameof(Factura.EsProductoEspecial));
+                ModelState.Remove(nameof(Factura.MontoTotal));
+
                 if (ModelState.IsValid)
                 {
-                    services.agregarFactura(factura);
+                    services.agregarFactura(factura); // valida/rellena/calcula
                     return RedirectToAction(nameof(Index));
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Log / manejar error si es necesario
+                ModelState.AddModelError(string.Empty, ex.Message);
             }
+
+            // Si hay error, recargamos lista de clientes para que el select no quede vacío
+            ViewBag.Clientes = services.mostrarClientes().Cast<Cliente>().OrderBy(c => c.Nombre).ToList();
             return View(factura);
         }
 
         // GET: FacturaController/Edit/5
         public ActionResult Edit(int id)
         {
-            try
-            {
-                var facturaAnterior = services.buscarFactura(id);
-                return View(facturaAnterior);
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            var factura = services.buscarFactura(id);
+
+            ViewBag.Clientes = services.mostrarClientes()
+                                       .Cast<Cliente>()
+                                       .OrderBy(c => c.Nombre)
+                                       .ToList();
+
+            return View(factura);
         }
 
         // POST: FacturaController/Edit/5
@@ -81,16 +94,28 @@ namespace Aeropost.Controllers
         {
             try
             {
+                // Igual que en Create: los rellena el Service
+                ModelState.Remove(nameof(Factura.Peso));
+                ModelState.Remove(nameof(Factura.ValorTotalPaquete));
+                ModelState.Remove(nameof(Factura.EsProductoEspecial));
+                ModelState.Remove(nameof(Factura.MontoTotal));
+
                 if (ModelState.IsValid)
                 {
                     services.actualizarFactura(factura);
                     return RedirectToAction(nameof(Index));
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Log / manejar error si es necesario
+                ModelState.AddModelError(string.Empty, ex.Message);
             }
+
+            // 🔸 Importante: si falló, volver a cargar clientes para que el select no quede vacío
+            ViewBag.Clientes = services.mostrarClientes()
+                                       .Cast<Cliente>()
+                                       .OrderBy(c => c.Nombre)
+                                       .ToList();
             return View(factura);
         }
 
@@ -99,8 +124,13 @@ namespace Aeropost.Controllers
         {
             try
             {
-                var facturaEliminada = services.buscarFactura(id);
-                return View(facturaEliminada);
+                var f = services.buscarFactura(id);
+                if (f == null) return RedirectToAction(nameof(Index));
+
+                // Para mostrar la tarjeta de Cliente
+                ViewBag.Cliente = services.buscarClientePorCedula(f.CedulaCliente);
+
+                return View(f);
             }
             catch
             {
@@ -125,8 +155,108 @@ namespace Aeropost.Controllers
             }
         }
 
+        // GET: Factura/PaquetesPorCedula?cedula=123456789
+        public IActionResult PaquetesPorCedula(string cedula)
+        {
+            if (string.IsNullOrWhiteSpace(cedula))
+                return Json(new object[0]);
 
+            var paquetes = services
+                .ReportePaquetesPorCliente(cedula)          // ya lo tienes
+                .Cast<Paquete>()
+                .OrderByDescending(p => p.FechaRegistro)
+                .Select(p => new {
+                    tracking = p.NumeroTracking,
+                    peso = p.Peso,
+                    valor = p.ValorTotalBruto,
+                    especial = p.CondicionEspecial
+                })
+                .ToList();
 
+            return Json(paquetes);
+        }
+
+        // GET: Factura/ReporteMensual?anio=2025&mes=8
+        public ActionResult ReporteMensual(int? anio, int? mes)
+        {
+            if (anio == null || mes == null)
+            {
+                ViewBag.Anio = DateTime.Now.Year;
+                ViewBag.Mes = DateTime.Now.Month;
+                ViewBag.Total = 0m;
+                ViewBag.Cantidad = 0;
+                return View(new List<Factura>());
+            }
+
+            var lista = services.listarFacturasPorMes(anio.Value, mes.Value);
+            var resumen = services.totalFacturadoDelMes(anio.Value, mes.Value);
+
+            ViewBag.Anio = anio.Value;
+            ViewBag.Mes = mes.Value;
+            ViewBag.Total = resumen.total;
+            ViewBag.Cantidad = resumen.cantidad;
+
+            return View(lista);
+        }
+
+        // GET: Factura/PorCedula   (sin cédula => muestra form)
+        // GET: Factura/PorCedula?cedula=123456789   (con cédula => lista resumen + tabla)
+        public ActionResult PorCedula(string? cedula)
+        {
+            if (string.IsNullOrWhiteSpace(cedula))
+            {
+                ViewBag.Cedula = null;
+                ViewBag.ClienteNombre = null;
+                ViewBag.Cantidad = 0;
+                ViewBag.TotalMonto = 0m;
+                return View(Enumerable.Empty<Factura>());
+            }
+
+            cedula = cedula.Trim();
+
+            var cliente = services.buscarClientePorCedula(cedula);
+            if (cliente == null)
+            {
+                ModelState.AddModelError(string.Empty, "La cédula no pertenece a ningún cliente registrado.");
+                ViewBag.Cedula = cedula;
+                ViewBag.ClienteNombre = null;
+                ViewBag.Cantidad = 0;
+                ViewBag.TotalMonto = 0m;
+                return View(Enumerable.Empty<Factura>());
+            }
+
+            var lista = services.listarFacturasPorCedula(cedula); // ya lo tienes en Service
+
+            ViewBag.Cedula = cedula;
+            ViewBag.ClienteNombre = cliente.Nombre;
+            ViewBag.Cantidad = lista.Count;
+            ViewBag.TotalMonto = lista.Sum(f => f.MontoTotal);
+
+            return View(lista);
+        }
+
+        // GET: Factura/PorTracking?tracking=AB0825MIA12345
+        public ActionResult PorTracking(string tracking)
+        {
+            if (string.IsNullOrWhiteSpace(tracking))
+                return View(model: null);
+
+            var f = services.buscarFacturaPorTracking(tracking);
+
+            // Para que el resumen muestre el nombre (si existe)
+            if (f != null)
+            {
+                var c = services.buscarClientePorCedula(f.CedulaCliente);
+                ViewBag.ClienteNombre = c?.Nombre;
+            }
+
+            ViewBag.Tracking = tracking;
+            return View(f);
+        }
 
     }
+
 }
+
+    
+

@@ -39,35 +39,42 @@ namespace Aeropost.Models
 
 
         [Key]
-        [Required]
-        public int Id { get; set; }   
+        [Display(Name = "Id")]
+        public int Id { get; set; }
 
-        [Required]
-        [Range(0, 999999.99)]
-        [DataType(DataType.Currency)]
-        public decimal Peso { get; set; }   
+        [Display(Name = "Peso (lb)")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [Range(0.01, 999999.99, ErrorMessage = "El {0} debe estar entre {1} y {2}.")]
+        public decimal Peso { get; set; }
 
-        [Required]
-        [Range(0, 999999999.99)]
-        [DataType(DataType.Currency)]
-        public decimal ValorTotalBruto { get; set; }   
+        [Display(Name = "Valor Total Bruto ($)")]
+        [Required(ErrorMessage = "El {0} es obligatorio.")]
+        [Range(0.01, 999999999.99, ErrorMessage = "El {0} debe estar entre {1} y {2}.")]
+        [DataType(DataType.Currency, ErrorMessage = "El {0} no tiene un formato válido.")]
+        public decimal ValorTotalBruto { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string TiendaOrigen { get; set; }   
+        [Display(Name = "Tienda de Origen")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "La {0} debe tener entre {2} y {1} caracteres.")]
+        public string TiendaOrigen { get; set; }
 
-        [Required]
-        public bool CondicionEspecial { get; set; }   
+        [Display(Name = "Condición Especial")]
+        [Required(ErrorMessage = "Debe indicar la {0}.")]
+        public bool CondicionEspecial { get; set; }
 
-        [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime FechaRegistro { get; set; }   
+        [Display(Name = "Fecha de Registro")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [DataType(DataType.Date, ErrorMessage = "La {0} no tiene un formato válido (dd/mm/aaaa).")]
+        public DateTime FechaRegistro { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Display(Name = "Cédula del Cliente")]
+        [Required(ErrorMessage = "La {0} es obligatoria.")]
+        [StringLength(100, ErrorMessage = "La {0} no puede exceder {1} caracteres.")]
+        [RegularExpression(@"^\d{1,20}$", ErrorMessage = "La {0} solo debe contener números.")] //solo números
         public string ClienteAsociado { get; set; }
-        
-        [StringLength(32)]
+
+        [Display(Name = "Número de Tracking")]
+        [StringLength(32, ErrorMessage = "El {0} no puede exceder {1} caracteres.")]
         public string NumeroTracking { get => numeroTracking; set => numeroTracking = value; }
 
         //Metodos de Logica de Paquetes:
@@ -85,11 +92,6 @@ namespace Aeropost.Models
 
             NumeroTracking = $"{pref}{mes}{yy}MIA{rand}";
         }
-
-
-
-
-
         
     }
 }

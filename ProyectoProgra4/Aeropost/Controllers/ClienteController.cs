@@ -22,12 +22,6 @@ namespace Aeropost.Controllers
             return View(clientes);
         }
 
-        // GET: ClienteController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: ClienteController/Create
         public ActionResult Create()
         {
@@ -156,6 +150,27 @@ namespace Aeropost.Controllers
             ViewBag.Total = lista.Count;
 
             return View(lista);
+        }
+
+        // GET: ClienteController/ClientePorCedula
+        public IActionResult ClientePorCedula(string cedula)
+        {
+            if (string.IsNullOrWhiteSpace(cedula))
+                return Json(null);
+
+            var c = services.buscarClientePorCedula(cedula);
+            if (c == null) return Json(null);
+
+            return Json(new
+            {
+                id = c.Id,
+                nombre = c.Nombre,
+                cedula = c.Cedula,
+                tipo = c.Tipo,
+                correo = c.Correo,
+                direccion = c.Direccion,
+                telefono = c.Telefono
+            });
         }
     }
 }

@@ -1,47 +1,73 @@
 ﻿@model IEnumerable<Aeropost.Models.Cliente>
+@{
+    ViewData["Title"] = "Clientes";
+}
 
-<h2>Clientes</h2>
+<h2 class="mb-3">Clientes</h2>
 
-<!-- Buscador (GET a /Cliente/Index?cedula=...) -->
-<form method="get" asp-action="Index" class="mb-3">
-    <div class="input-group">
-        <input name="cedula" value="@ViewBag.CedulaFiltro" class="form-control" placeholder="Buscar por cédula" />
-        <button class="btn btn-primary" type="submit">Buscar</button>
-        <a class="btn btn-outline-secondary" asp-action="Index">Limpiar</a>
+<!-- Buscar + acciones -->
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <form method="get" asp-action="Index" class="row g-2">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input name="cedula"
+                           value="@ViewBag.CedulaFiltro"
+                           class="form-control"
+                           placeholder="Buscar por cédula" />
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Limpiar</a>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end gap-2">
+                <a class="btn btn-success" asp-action="ReportePorTipo">
+                    Reporte por tipo
+                </a>
+                <a class="btn btn-outline-success" asp-action="Create">
+                    Agregar cliente
+                </a>
+            </div>
+        </form>
     </div>
-</form>
-
-<!-- Acceso al Reporte -->
-<div class="mb-3">
-    <a class="btn btn-success" asp-action="ReportePorTipo">Reporte por tipo</a>
-    <a class="btn btn-outline-success" asp-action="Create">Agregar cliente</a>
 </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Cédula</th>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var c in Model)
-        {
-            <tr>
-                <td>@c.Cedula</td>
-                <td>@c.Nombre</td>
-                <td>@c.Tipo</td>
-                <td>@c.Correo</td>
-                <td>@c.Telefono</td>
-                <td class="text-end">
-                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@c.Id">Editar</a>
-                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@c.Id">Eliminar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th class="text-end" style="width:200px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in Model)
+                    {
+                        <tr>
+                            <td>@c.Cedula</td>
+                            <td>@c.Nombre</td>
+                            <td>@c.Tipo</td>
+                            <td>@c.Correo</td>
+                            <td>@c.Telefono</td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-warning me-1"
+                                   asp-action="Edit" asp-route-id="@c.Id">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </a>
+                                <a class="btn btn-sm btn-outline-danger"
+                                   asp-action="Delete" asp-route-id="@c.Id">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

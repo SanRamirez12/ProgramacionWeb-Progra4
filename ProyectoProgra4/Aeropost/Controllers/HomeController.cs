@@ -15,7 +15,12 @@ namespace Aeropost.Controllers
 
         public IActionResult Index()
         {
+            var nombre = HttpContext.Session.GetString("VarSesion_NombreUsuario");
+            ViewBag.Usuario = string.IsNullOrWhiteSpace(nombre) ? "Invitado" : nombre;
+
+            ViewData["Title"] = "Bitácora";
             return View();
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

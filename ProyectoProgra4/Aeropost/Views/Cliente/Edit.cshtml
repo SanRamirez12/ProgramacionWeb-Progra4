@@ -1,36 +1,36 @@
 ﻿@model Aeropost.Models.Cliente
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar cliente";
 }
 
-<h1>Edit</h1>
+<h1 class="mb-3">Editar cliente</h1>
 
-<h4>Cliente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card shadow-sm">
+    <div class="card-body">
         <form asp-action="Edit" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.AntiForgeryToken()
 
-            @* Necesario para que el POST Edit conozca a quién actualizar *@
+            <!-- ID oculto para que el POST sepa a quién actualizar -->
             <input type="hidden" asp-for="Id" />
 
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
                 <input asp-for="Nombre" class="form-control" placeholder="Nombre completo" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Cedula" class="control-label"></label>
-                <input asp-for="Cedula" class="form-control" placeholder="Ej: 123450678" />
+            <div class="mb-3">
+                <label asp-for="Cedula" class="form-label">Cédula</label>
+                <input asp-for="Cedula" class="form-control" placeholder="123456789" />
                 <span asp-validation-for="Cedula" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Tipo" class="control-label"></label>
-                <select asp-for="Tipo" class="form-control">
+            <div class="mb-3">
+                <label asp-for="Tipo" class="form-label">Tipo</label>
+                <select asp-for="Tipo" class="form-select">
                     <option value="">-- Seleccione --</option>
                     <option value="Regular">Regular</option>
                     <option value="Frecuente">Frecuente</option>
@@ -39,27 +39,27 @@
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo</label>
                 <input asp-for="Correo" class="form-control" type="email" placeholder="correo@dominio.com" />
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="Direccion" class="form-label">Dirección</label>
                 <input asp-for="Direccion" class="form-control" placeholder="Dirección de entrega" />
                 <span asp-validation-for="Direccion" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="Telefono" class="form-label">Teléfono</label>
                 <input asp-for="Telefono" class="form-control" type="tel" placeholder="8888-8888" />
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
 
-            <div class="form-group mt-3">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
             </div>
         </form>
     </div>

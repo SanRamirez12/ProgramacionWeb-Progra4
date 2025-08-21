@@ -1,95 +1,95 @@
 ﻿@model Aeropost.Models.Usuario
-
 @{
     ViewData["Title"] = "Crear Usuario";
 }
 
 <h1>Crear Usuario</h1>
-
-<h4>Usuario</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Create" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- Id oculto -->
-            <input type="hidden" asp-for="Id" />
+            <!-- DIAGNÓSTICO: imprime todos los errores del ModelState -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-warning">
+                    <strong>Diagnóstico ModelState:</strong>
+                    <ul>
+                        @foreach (var kvp in ViewData.ModelState)
+                        {
+                            foreach (var err in kvp.Value.Errors)
+                            {
+                                <li><code>@kvp.Key</code>: @err.ErrorMessage</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
 
-            <!-- Nombre -->
+
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label">Nombre</label>
-                <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre completo" required />
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
 
-            <!-- Cédula -->
             <div class="form-group">
-                <label asp-for="Cedula" class="control-label">Cédula</label>
-                <input asp-for="Cedula" class="form-control" type="number" placeholder="Ingrese la cédula" required />
+                <label asp-for="Cedula"></label>
+                <input asp-for="Cedula" class="form-control" type="text" />
                 <span asp-validation-for="Cedula" class="text-danger"></span>
             </div>
 
-            <!-- Género -->
             <div class="form-group">
                 <label>Género</label><br />
-                <input type="radio" asp-for="Genero" value="Masculino" required /> Masculino
-                <input type="radio" asp-for="Genero" value="Femenino" required /> Femenino
+                <input type="radio" asp-for="Genero" value="Masculino" /> Masculino
+                <input type="radio" asp-for="Genero" value="Femenino" /> Femenino
                 <span asp-validation-for="Genero" class="text-danger"></span>
             </div>
 
-            <!-- Fecha de Registro -->
             <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label">Fecha de Registro</label>
-                <input asp-for="FechaRegistro" class="form-control" type="date" required />
+                <label asp-for="FechaRegistro"></label>
+                <input asp-for="FechaRegistro" class="form-control" type="date" />
                 <span asp-validation-for="FechaRegistro" class="text-danger"></span>
             </div>
 
-            <!-- Estado -->
             <div class="form-group">
                 <label>Estado</label><br />
-                <input type="radio" asp-for="Estado" value="Activo" required /> Activo
-                <input type="radio" asp-for="Estado" value="Inactivo" required /> Inactivo
+                <input type="radio" asp-for="Estado" value="Activo" /> Activo
+                <input type="radio" asp-for="Estado" value="Inactivo" /> Inactivo
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
 
-            <!-- Correo -->
             <div class="form-group">
-                <label asp-for="Correo" class="control-label">Correo</label>
-                <input asp-for="Correo" class="form-control" type="email" placeholder="ejemplo@correo.com" required />
+                <label asp-for="Correo"></label>
+                <input asp-for="Correo" class="form-control" type="email" />
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
 
-            <!-- Username -->
             <div class="form-group">
-                <label asp-for="Username" class="control-label">Usuario</label>
-                <input asp-for="Username" class="form-control" placeholder="Nombre de usuario" required />
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
-
-            <!-- Password -->
             <div class="form-group">
-                <label asp-for="Password" class="control-label">Contraseña</label>
-                <input asp-for="Password" class="form-control" type="password" required placeholder="Ingrese la contraseña" />
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" autocomplete="new-password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <!-- Confirm Password (no está en el modelo) 
+
             <div class="form-group">
-                <label for="ConfirmPassword" class="control-label">Confirmar Contraseña</label>
-                <input id="ConfirmPassword" name="ConfirmPassword" class="form-control"
-                       type="password" required placeholder="Repita la contraseña" />
-                <span class="text-danger">
-                    @ViewData.ModelState["ConfirmPassword"]?.Errors.FirstOrDefault()?.ErrorMessage
-                </span>
-            </div>-->
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
 
-
-            <!-- Botones -->
             <div class="form-group mt-3">
                 <input type="submit" value="Crear" class="btn btn-primary" />
-                <input type="reset" value="Cancelar" class="btn btn-secondary" />
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                <button type="reset" class="btn btn-light">Limpiar</button>
             </div>
         </form>
     </div>
@@ -98,6 +98,40 @@
 <div class="mt-3">
     <a asp-action="Index">Volver a la Lista</a>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Prevalidación en cliente (evita post si no coincide)
+        (function () {
+          const form = document.querySelector('form[asp-action="Create"]');
+          if (!form) return;
+          const pwd = form.querySelector('input[name="Password"]');
+          const cpw = form.querySelector('input[name="ConfirmPassword"]');
+          const summary = form.querySelector('[asp-validation-summary]');
+
+          form.addEventListener('submit', function (e) {
+            if (!pwd || !cpw) return;
+            if (summary) summary.innerHTML = '';
+            const p = pwd.value || '', c = cpw.value || '';
+            const errs = [];
+            if (p.length < 8) errs.push('La contraseña debe tener al menos 8 caracteres.');
+            if (p !== c) errs.push('Las contraseñas no coinciden.');
+            if (errs.length) {
+              e.preventDefault();
+              if (summary) {
+                const ul = document.createElement('ul');
+                errs.forEach(m => { const li = document.createElement('li'); li.textContent = m; ul.appendChild(li); });
+                summary.appendChild(ul);
+              }
+            }
+          });
+        })();
+    </script>
+}
 
 
 

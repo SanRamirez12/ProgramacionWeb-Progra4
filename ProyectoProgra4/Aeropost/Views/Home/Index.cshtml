@@ -1,28 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Bitacora";
+    ViewData["Title"] = "Bitácora";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bienvenido @((ViewBag.Usuario ?? "Invitado"))</h1>
 </div>
 
+<section id="acerca-de">
+    <h1>Acerca de</h1>
 
-<h1>Acerca de nosotros</h1>
-<br>
-<br>
-<h2>Universidad Latina de Costa Rica</h2>
-<br>
-<h2>Curso: Programacion 4</h2>
-<br>
-<h3>Estudiantes:</h3>
-Santiago Ramirez Elizondo
-Luis Alonso Matarrita Obregon
-Luis Felipe Mendez Navarro
-Jose Alberto Alvarez Navarro
-<br>
-<h3>Profesora:</h3>
-Adriana
-<br>
+    <h2>Universidad Latina de Costa Rica</h2>
+    <p><strong>Curso:</strong> Ingeniería en Sistemas Computacionales</p>
+    <p><strong>Profesora:</strong> ADRIANA STEPHANIE RUBIO ESCOBAR</p>
 
-Falta agregar imagenes, completar datos y que se vea mas bonito
+    <h3>Estudiantes</h3>
+    <ul>
+        <li>José Alberto Álvarez Navarro — 20210110651</li>
+        <li>Luis Felipe Méndez Navarro — 20240116329</li>
+        <li>Luis Alonso Matarrita Obregón — 202401114039</li>
+        <li>Santiago Ramírez Elizondo — 202401112941</li>
+    </ul>
+
+    <h3>Nuestra motivación</h3>
+    <p>
+        Como estudiantes de Ingeniería en Sistemas Computacionales, nos mueve la pasión por
+        aprender, crear soluciones innovadoras y aplicar la tecnología en proyectos que representen
+        un reto real. Este trabajo refleja nuestro esfuerzo colaborativo, disciplina y compromiso con
+        nuestra formación profesional.
+    </p>
+
+    <h3>Imagen representativa</h3>
+    <!-- <img src="~/img/logo-universidad.png" alt="Logo Universidad Latina de Costa Rica" width="250" /> -->
+
+    <footer>
+        <p><em>Este proyecto fue desarrollado con fines académicos en la Universidad Latina de Costa Rica.</em></p>
+    </footer>
+</section>
+
