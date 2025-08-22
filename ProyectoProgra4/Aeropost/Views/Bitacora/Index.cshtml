@@ -1,27 +1,54 @@
 ﻿@model IEnumerable<Aeropost.Models.Bitacora>
-
 @{
     ViewData["Title"] = "Bitácora de inicios de sesión";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="clientes-container">
+    <div class="clientes-wrapper">
+        <!-- Título de la página -->
+        <h1 class="clientes-title">Bitácora de inicios de sesión</h1>
 
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Usuario</th>
-            <th>Fecha de ingreso</th>
-            <th>Fecha de salida</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Username</td>
-                <td>@item.FechaIngreso.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
-                <td>@(item.FechaSalida.HasValue? item.FechaSalida.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss") : "-")</td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <!-- Tarjeta con la tabla -->
+        <div class="modern-card">
+            <div class="modern-card-body" style="padding: 0;">
+                <table class="modern-table" style="width: 100%; table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Usuario</th>
+                            <th style="width: 35%;">Fecha de ingreso</th>
+                            <th style="width: 35%;">Fecha de salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="font-weight: 500; color: #1f2937;">@item.Username</td>
+                                <td style="color: #10b981; font-family: 'Courier New', monospace;">@item.FechaIngreso.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                <td style="font-family: 'Courier New', monospace;">
+                                    @if (item.FechaSalida.HasValue)
+                                    {
+                                        <span style="color: #ef4444;">@item.FechaSalida.Value.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.875rem; font-weight: 500;">En línea</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- Mensaje cuando no hay registros -->
+                @if (!Model.Any())
+                {
+                    <div style="padding: 3rem; text-align: center; color: #6b7280;">
+                        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">No hay registros de bitácora</h3>
+                        <p style="margin: 0;">Los registros de inicio y cierre de sesión aparecerán aquí.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
