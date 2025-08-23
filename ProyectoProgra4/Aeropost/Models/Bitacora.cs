@@ -8,7 +8,7 @@ namespace Aeropost.Models
         private int id;
         private string username;
         private DateTime fechaIngreso;
-        private DateTime? fechaSalida;
+        private DateTime? fechaSalida; 
 
         public Bitacora()
         {
