@@ -25,9 +25,6 @@ The purpose of this repository is to demonstrate the application of **web progra
 - `Pasos Entity Framework.txt`  
   Reference notes and setup steps related to **Entity Framework** configuration and usage.
 
-- `ProyectoProgra4.rar`  
-  Archived version of the main project for backup or submission purposes.
-
 ---
 
 ## Technologies and Concepts Applied
