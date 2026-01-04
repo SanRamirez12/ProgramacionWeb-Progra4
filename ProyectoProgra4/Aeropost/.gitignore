@@ -1,9 +1,86 @@
-# Build artifacts
+# ================================
+# Visual Studio / .NET
+# ================================
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio workspace
+.vs/
+
+# Build results
 bin/
 obj/
-.vs/
-*.user
-*.suo
 
-# Static web assets cache
-**/staticwebassets*
+# Debug / Release folders
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# .NET Core / ASP.NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ================================
+# ASP.NET Core
+# ================================
+
+# App settings (environment-specific)
+appsettings.Development.json
+appsettings.Staging.json
+appsettings.Production.json
+
+# HTTPS development certificates
+*.pfx
+*.pem
+
+# ================================
+# Entity Framework
+# ================================
+
+# EF Core temp files
+Migrations/*.Designer.cs
+Migrations/*.resx
+
+# ================================
+# Logs & runtime files
+# ================================
+
+logs/
+*.log
+
+# ================================
+# OS generated files
+# ================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# ================================
+# IDEs & Editors
+# ================================
+
+# Visual Studio Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+
+# ================================
+# Archives
+# ================================
+
+*.zip
+*.rar
+*.7z
